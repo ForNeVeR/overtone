@@ -17,9 +17,26 @@ to provide these resources ourselves).
 The game is considered [abandonware][wikipedia.abandonware], so feel free to
 download the game from [My Abandonware][myabandonware.the-tone-rebellion].
 
+Prerequisites
+-------------
+To develop the project, you'll need [.NET SDK][dotnet-sdk] 3.1.402 installed.
+
+Build
+-----
+```console
+$ dotnet build
+```
+
+Test
+----
+```console
+$ dotnet test
+```
+
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-zero-
 [docs.resources]: docs/resources.md
 [docs.running-original]: docs/running-original.md
+[dotnet-sdk]: https://dot.net/
 [myabandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
 [status-zero]: https://img.shields.io/badge/status-zero-lightgrey.svg
 [wikipedia.abandonware]: https://en.wikipedia.org/wiki/Abandonware

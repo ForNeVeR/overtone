@@ -1,9 +1,23 @@
-﻿let printUsage() =
-    printfn "Usage: Overtone.Cob <path to cob file> <path to output directory>\n\n  Extracts the COB archive contents."
+﻿module Overtone.Cob.Program
+
+open System
+
+let printUsage() =
+    Console.WriteLine (
+        "Usage:\n" +
+        "Overtone.Cob ls <path to a COB archive>\n" +
+        "  Lists the archive contents.\n\n" +
+        "Overtone.Cob x <path to a COB archive> <path to the output directory>\n" +
+        "  Extracts the COB archive contents to the output directory (will be created if not exists)."
+    )
 
 [<EntryPoint>]
 let main = function
-| [|_filePath; _outputPath|] ->
+| [|"ls"; archivePath|] ->
+    use file = new CobFile(archivePath)
+    file.ReadEntries() |> Seq.iter (fun e ->
+        printfn "%d: %s (%d bytes)" e.Offset e.Path e.Size
+    )
     0
 | _ ->
     printUsage()

@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Cob", "Overtone.Cob\Overtone.Cob.fsproj", "{F1B0961A-AE5E-4402-89AB-C1D6C31696F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".gjthub", ".gjthub", "{F7A92DCC-190F-4E09-949A-C0413800326A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{046B3949-4459-4EC5-8041-D00687495715}"
+ProjectSection(SolutionItems) = preProject
+	.github\workflows\main.yml = .github\workflows\main.yml
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{81501330-B010-4924-8262-3A08B435CF03}"
+ProjectSection(SolutionItems) = preProject
+	docs\resources.md = docs\resources.md
+	docs\running-original.md = docs\running-original.md
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FFCC3BCD-5592-4C94-9AD7-CFDB9405B304}"
+ProjectSection(SolutionItems) = preProject
+	.editorconfig = .editorconfig
+	.gitignore = .gitignore
+	Directory.Build.props = Directory.Build.props
+	License.md = License.md
+	Readme.md = Readme.md
+EndProjectSection
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Cob.Tests", "Overtone.Cob.Tests\Overtone.Cob.Tests.fsproj", "{7078BD52-2021-4902-9C0F-C72E24E0BC10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1B0961A-AE5E-4402-89AB-C1D6C31696F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1B0961A-AE5E-4402-89AB-C1D6C31696F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1B0961A-AE5E-4402-89AB-C1D6C31696F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1B0961A-AE5E-4402-89AB-C1D6C31696F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7078BD52-2021-4902-9C0F-C72E24E0BC10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7078BD52-2021-4902-9C0F-C72E24E0BC10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7078BD52-2021-4902-9C0F-C72E24E0BC10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7078BD52-2021-4902-9C0F-C72E24E0BC10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{046B3949-4459-4EC5-8041-D00687495715} = {F7A92DCC-190F-4E09-949A-C0413800326A}
+	EndGlobalSection
+EndGlobal

@@ -6,6 +6,7 @@ strategy game developed by The Logic Factory and released in 1997.
 Developer Documentation
 -----------------------
 - [Running the Original Game][docs.running-original]
+- [Game Resources][docs.resources]
 
 Getting the Game Resources
 --------------------------
@@ -17,6 +18,7 @@ The game is considered [abandonware][wikipedia.abandonware], so feel free to
 download the game from [My Abandonware][myabandonware.the-tone-rebellion].
 
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-zero-
+[docs.resources]: docs/resources.md
 [docs.running-original]: docs/running-original.md
 [myabandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
 [status-zero]: https://img.shields.io/badge/status-zero-lightgrey.svg

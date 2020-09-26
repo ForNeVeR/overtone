@@ -559,6 +559,12 @@
         "dependencies": {
           "xunit.extensibility.core": "[2.4.0]"
         }
+      },
+      "overtone.cob": {
+        "type": "Project",
+        "dependencies": {
+          "FSharp.Core": "4.7.2"
+        }
       }
     }
   }

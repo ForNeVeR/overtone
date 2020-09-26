@@ -34,10 +34,10 @@ Files on the CD
     - `RESUME.GAM`: initially a 1-byte file with a single space inside, will be
       overwritten by the current game state on exit (used as a temporary save
       file)
-    - `TONE00.COB`–`TONE01.COB`: the game data archives, see the description
-      below
+    - `TONE00.COB`–`TONE01.COB`: the game data archives in the
+      [COB format][docs.cob], see the description below
 - `THING2` directory (files from this directory are always read from the CD)
-    - `ACT1.WAV`–`ACT4.WAV`: main in-game music, presumably remastered versiobns
+    - `ACT1.WAV`–`ACT4.WAV`: main in-game music, presumably remastered versions
       of these're available in the "Bonus Content" archive from [My
       Abandonware][myabandonware.the-tone-rebellion] (TODO: yet to determine)
     - `AMBIENT1.WAV`–`AMBIENT4.WAV`: other game music files, presumably
@@ -123,6 +123,7 @@ COB Archive Contents
 --------------------
 TODO: Enumerate the archives
 
+[docs.cob]: ./cob.md
 [fadoli.title-screen]: https://github.com/Fadoli/ToneRebellion_Raw/tree/932909a9561b9f3666fb7b25ac011016a010fe6f/extracted_shp/TITSCRN
 [myabandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
 [nomacs]: https://nomacs.org/

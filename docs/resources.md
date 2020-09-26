@@ -96,13 +96,12 @@ Files on the CD
         - `SEEKERS.WAV`
         - `START.WAV`
         - `WINNER.WAV`
-    - `VIELOGO.TGA`: presumably, a TGA file; contents are unknown yet, because I
-      wasn't able to read them with any tool
+    - `VIELOGO.TGA`: a Virgin Interactive Entertainment logo in a, presumably,
+      TGA format.
 
-      ```console
-      $ magick identify VIELOGO.TGA
-      VIELOGO.TGA TGA 320x79 320x79+0+0 5-bit sRGB 50576B 0.000u 0:00.000
-      ```
+      Interestingly, it wasn't easy to render this image; it may be corrupted or
+      just using older TGA format. Though it was rendered perfectly by
+      [nomacs][] 3.16.1709.
 
       Search across the game binaries for this file's name didn't yield any
       results, so maybe this file is unused. Also, the game doesn't access this
@@ -126,3 +125,4 @@ TODO: Enumerate the archives
 
 [fadoli.title-screen]: https://github.com/Fadoli/ToneRebellion_Raw/tree/932909a9561b9f3666fb7b25ac011016a010fe6f/extracted_shp/TITSCRN
 [myabandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
+[nomacs]: https://nomacs.org/

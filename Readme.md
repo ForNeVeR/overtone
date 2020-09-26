@@ -33,6 +33,16 @@ Test
 $ dotnet test
 ```
 
+Available Utilities
+-------------------
+
+### Overtone.Cob
+
+```console
+$ dotnet run --project Overtone.Cob -- ls <path to a COB archive>
+$ dotnet run --project Overtone.Cob -- x <path to a COB archive> <path to the output dir>
+```
+
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-zero-
 [docs.resources]: docs/resources.md
 [docs.running-original]: docs/running-original.md

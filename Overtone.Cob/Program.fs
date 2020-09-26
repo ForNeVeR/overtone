@@ -1,8 +1,9 @@
 ﻿module Overtone.Cob.Program
 
 open System
+open System.IO
 
-let printUsage() =
+let private printUsage() =
     Console.WriteLine (
         "Usage:\n" +
         "Overtone.Cob ls <path to a COB archive>\n" +
@@ -12,9 +13,10 @@ let printUsage() =
     )
 
 [<EntryPoint>]
-let main = function
+let main: string[] -> int = function
 | [|"ls"; archivePath|] ->
-    use file = new CobFile(archivePath)
+    use input = new FileStream(archivePath, FileMode.Open)
+    use file = new CobFile(input)
     file.ReadEntries() |> Seq.iter (fun e ->
         printfn "%d: %s (%d bytes)" e.Offset e.Path e.Size
     )

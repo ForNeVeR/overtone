@@ -7,6 +7,7 @@ Developer Documentation
 -----------------------
 - [Running the Original Game][docs.running-original]
 - [Game Resources][docs.resources]
+- [COB File Format][docs.cob]
 
 Getting the Game Resources
 --------------------------
@@ -44,6 +45,7 @@ $ dotnet run --project Overtone.Cob -- x <path to a COB archive> <path to the ou
 ```
 
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-zero-
+[docs.cob]: docs/cob.md
 [docs.resources]: docs/resources.md
 [docs.running-original]: docs/running-original.md
 [dotnet-sdk]: https://dot.net/

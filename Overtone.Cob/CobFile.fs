@@ -10,16 +10,15 @@ type CobFileEntry = {
     Size: int
 }
 
-type CobFile(path: string) =
-    let file = new FileStream(path, FileMode.Open)
-    let reader = new BinaryReader(file)
+type CobFile(input: Stream) =
+    let reader = new BinaryReader(input)
     interface IDisposable with
         member _.Dispose() =
             (reader :> IDisposable).Dispose()
-            (file :> IDisposable).Dispose()
+            (input :> IDisposable).Dispose()
 
     member _.ReadEntries(): CobFileEntry seq =
-        file.Seek(0L, SeekOrigin.Begin) |> ignore
+        input.Seek(0L, SeekOrigin.Begin) |> ignore
 
         let count = reader.ReadInt32()
         if count < 0 then failwithf "Item count in the archive: %d is less than zero" count
@@ -51,5 +50,5 @@ type CobFile(path: string) =
                 entries.[i] <- { entries.[i] with Offset = offset }
 
             // All the other entries are ready; now, fill the last one:
-            entries.[count - 1] <- setEntrySizeFromNextOffset entries.[count - 1] (Checked.int file.Length)
+            entries.[count - 1] <- setEntrySizeFromNextOffset entries.[count - 1] (Checked.int input.Length)
             upcast entries

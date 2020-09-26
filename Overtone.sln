@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{81501330-B
 ProjectSection(SolutionItems) = preProject
 	docs\resources.md = docs\resources.md
 	docs\running-original.md = docs\running-original.md
+	docs\cob.md = docs\cob.md
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FFCC3BCD-5592-4C94-9AD7-CFDB9405B304}"
@@ -24,7 +25,7 @@ ProjectSection(SolutionItems) = preProject
 	Readme.md = Readme.md
 EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Cob.Tests", "Overtone.Cob.Tests\Overtone.Cob.Tests.fsproj", "{7078BD52-2021-4902-9C0F-C72E24E0BC10}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Tests", "Overtone.Tests\Overtone.Tests.fsproj", "{7078BD52-2021-4902-9C0F-C72E24E0BC10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -43,8 +43,8 @@ Setting Up the Virtual Machine
    available from it (the main thing being the graphics driver).
 
    You'll be required to confirm driver installation several times during the
-   installation. It may take up to (17:57-) minutes (probably due to Windows
-   trying to search drivers on the malfunctioning Windows Update site).
+   installation. It may take up to 15 minutes (probably due to Windows trying to
+   search drivers on the malfunctioning Windows Update site).
 
    You will be required to reboot after the Guest Additions installation.
 

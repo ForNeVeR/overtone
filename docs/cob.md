@@ -1,5 +1,13 @@
 ﻿COB File Format
 ===============
+
+Author would like to thank GitHub users Darcy ([@daumiller][daumiller]) and
+Roger Braun ([@rogerbraun][rogerbraun]) for publishing the scripts to handle
+Ascendancy data archives:
+
+- [daumiller/ascendancy][daumiller.ascendancy]
+- [rogerbraun/Ascendancy-tool][rogerbraun.ascendancy-tools]
+
 Main game data is stored in COB files (i.e. `TONE00.COB` and `TONE01.COB`).
 
 COB is a simple, tar-like file format which is described below.
@@ -16,3 +24,8 @@ lest entry ends where the file ends (because you cannot otherwise estimate its
 size).
 
 Entry paths use a backslash path separator (`\`).
+
+[daumiller]: https://github.com/daumiller
+[daumiller.ascendancy]: https://github.com/daumiller/ascendancy
+[rogerbraun]: https://github.com/rogerbraun
+[rogerbraun.ascendancy-tools]: https://github.com/rogerbraun/Ascendancy-tools

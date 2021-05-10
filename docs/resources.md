@@ -1,7 +1,7 @@
 Game Resources
 ==============
 Overtone is utilizing the resources from the original CD. We consider the
-English ISO of the game from [My Abandonware][myabandonware.the-tone-rebellion]
+English ISO of the game from [My Abandonware][my-abandonware.the-tone-rebellion]
 (the "Alternative ISO Version") to serve as the reference, though other versions
 of the game are known to exist (e.g. check [these][fadoli.title-screen] French
 title screen buttons). Ideally, they shouldn't differ in resource contents too
@@ -21,7 +21,7 @@ Files on the CD
   by the game installer)
     - `00.SAV`–`07.SAV`: seven files, all of 1 byte size, all containing a space
       character
-    - `COB.CFG`: a list of all COB archives inside of a game; there're two of
+    - `COB.CFG`: a list of all COB archives inside a game; there are two of
       them here
     - `FLOAT.CFG`: a configuration file of single-player game; contains no
        useful settings for the remake
@@ -38,11 +38,11 @@ Files on the CD
       [COB format][docs.cob], see the description below
 - `THING2` directory (files from this directory are always read from the CD)
     - `ACT1.WAV`–`ACT4.WAV`: main in-game music, presumably remastered versions
-      of these're available in the "Bonus Content" archive from [My
-      Abandonware][myabandonware.the-tone-rebellion] (TODO: yet to determine)
+      of these are available in the "Bonus Content" archive from [My
+      Abandonware][my-abandonware.the-tone-rebellion] (TODO: yet to determine)
     - `AMBIENT1.WAV`–`AMBIENT4.WAV`: other game music files, presumably
-      remastered versiobns of these're available in the "Bonus Content" archive
-      from [My Abandonware][myabandonware.the-tone-rebellion] (TODO: yet to
+      remastered versions of these are available in the "Bonus Content" archive
+      from [My Abandonware][my-abandonware.the-tone-rebellion] (TODO: yet to
       determine)
     - `INTRO.AVI`: the introduction video; it wasn't shown in-game, but there's
       a **Start** menu item to show it in the standard video player.
@@ -109,7 +109,7 @@ Files on the CD
 
 Start Menu Items
 ----------------
-These're the Windows' **Start** menu items created by the game installer (for
+These are the Windows' **Start** menu items created by the game installer (for
 completeness of this overview).
 
 Game installs the following links to the Windows' **Start** menu:
@@ -125,5 +125,5 @@ TODO: Enumerate the archives
 
 [docs.cob]: ./cob.md
 [fadoli.title-screen]: https://github.com/Fadoli/ToneRebellion_Raw/tree/932909a9561b9f3666fb7b25ac011016a010fe6f/extracted_shp/TITSCRN
-[myabandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
+[my-abandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
 [nomacs]: https://nomacs.org/

@@ -52,3 +52,7 @@ type CobFile(input: Stream) =
             // All the other entries are ready; now, fill the last one:
             entries.[count - 1] <- setEntrySizeFromNextOffset entries.[count - 1] (Checked.int input.Length)
             upcast entries
+
+    member _.ReadEntry(entry: CobFileEntry): byte[] =
+        input.Seek(int64 entry.Offset, SeekOrigin.Begin) |> ignore
+        reader.ReadBytes entry.Size

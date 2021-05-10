@@ -20,7 +20,7 @@ All integers in a COB file are stored in little endian. The file looks as:
 - for each entry: entry contents
 
 Size of entry contents should be calculated based on the next entry offset. The
-lest entry ends where the file ends (because you cannot otherwise estimate its
+last entry ends where the file ends (because you cannot otherwise estimate its
 size).
 
 Entry paths use a backslash path separator (`\`).

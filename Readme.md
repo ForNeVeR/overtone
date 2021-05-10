@@ -8,6 +8,7 @@ Developer Documentation
 - [Running the Original Game][docs.running-original]
 - [Game Resources][docs.resources]
 - [COB File Format][docs.cob]
+- [Text Configuration Files][docs.txt]
 
 Getting the Game Resources
 --------------------------
@@ -50,6 +51,7 @@ $ dotnet run --project Overtone.Cob -- x <path to a COB archive> <path to the ou
 [docs.cob]: docs/cob.md
 [docs.resources]: docs/resources.md
 [docs.running-original]: docs/running-original.md
+[docs.txt]: ./docs/txt.md
 [dotnet-sdk]: https://dot.net/
 [my-abandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
 [wikipedia.abandonware]: https://en.wikipedia.org/wiki/Abandonware

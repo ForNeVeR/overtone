@@ -121,9 +121,166 @@ Game installs the following links to the Windows' **Start** menu:
 
 COB Archive Contents
 --------------------
-TODO: Enumerate the archives
+The archives contain files in the following formats:
+- `*.fnt`: font files _(TODO: document the format)_
+- `*.pal`: palette files corresponding to the shapes _(TODO: document the format)_
+- `*.shp`: shape files _(TODO: document the format)_
+- `*.txt`: [text configuration files][docs.txt]
+- `*.wav`: sound files of a well-known [Waveform Audio File Format][wav]
+- `*.haz`, `*.hzt`: binary files of unknown format
+- `*.gif`: a standard GIF file
+
+### `TONE00.COB`
+- `bldinf.txt`: "Building Animation Segments" description
+- `bldname.txt`: building names
+- `bldtxt.txt`: building and effect (like `FEAT00`?) descriptions
+- `credits.txt`: game credits
+- `effects.txt`: various effect definitions
+- `endgame.txt`: the text presented when winning the game?
+- `floater.txt`: unit statistics
+- `fltinf.txt`, `flting.txt`: "Floater shape info file", two copies of the same file
+- `gamey.txt`: some labels for the UI
+- `names.txt`: names of various entities (tribes, islands, Lefiathan beasts)
+- `newgame.txt`: texts shown when starting a new game
+- `newtext.txt`: some additional UI labels and texts
+- `pad.txt`: "the generic pad info": the building characteristics
+- `plotobj.txt`: looks like descriptions of plot items
+- `shapeinf.txt`: "Shape info file": the information about animation frames for various units
+- `shapes.txt`: annotated list of certain shape files
+- `sound.txt`: barely annotated list of certain sound files, including the files that are stored outside of COB archives (in the `THING2` directory on the CD)
+- `spells.txt`: spell descriptions and certain characteristics
+- `tonehelp.txt`: help texts for UI
+- `windows.txt`: UI screen definitions with various UI element positions
+
+### `TONE01.COB`
+- various `data\*.shp` files enumerated in `TONE00.COB\shapes.txt`: shape data
+- the following `data\*.shp` files, not enumerated in `TONE00.COB\shapes.txt` _(TODO: determine their purpose)_:
+  - `data\clip1.shp`
+  - `data\clip2.shp`
+  - `data\clip3.shp`
+  - `data\editor00.shp`
+  - `data\editor01.shp`
+  - `data\endtem1.shp`
+  - `data\endtem2.shp`
+  - `data\endtem3.shp`
+  - `data\endtemp.shp`
+  - `data\glinv0.shp`
+  - `data\glinv1.shp`
+  - `data\glinv2.shp`
+  - `data\glinv3.shp`
+  - `data\halllife.shp`
+  - `data\hallmyst.shp`
+  - `data\hallprot.shp`
+  - `data\hallseek.shp`
+  - `data\hallwand.shp`
+  - `data\i00-feat.shp`
+  - `data\i01-feat.shp`
+  - `data\i02-feat.shp`
+  - `data\i03-feat.shp`
+  - `data\i04-feat.shp`
+  - `data\i05-feat.shp`
+  - `data\i06-feat.shp`
+  - `data\i07-feat.shp`
+  - `data\i08-feat.shp`
+  - `data\i09-feat.shp`
+  - `data\i10-feat.shp`
+  - `data\i11-feat.shp`
+  - `data\i12-feat.shp`
+  - `data\i13-feat.shp`
+  - `data\i13-trig.shp`
+  - `data\i14-feat.shp`
+  - `data\inci1.shp`
+  - `data\inci2.shp`
+  - `data\island00.shp`
+  - `data\island01.shp`
+  - `data\island02.shp`
+  - `data\island03.shp`
+  - `data\island04.shp`
+  - `data\island05.shp`
+  - `data\island06.shp`
+  - `data\island07.shp`
+  - `data\island08.shp`
+  - `data\island09.shp`
+  - `data\island10.shp`
+  - `data\island11.shp`
+  - `data\island12.shp`
+  - `data\island13.shp`
+  - `data\island14.shp`
+  - `data\islandxx.shp`
+  - `data\isletmp1.shp`
+  - `data\isletmp2.shp`
+  - `data\isletmp3.shp`
+  - `data\l-bldton.shp`
+  - `data\l-cryton.shp`
+  - `data\l-enrich.shp`
+  - `data\l-extend.shp`
+  - `data\l-magton.shp`
+  - `data\loadsav1.shp`
+  - `data\loadsav2.shp`
+  - `data\loadsav3.shp`
+  - `data\loadsave.shp`
+  - `data\m-spec2.shp`
+  - `data\mainbut1.shp`
+  - `data\mainbut2.shp`
+  - `data\mainbut3.shp`
+  - `data\ngbutton.shp`
+  - `data\p-medic.shp`
+  - `data\p-pctrn.shp`
+  - `data\p-prtrn.shp`
+  - `data\p-ronin.shp`
+  - `data\p-speltw.shp`
+  - `data\p-splton.shp`
+  - `data\p-srtrn.shp`
+  - `data\p-tcrys.shp`
+  - `data\pspl13.shp`
+  - `data\pt2b.shp`
+  - `data\s3c.shp`
+  - `data\scarrow1.shp`
+  - `data\scarrow2.shp`
+  - `data\scarrow3.shp`
+  - `data\slidwin1.shp`
+  - `data\slidwin2.shp`
+  - `data\slidwin3.shp`
+  - `data\smilse.shp`
+  - `data\spiral.shp`
+  - `data\spiral2.shp`
+  - `data\spl2b.shp`
+  - `data\spl8e.shp`
+  - `data\st1b.shp`
+  - `data\st1c.shp`
+  - `data\st2e.shp`
+  - `data\temphol1.shp`
+  - `data\temphol2.shp`
+  - `data\temphol3.shp`
+  - `data\thall.shp`
+  - `data\thall1.shp`
+  - `data\thall2.shp`
+  - `data\thall3.shp`
+  - `data\v-at2fx.shp`
+  - `data\v-at5fx.shp`
+  - `data\vblegs.shp`
+  - `data\vlegs.shp`
+  - `data\vmbods.shp`
+  - `data\vmsrlegs.shp`
+- various `data\*.wav` files enumerated in `TONE00.COB\sound.txt`
+- the following `data\*.wav` files, not enumerated in `TONE00.COB\sounds.txt` _(TODO: determine their purpose)_:
+  - `feature.wav`
+  - `format.wav`
+  - `fxformat.wav`
+- `data\bgoutfnt.fnt`, `data\bigfont.fnt`, `data\smfont.fnt`: obviously, font-related files _(TODO: determine when to use every one)_
+- `data\newgame.pal`: a palette file not accompanied by a shape file
+- `data\newgame.hzt`: a binary file of unknown format
+- `data\*.pal`: the palette files for the corresponding shapes
+- `data\imremap.haz`: a binary file, purpose unknown
+- `data\island00.hzt`–`data\island14.hzt`: binary files obviously related to the corresponding `.shp`/`.pal` files, purpose currently unknown
+- `data\island00.txt`–`data\island14.txt`: object coordinates in the islands
+- `data\island04.tx2`, `data\island07.tx2`–`data\island10.tx2`: old copies of the same coordinate data?
+- `data\logo.gif`: The Logic Factory logo
+- `data\worldpos.txt`: definitions of the islands shown on the main map screen
 
 [docs.cob]: ./cob.md
+[docs.txt]: ./txt.md
 [fadoli.title-screen]: https://github.com/Fadoli/ToneRebellion_Raw/tree/932909a9561b9f3666fb7b25ac011016a010fe6f/extracted_shp/TITSCRN
 [my-abandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
 [nomacs]: https://nomacs.org/
+[wav]: https://en.wikipedia.org/wiki/WAV

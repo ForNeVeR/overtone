@@ -122,13 +122,14 @@ Game installs the following links to the Windows' **Start** menu:
 COB Archive Contents
 --------------------
 The archives contain files in the following formats:
+
 - `*.fnt`: font files _(TODO: document the format)_
+- `*.gif`: a standard GIF file
+- `*.haz`, `*.hzt`: binary files of unknown format
 - `*.pal`: palette files corresponding to the shapes _(TODO: document the format)_
 - `*.shp`: shape files _(TODO: document the format)_
 - `*.txt`: [text configuration files][docs.txt]
 - `*.wav`: sound files of a well-known [Waveform Audio File Format][wav]
-- `*.haz`, `*.hzt`: binary files of unknown format
-- `*.gif`: a standard GIF file
 
 ### `TONE00.COB`
 - `bldinf.txt`: "Building Animation Segments" description

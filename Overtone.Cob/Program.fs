@@ -18,7 +18,7 @@ let main: string[] -> int = function
     use input = new FileStream(archivePath, FileMode.Open)
     use file = new CobFile(input)
     file.ReadEntries() |> Seq.iter (fun e ->
-        printfn "%d: %s (%d bytes)" e.Offset e.Path e.Size
+        printfn $"%d{e.Offset}: %s{e.Path} (%d{e.Size} bytes)"
     )
     0
 | [|"x"; archivePath; outputPath|] ->
@@ -26,7 +26,7 @@ let main: string[] -> int = function
     use file = new CobFile(input)
     file.ReadEntries() |> Seq.iter (fun e ->
         let targetPath = Path.Combine(outputPath, e.Path.Replace('\\', Path.DirectorySeparatorChar))
-        printfn "Extracting file %s to %s (%d bytes)" e.Path targetPath e.Size
+        printfn $"Extracting file %s{e.Path} to %s{targetPath} (%d{e.Size} bytes)"
 
         Directory.CreateDirectory(Path.GetDirectoryName targetPath) |> ignore
 

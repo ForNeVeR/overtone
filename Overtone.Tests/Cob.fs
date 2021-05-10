@@ -23,15 +23,15 @@ let private cobFile =
     do
         use writer = new BinaryWriter(output)
         writer.Write count // 4 bytes: count
-        for (path, _) in entries do
+        for path, _ in entries do
             let pathBytes = Array.zeroCreate 50
             Encoding.UTF8.GetBytes(path.AsSpan(), pathBytes.AsSpan()) |> ignore
             writer.Write pathBytes // 50 bytes: path for each item
         let mutable currentOffset = int output.Position + count * 4
-        for (_, content) in entries do
+        for _, content in entries do
             writer.Write currentOffset // 4 bytes: offset to the current item
             currentOffset <- currentOffset + int content.LongLength
-        for (_, content) in entries do
+        for _, content in entries do
             writer.Write content // content of the current file
 
     output.ToArray()

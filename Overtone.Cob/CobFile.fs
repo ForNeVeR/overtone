@@ -21,14 +21,14 @@ type CobFile(input: Stream) =
         input.Seek(0L, SeekOrigin.Begin) |> ignore
 
         let count = reader.ReadInt32()
-        if count < 0 then failwithf "Item count in the archive: %d is less than zero" count
+        if count < 0 then failwithf $"Item count in the archive: %d{count} is less than zero"
         if count = 0 then
             upcast Array.empty
         else
             let setEntrySizeFromNextOffset entry nextOffset =
                 let sizedEntry = { entry with Size = nextOffset - entry.Offset }
                 if sizedEntry.Size < 0 then
-                    failwithf "Couldn't calculate size for archive entry at %d (%s)" entry.Offset entry.Path
+                    failwithf $"Couldn't calculate size for archive entry at %d{entry.Offset} (%s{entry.Path})"
                 sizedEntry
 
             let entries = Array.zeroCreate count

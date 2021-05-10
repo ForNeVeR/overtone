@@ -23,6 +23,7 @@ ProjectSection(SolutionItems) = preProject
 	Directory.Build.props = Directory.Build.props
 	License.md = License.md
 	Readme.md = Readme.md
+	global.json = global.json
 EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Tests", "Overtone.Tests\Overtone.Tests.fsproj", "{7078BD52-2021-4902-9C0F-C72E24E0BC10}"

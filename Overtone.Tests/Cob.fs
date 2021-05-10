@@ -49,3 +49,10 @@ let ``Entries should be properly enumerated``(): unit =
     Assert.Equal(expectedEntries, entries)
 
 
+[<Fact>]
+let ``Entry should be read properly``(): unit =
+    use archive = new MemoryStream(cobFile)
+    use file = new CobFile(archive)
+    let entry = Seq.head(file.ReadEntries())
+    let content = file.ReadEntry entry
+    Assert.Equal<byte>(file1, content)

@@ -47,14 +47,34 @@ $ dotnet run --project Overtone.Cob -- ls <path to a COB archive>
 $ dotnet run --project Overtone.Cob -- x <path to a COB archive> <path to the output dir>
 ```
 
+Testimonials
+------------
+
+Author would like to thank the following people for their help with this project (in no particular order):
+
+- Darcy ([@daumiller][daumiller]), the author of the [ascendancy][daumiller.ascendancy] utilities
+- Franck M. ([@Fadoli][fadoli]), the author of the [Tone Extractor Tools][fadoli.tone-rebellion-extractor]
+- Roger Braun ([@rogerbraun][rogerbraun]), the author of the [Ascendancy-tools][rogerbraun.ascendancy-tools]
+- [The Logic Factory][wikipedia.the-logic-factory], the authors of The Tone Rebellion
+- [Михаил Бесчетнов aka Terminus][extractor.ru], the author of the [Ascendancy Converter v1.0][ascendancy-converter]
+
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-umbra-
+[ascendancy-converter]: https://www.extractor.ru/files/051b8c7c6155fef1460fab189f7edb68/
+[daumiller.ascendancy]: https://github.com/daumiller/ascendancy
+[daumiller]: https://github.com/daumiller
 [docs.cob]: docs/cob.md
 [docs.resources]: docs/resources.md
 [docs.running-original]: docs/running-original.md
 [docs.txt]: ./docs/txt.md
 [dotnet-sdk]: https://dot.net/
+[extractor.ru]: http://www.extractor.ru/
+[fadoli.tone-rebellion-extractor]: https://github.com/Fadoli/Tone-rebellion-extractor
+[fadoli]: https://github.com/Fadoli
 [my-abandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
+[rogerbraun.ascendancy-tools]: https://github.com/rogerbraun/Ascendancy-tools
+[rogerbraun]: https://github.com/rogerbraun
 [wikipedia.abandonware]: https://en.wikipedia.org/wiki/Abandonware
+[wikipedia.the-logic-factory]: https://en.wikipedia.org/wiki/The_Logic_Factory
 [wikipedia.the-tone-rebellion]: https://en.wikipedia.org/wiki/The_Tone_Rebellion
 
 [status-umbra]: https://img.shields.io/badge/status-umbra-red.svg

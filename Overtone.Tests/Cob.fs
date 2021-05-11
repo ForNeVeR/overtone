@@ -6,7 +6,7 @@ open System.Text
 
 open Xunit
 
-open Overtone.Cob
+open Overtone.Resources.Cob
 
 let private file1 = Encoding.UTF8.GetBytes "Hello, world"
 let private file2 = Encoding.UTF8.GetBytes(String('x', 50000))

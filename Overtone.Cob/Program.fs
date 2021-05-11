@@ -3,6 +3,8 @@
 open System
 open System.IO
 
+open Overtone.Resources.Cob
+
 let private printUsage() =
     Console.WriteLine (
         "Usage:\n" +

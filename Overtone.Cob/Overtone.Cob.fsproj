@@ -6,8 +6,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="CobFile.fs" />
         <Compile Include="Program.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Overtone.Resources\Overtone.Resources.fsproj" />
     </ItemGroup>
 
 </Project>

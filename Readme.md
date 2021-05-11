@@ -8,6 +8,7 @@ Developer Documentation
 - [Running the Original Game][docs.running-original]
 - [Game Resources][docs.resources]
 - [COB File Format][docs.cob]
+- [Palette File Format][docs.pal]
 - [Text Configuration Files][docs.txt]
 
 Getting the Game Resources
@@ -63,6 +64,7 @@ Author would like to thank the following people for their help with this project
 [daumiller.ascendancy]: https://github.com/daumiller/ascendancy
 [daumiller]: https://github.com/daumiller
 [docs.cob]: docs/cob.md
+[docs.pal]: ./docs/pal.md
 [docs.resources]: docs/resources.md
 [docs.running-original]: docs/running-original.md
 [docs.txt]: ./docs/txt.md

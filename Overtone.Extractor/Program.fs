@@ -17,9 +17,9 @@ let main: string[] -> int = function
         printfn $"Sprite {i}. Offset {header.SpriteOffset}, custom palette: {palette}"
         let sprite = file.ReadSprite header
         printfn $"  Size: {sprite.Width} × {sprite.Height}"
-        printfn $"  Center: {sprint sprite.Center}"
+        printfn $"  Origin: {sprint sprite.Origin}"
         printfn $"  Start: {sprint sprite.Start}"
-        printfn $"  End: {sprint sprite.Start}"
+        printfn $"  End: {sprint sprite.End}"
         printfn $"  Data offset: {sprite.DataOffset}"
     )
     0

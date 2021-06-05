@@ -16,7 +16,7 @@ type SpriteData = {
     Header: SpriteHeader
     Width: uint16
     Height: uint16
-    Center: UShortPoint
+    Origin: UShortPoint
     Start: Point
     End: Point
     DataOffset: int64
@@ -45,8 +45,8 @@ type ShapeFile(input: Stream) =
         use reader = new BinaryReader(input, Encoding.UTF8, leaveOpen = true)
         let height = reader.ReadUInt16() + 1us
         let width = reader.ReadUInt16() + 1us
-        let centerY = reader.ReadUInt16()
-        let centerX = reader.ReadUInt16()
+        let originY = reader.ReadUInt16()
+        let originX = reader.ReadUInt16()
         let startX = reader.ReadInt32()
         let startY = reader.ReadInt32()
         let endX = reader.ReadInt32()
@@ -55,7 +55,7 @@ type ShapeFile(input: Stream) =
             Header = header
             Width = width
             Height = height
-            Center = struct (centerX, centerY)
+            Origin = struct (originX, originY)
             Start = struct (startX, startY)
             End = struct (endX, endY)
             DataOffset = input.Position

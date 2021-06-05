@@ -9,6 +9,7 @@ Developer Documentation
 - [Game Resources][docs.resources]
 - [COB File Format][docs.cob]
 - [Palette File Format][docs.pal]
+- [Shape File Format][docs.shp]
 - [Text Configuration Files][docs.txt]
 
 Getting the Game Resources
@@ -67,6 +68,7 @@ Author would like to thank the following people for their help with this project
 [docs.pal]: ./docs/pal.md
 [docs.resources]: docs/resources.md
 [docs.running-original]: docs/running-original.md
+[docs.shp]: ./docs/shp.md
 [docs.txt]: ./docs/txt.md
 [dotnet-sdk]: https://dot.net/
 [extractor.ru]: http://www.extractor.ru/

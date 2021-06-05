@@ -127,7 +127,7 @@ The archives contain files in the following formats:
 - `*.gif`: a standard GIF file
 - `*.haz`, `*.hzt`: binary files of unknown format
 - `*.pal`: [palette files][docs.pal] corresponding to the shapes
-- `*.shp`: shape files _(TODO: document the format)_
+- `*.shp`: [shape files][docs.shp]
 - `*.txt`: [text configuration files][docs.txt]
 - `*.wav`: sound files of a well-known [Waveform Audio File Format][wav]
 
@@ -281,6 +281,7 @@ The archives contain files in the following formats:
 
 [docs.cob]: ./cob.md
 [docs.pal]: ./pal.md
+[docs.shp]: ./shp.md
 [docs.txt]: ./txt.md
 [fadoli.title-screen]: https://github.com/Fadoli/ToneRebellion_Raw/tree/932909a9561b9f3666fb7b25ac011016a010fe6f/extracted_shp/TITSCRN
 [my-abandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc

@@ -7,7 +7,7 @@ Author would like to thank authors of the following tools (in no particular orde
 - [Tone Extractor Tools][fadoli.tone-rebellion-extractor] by Franck M. ([@Fadoli][fadoli])
 - [ascendancy][daumiller.ascendancy] utilities by Darcy ([@daumiller][daumiller])
 
-The Tone Rebellion stores its image data in the so called shape files (`*.shp`).
+The Tone Rebellion stores its image data in the so called shape files (`*.shp`). Shape file defines a collection of sprites.
 
 Every `*.shp` file starts from the identifying ASCII string, `1.10` (first 4 bytes).
 
@@ -17,22 +17,24 @@ Then, for each sprite, a small header is written. Sprite header is just two offs
 
 **TODO:** It seems like the embedded palette is unused in the Tone Rebellion. Check this.
 
-Sprite data (found by the offset from the file header) contains the following fields:
+Sprite data (found by the offset from the file header) defines two distinct areas: a canvas area, and a sprite area and position on said canvas. Sprite data contains the following fields:
 
-- sprite height minus one in pixels, 4-byte integer (so, you have to actually add 1 to get the real height)
-- sprite width minus one in pixels, 4-byte integer
-- Y coordinate of the sprite origin in pixels (2-byte unsigned integer)
-- X coordinate of the sprite origin in pixels (2-byte unsigned integer)
-- start X coordinate of the sprite in pixels (2-byte unsigned integer)
-- start Y coordinate of the sprite in pixels (2-byte unsigned integer)
-- end X coordinate of the sprite in pixels (2-byte unsigned integer)
-- end Y coordinate of the sprite in pixels (2-byte unsigned integer)
+- canvas height minus one in pixels, 2-byte unsigned integer (so, you have to add 1 to get the real height)
+- canvas width minus one in pixels, 2-byte unsigned integer
+- absolute Y coordinate of the sprite origin in pixels, 2-byte unsigned integer
+- absolute X coordinate of the sprite origin in pixels, 2-byte unsigned integer
+- relative start X coordinate of the sprite in pixels, 4-byte integer
+- relative start Y coordinate of the sprite in pixels, 4-byte integer
+- relative end X coordinate of the sprite in pixels, 4-byte integer
+- relative end Y coordinate of the sprite in pixels, 4-byte integer
 
-Please note that X and Y coordinates are written in the opposite order (first Y, then X) in case of width, height and sprite origin, but in a normal order in case of start and end.
+Please note that X and Y coordinates are written in the opposite order (first Y, then X) in case of canvas dimensions and sprite origin, but in a normal order in case of sprite starting and ending corners.
 
-Start and end coordinates are relative to the origin. Essentially, this allows to select a rectangle on a (potentially bigger) sprite canvas. Sprite data only gets drawn into that rectangle; other parts of the sprite are meant to be transparent.
+Start and end coordinates are relative to the origin. Essentially, this allows to select a rectangle on a (potentially bigger) sprite canvas. Sprite data only gets drawn into that rectangle; other parts of the canvas are meant to be transparent.
 
-**TODO:** Describe actual pixel data storage.
+Sprite pixel data immediately follows this structure (so, it starts at offset of 24 bytes from the initial sprite offset).
+
+**TODO:** Describe the pixel data storage.
 
 **TODO:** Describe how the palette gets chosen for a particular sprite.
 

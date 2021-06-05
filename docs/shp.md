@@ -9,7 +9,22 @@ Author would like to thank authors of the following tools (in no particular orde
 
 The Tone Rebellion stores its image data in the so called shape files (`*.shp`).
 
-Every `*.shp` file starts from the identifying ASCII string, `1.10` (first 4 bytes). Next 4 bytes store the sprite count.
+Every `*.shp` file starts from the identifying ASCII string, `1.10` (first 4 bytes).
+
+Next 4 bytes store the sprite count.
+
+Then, for each sprite, a small header is written. Sprite header is just two offsets: 4-byte offset to a sprite data, and 4-byte offset to a sprite palette, both are zero-based offsets to the same file. Offset to a sprite palette is optional, and may be zero (in such case, no custom palette is defined for a sprite).
+
+Sprite data (found by the offset from the file header) contains the following fields:
+
+- sprite height minus one in pixels, 4-byte integer (so, you have to actually add 1 to get the real height)
+- sprite width minus one in pixels, 4-byte integer
+- center Y coordinate of the sprite in pixels (2-byte unsigned integer)
+- center X coordinate of the sprite in pixels (2-byte unsigned integer)
+- start X coordinate of the sprite in pixels (2-byte unsigned integer)
+- start Y coordinate of the sprite in pixels (2-byte unsigned integer)
+- end X coordinate of the sprite in pixels (2-byte unsigned integer)
+- end Y coordinate of the sprite in pixels (2-byte unsigned integer)
 
 [ascendancy-converter]: https://www.extractor.ru/files/051b8c7c6155fef1460fab189f7edb68/
 [daumiller.ascendancy]: https://github.com/daumiller/ascendancy

@@ -8,6 +8,7 @@
     <ItemGroup>
       <Compile Include="Cob.fs" />
       <Compile Include="Palette.fs" />
+      <Compile Include="Shape.fs" />
     </ItemGroup>
 
 </Project>

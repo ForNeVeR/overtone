@@ -33,6 +33,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Tests", "Overtone.
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Resources", "Overtone.Resources\Overtone.Resources.fsproj", "{684AAE3A-07DC-4197-B265-004899513238}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Extractor", "Overtone.Extractor\Overtone.Extractor.fsproj", "{8D242B83-C50B-4E72-908C-73FBA9D61976}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{684AAE3A-07DC-4197-B265-004899513238}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{684AAE3A-07DC-4197-B265-004899513238}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{684AAE3A-07DC-4197-B265-004899513238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D242B83-C50B-4E72-908C-73FBA9D61976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D242B83-C50B-4E72-908C-73FBA9D61976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D242B83-C50B-4E72-908C-73FBA9D61976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D242B83-C50B-4E72-908C-73FBA9D61976}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{046B3949-4459-4EC5-8041-D00687495715} = {F7A92DCC-190F-4E09-949A-C0413800326A}

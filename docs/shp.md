@@ -1,11 +1,19 @@
 ﻿Shape File Format
 =================
 
-The Tone Rebellion stores its image data in the so called shape files (`*.shp`).
-
-Every `*.shp` file starts from the identifying ASCII string, `1.10` (first 4 bytes). Next 4 bytes are
-
 Author would like to thank authors of the following tools (in no particular order) for providing the information about the shape file format (which is the same in The Tone Rebellion and an older game from The Logic Factory, Ascendancy):
 
 - [Ascendancy Converter v1.0][ascendancy-converter] by [Михаил Бесчетнов aka Terminus][extractor.ru]
 - [Tone Extractor Tools][fadoli.tone-rebellion-extractor] by Franck M. ([@Fadoli][fadoli])
+- [ascendancy][daumiller.ascendancy] utilities by Darcy ([@daumiller][daumiller])
+
+The Tone Rebellion stores its image data in the so called shape files (`*.shp`).
+
+Every `*.shp` file starts from the identifying ASCII string, `1.10` (first 4 bytes). Next 4 bytes store the sprite count.
+
+[ascendancy-converter]: https://www.extractor.ru/files/051b8c7c6155fef1460fab189f7edb68/
+[daumiller.ascendancy]: https://github.com/daumiller/ascendancy
+[daumiller]: https://github.com/daumiller
+[extractor.ru]: http://www.extractor.ru/
+[fadoli.tone-rebellion-extractor]: https://github.com/Fadoli/Tone-rebellion-extractor
+[fadoli]: https://github.com/Fadoli

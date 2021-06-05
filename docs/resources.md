@@ -125,7 +125,8 @@ The archives contain files in the following formats:
 
 - `*.fnt`: font files _(TODO: document the format)_
 - `*.gif`: a standard GIF file
-- `*.haz`, `*.hzt`: binary files of unknown format
+- `*.haz`: documented as "shading files" in the `README.md` file of the [ascendancy][daumiller.ascendancy] utilities repository; exact format is currently unknown
+- `*.hzt`: binary files of unknown format
 - `*.pal`: [palette files][docs.pal] corresponding to the shapes
 - `*.shp`: [shape files][docs.shp]
 - `*.txt`: [text configuration files][docs.txt]
@@ -279,6 +280,7 @@ The archives contain files in the following formats:
 - `data\logo.gif`: The Logic Factory logo
 - `data\worldpos.txt`: definitions of the islands shown on the main map screen
 
+[daumiller.ascendancy]: https://github.com/daumiller/ascendancy
 [docs.cob]: ./cob.md
 [docs.pal]: ./pal.md
 [docs.shp]: ./shp.md

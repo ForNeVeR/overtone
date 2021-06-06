@@ -1,4 +1,4 @@
-﻿namespace Overtone.Resources.Palette
+﻿namespace Overtone.Resources
 
 open System.Drawing
 open System.IO
@@ -6,11 +6,11 @@ open System.IO
 open Checked
 
 /// Type supporting reading .pal files from The Tone Rebellion.
-type PalFile = {
+type Palette = {
     Colors: Color[]
 }
     with
-    static member Read(input: Stream): PalFile =
+    static member Read(input: Stream): Palette =
         use reader = new BinaryReader(input)
         let colors = Array.init 256 (fun _ -> Color.Transparent)
         for index in 0..255 do
@@ -19,3 +19,6 @@ type PalFile = {
             let b = reader.ReadByte() * 4uy
             colors.[index] <- Color.FromArgb(int r, int g, int b)
         { Colors = colors }
+
+    member this.GetColor(index: byte): Color =
+        this.Colors.[int index]

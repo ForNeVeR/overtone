@@ -34,7 +34,14 @@ Start and end coordinates are relative to the origin. Essentially, this allows t
 
 Sprite pixel data immediately follows this structure (so, it starts at offset of 24 bytes from the initial sprite offset).
 
-**TODO:** Describe the pixel data storage.
+The sprite pixel data is a slightly packed representation of palette indices stream. It contains a sequence of commands, each starting with an indicator byte.
+
+- indicator byte = 0: end of current row (remaining part of the pixel row contains only transparent pixels)
+- indicator byte = 1: next byte contains a number of pixels to skip (fill them with the transparent color)
+- indicator byte > 1:
+    - calculate _count_ by right shifting it by 1 bit
+    - if lowest bit is 0: next byte contains an index of color from the palette. Add a pixel of the same color _count_ times
+    - if lowest bit is 1: next _count_ bytes contain color indices from the palette. Add _count_ pixels of these colors to the image
 
 **TODO:** Describe how the palette gets chosen for a particular sprite.
 

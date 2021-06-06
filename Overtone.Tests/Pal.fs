@@ -2,8 +2,10 @@
 
 open System.Drawing
 open System.IO
-open Overtone.Resources.Palette
+
 open Xunit
+
+open Overtone.Resources
 
 let greenPalFile = [|
     let color = Color.Green
@@ -16,6 +18,6 @@ let greenPalFile = [|
 [<Fact>]
 let ``.pal file should be read``(): unit =
     use stream = new MemoryStream(greenPalFile)
-    let file = PalFile.Read stream
+    let file = Palette.Read stream
     for color in file.Colors do
         Assert.Equal(Color.Green.ToArgb(), color.ToArgb())

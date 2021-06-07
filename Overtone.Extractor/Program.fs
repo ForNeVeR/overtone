@@ -24,11 +24,21 @@ let private info name (file: ShapeFile) =
 
 [<EntryPoint>]
 let main: string[] -> int = function
-| [|"info"; inputFilePath|] ->
-    use stream = new FileStream(inputFilePath, FileMode.Open)
-    let file = ShapeFile stream
-    info (Path.GetFileName inputFilePath) file
-    0
+| [|"info"; inputFilePattern|] ->
+    let parent = Path.GetDirectoryName inputFilePattern
+    let files = Directory.GetFiles(parent, Path.GetFileName inputFilePattern)
+    let mutable errors = 0
+    for path in files do
+        try
+            use stream = new FileStream(path, FileMode.Open)
+            let file = ShapeFile stream
+            info (Path.GetFileName path) file
+        with
+        | e ->
+            errors <- errors + 1
+            eprintf $"%A{e}"
+    printf $"Errors: {errors}"
+    if errors = 0 then 0 else 1
 | [| "render"; shpFilePath; imageFilePath |] ->
     use stream = new FileStream(shpFilePath, FileMode.Open)
     let file = ShapeFile stream
@@ -50,6 +60,6 @@ let main: string[] -> int = function
     0
 | _ ->
     printfn "Usage:"
-    printfn "  info <path-to-shp-file>: print shp file info"
+    printfn "  info <path-to-shp-file>: print shp file info (accepts glob)"
     printfn "  render <path-to-shp-file> <path-to-output-file>: render the first sprite from the file"
     1

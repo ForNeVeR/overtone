@@ -13,9 +13,7 @@ Every `*.shp` file starts from the identifying ASCII string, `1.10` (first 4 byt
 
 Next 4 bytes store the sprite count.
 
-Then, for each sprite, a small header is written. Sprite header is just two offsets: 4-byte offset to a sprite data, and 4-byte offset to a sprite palette, both are zero-based offsets to the same file. Offset to a sprite palette is optional, and may be zero (in such case, no custom palette is defined for a sprite).
-
-**TODO:** It seems like the embedded palette is unused in the Tone Rebellion. Check this.
+Then, for each sprite, a small header is written. Sprite header is 8 bytes: 4-byte offset to a sprite data (zero-based offset into the same file), and 4 bytes of unknown data. Unknown data is documented to be a palette offset in the [ascendancy][daumiller.ascendancy] utilities source code, though it is only present in two files of The Tone Rebellion (`TONE01\l-magton.shp` and `TONE01\p-splton.shp`), both of which are 256 bytes only, and look corrupted.
 
 Sprite data (found by the offset from the file header) defines two distinct areas: a canvas area, and a sprite area and position on said canvas. Sprite data contains the following fields:
 

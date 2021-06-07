@@ -9,6 +9,7 @@
       <Compile Include="Cob.fs" />
       <Compile Include="Palette.fs" />
       <Compile Include="Shape.fs" />
+      <Compile Include="ShapePalette.fs" />
     </ItemGroup>
 
     <ItemGroup>

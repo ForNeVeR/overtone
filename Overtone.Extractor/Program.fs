@@ -58,8 +58,16 @@ let main: string[] -> int = function
     bitmap.Save(imageFilePath, ImageFormat.Png)
 
     0
+| [| "palette"; inputDirectoryPath |] ->
+    for file in Directory.GetFiles(inputDirectoryPath, "*.shp") do
+        let name = Path.GetFileName file
+        let palette = ShapePalette.get file
+        let status = if File.Exists(Path.Combine(Path.GetDirectoryName file, palette)) then "ok" else "not found"
+        printfn $"{name}: {palette}, {status}"
+    0
 | _ ->
     printfn "Usage:"
     printfn "  info <path-to-shp-file>: print shp file info (accepts glob)"
     printfn "  render <path-to-shp-file> <path-to-output-file>: render the first sprite from the file"
+    printfn "  palette <path-to-directory>: list the palettes for each file in the directory"
     1

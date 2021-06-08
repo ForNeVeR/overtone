@@ -22,6 +22,26 @@ let private info name (file: ShapeFile) =
         printfn $"  Data offset: {sprite.DataOffset}"
     )
 
+let private render inputFile outputDirectory =
+    use stream = new FileStream(inputFile, FileMode.Open)
+    let file = ShapeFile stream
+    info (Path.GetFileName inputFile) file
+
+    let palFilePath = Path.Combine(Path.GetDirectoryName inputFile, ShapePalette.get inputFile)
+    use palStream = new FileStream(palFilePath, FileMode.Open)
+    let palette = Palette.Read palStream
+
+    file.ReadSpriteHeaders()
+    |> Seq.iteri (fun index header ->
+        Directory.CreateDirectory outputDirectory |> ignore
+        let outputFilePath = Path.Combine(outputDirectory,
+                                          $"{Path.GetFileNameWithoutExtension inputFile}_{index}.png")
+
+        let sprite = file.ReadSprite header
+        use bitmap = file.Render palette sprite
+        bitmap.Save(outputFilePath, ImageFormat.Png)
+    )
+
 [<EntryPoint>]
 let main: string[] -> int = function
 | [|"info"; inputFilePattern|] ->
@@ -36,28 +56,25 @@ let main: string[] -> int = function
         with
         | e ->
             errors <- errors + 1
-            eprintf $"%A{e}"
-    printf $"Errors: {errors}"
+            eprintfn $"%A{e}"
+    printfn $"Errors: {errors}"
     if errors = 0 then 0 else 1
-| [| "render"; shpFilePath; imageFilePath |] ->
-    use stream = new FileStream(shpFilePath, FileMode.Open)
-    let file = ShapeFile stream
-    info (Path.GetFileName shpFilePath) file
-
-    let palFilePath = Path.ChangeExtension(shpFilePath, "pal")
-    use palStream = new FileStream(palFilePath, FileMode.Open)
-    let palette = Palette.Read palStream
-
-    let bitmap =
-        file.ReadSpriteHeaders()
-        |> Seq.head
-        |> file.ReadSprite
-        |> file.Render palette
-
-    Directory.CreateDirectory(Path.GetDirectoryName imageFilePath) |> ignore
-    bitmap.Save(imageFilePath, ImageFormat.Png)
-
-    0
+| [| "render"; shpFilePattern; outputDirectory |] ->
+    let parent = Path.GetDirectoryName shpFilePattern
+    let files = Directory.GetFiles(parent, Path.GetFileName shpFilePattern)
+    let mutable success = 0
+    let mutable errors = 0
+    for path in files do
+        try
+            render path outputDirectory
+            success <- success + 1
+        with
+        | e ->
+            errors <- errors + 1
+            eprintfn $"%A{e}"
+    printfn $"Success: {success}"
+    printfn $"Errors: {errors}"
+    if errors = 0 then 0 else 1
 | [| "palette"; inputDirectoryPath |] ->
     for file in Directory.GetFiles(inputDirectoryPath, "*.shp") do
         let name = Path.GetFileName file
@@ -68,6 +85,6 @@ let main: string[] -> int = function
 | _ ->
     printfn "Usage:"
     printfn "  info <path-to-shp-file>: print shp file info (accepts glob)"
-    printfn "  render <path-to-shp-file> <path-to-output-file>: render the first sprite from the file"
+    printfn "  render <path-to-shp-file> <output-directory>: render all the sprites from the file (accepts glob)"
     printfn "  palette <path-to-directory>: list the palettes for each file in the directory"
     1

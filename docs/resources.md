@@ -270,9 +270,9 @@ The archives contain files in the following formats:
   - `format.wav`
   - `fxformat.wav`
 - `data\bgoutfnt.fnt`, `data\bigfont.fnt`, `data\smfont.fnt`: obviously, font-related files _(TODO: determine when to use every one)_
-- `data\newgame.pal`: a palette file not accompanied by a shape file
+- `data\logo.pal`: a palette file not accompanied by a shape file
 - `data\newgame.hzt`: a binary file of unknown format
-- `data\*.pal`: the palette files for the corresponding shapes
+- `data\*.pal`: the palette files for the corresponding shapes (see [the palettes documentation][docs.pal] for the full association list)
 - `data\imremap.haz`: a binary file, purpose unknown
 - `data\island00.hzt`–`data\island14.hzt`: binary files obviously related to the corresponding `.shp`/`.pal` files, purpose currently unknown
 - `data\island00.txt`–`data\island14.txt`: object coordinates in the islands

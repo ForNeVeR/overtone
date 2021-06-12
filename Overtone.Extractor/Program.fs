@@ -56,7 +56,7 @@ let main: string[] -> int = function
         with
         | e ->
             errors <- errors + 1
-            eprintfn $"%A{e}"
+            printfn $"%A{e}"
     printfn $"Errors: {errors}"
     if errors = 0 then 0 else 1
 | [| "render"; shpFilePattern; outputDirectory |] ->
@@ -71,7 +71,7 @@ let main: string[] -> int = function
         with
         | e ->
             errors <- errors + 1
-            eprintfn $"%A{e}"
+            printfn $"%A{e}"
     printfn $"Success: {success}"
     printfn $"Errors: {errors}"
     if errors = 0 then 0 else 1

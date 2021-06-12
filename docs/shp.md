@@ -41,7 +41,12 @@ The sprite pixel data is a slightly packed representation of palette indices str
     - if lowest bit is 0: next byte contains an index of color from the palette. Add a pixel of the same color _count_ times
     - if lowest bit is 1: next _count_ bytes contain color indices from the palette. Add _count_ pixels of these colors to the image
 
-**TODO:** Describe how the palette gets chosen for a particular sprite.
+## Oddities
+
+Certain sprites or sprite files look corrupted and/or couldn't be decoded following this guide.
+
+- `TONE01\l-magton.shp` and `TONE01\p-splton.shp` are looking like they have embedded palette, though both the sprite and the palette seem to have ridiculous offset (4481064 bytes in a file of 256 bytes), so they're completely broken.
+- Certain sprites seems to have ridiculous start/end coordinates (greater than 2000000000). At the same time, they seem to have zero bytes of data (either first byte of the sprite data is supposed to be just after the end of the file, or the next sprite starts immediately after the current one, without any gap in-between). As of now, I recommend to detect those by the first two bytes of all four of their start and end X and Y coordinates being `0x7fff`.
 
 [ascendancy-converter]: https://www.extractor.ru/files/051b8c7c6155fef1460fab189f7edb68/
 [daumiller.ascendancy]: https://github.com/daumiller/ascendancy

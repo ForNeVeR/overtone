@@ -12,7 +12,9 @@ open Checked
 type SpriteHeader = {
     SpriteOffset: int
     PaletteOffset: int option
-}
+} with
+    member this.IsCorrupted: bool =
+        Option.isSome this.PaletteOffset
 
 type UShortSize = (struct (uint16 * uint16))
 type UShortPoint = (struct (uint16 * uint16))
@@ -25,7 +27,12 @@ type SpriteData = {
     Start: Point
     End: Point
     DataOffset: int64
-}
+} with
+    member this.IsEmpty: bool =
+        let struct (startX, startY) = this.Start
+        let struct (endX, endY) = this.End
+        let empty x = x &&& 0x7fff0000 = 0x7fff0000
+        empty startX && empty startY && empty endX && empty endY
 
 type ShapeFile(input: Stream) =
     member _.ReadSpriteHeaders(): SpriteHeader seq =
@@ -67,46 +74,48 @@ type ShapeFile(input: Stream) =
 
     member _.Render (palette: Palette) (sprite: SpriteData): Bitmap =
         let struct (canvasWidth, canvasHeight) = sprite.CanvasDimensions
-        let struct (originX, originY) = sprite.Origin
-        let struct (startX, startY) = sprite.Start
-        let struct (endX, endY) = sprite.End
-        let spriteHeight = endY - startY + 1
-
-        let minCanvasX = int originX + startX
-        let minCanvasY = int originY + startY
-        let maxCanvasX = int originX + endX
-        let maxCanvasY = int originY + endY
-
-        input.Seek(sprite.DataOffset, SeekOrigin.Begin) |> ignore
-        use reader = new BinaryReader(input, Encoding.UTF8, leaveOpen = true)
-
         let bitmap = new Bitmap(int canvasWidth, int canvasHeight)
-        for spriteY in 0..spriteHeight - 1 do
-            let canvasY = int originY + startY
-            if canvasY < minCanvasY || canvasY > maxCanvasY then
-                failwith $"Pixel row {canvasY} is outside of allowed bounds [{minCanvasY}, {maxCanvasY}]"
 
-            let mutable canvasX = int originX + startX
+        if not sprite.IsEmpty then
+            let struct (originX, originY) = sprite.Origin
+            let struct (startX, startY) = sprite.Start
+            let struct (endX, endY) = sprite.End
+            let spriteHeight = endY - startY + 1
 
-            let addPixel idx =
-                if canvasX < minCanvasX || canvasX > maxCanvasX then
-                    failwith $"Pixel column {canvasX} is outside of allowed bounds [{minCanvasX}; {maxCanvasX}]"
-                bitmap.SetPixel(canvasX, spriteY, palette.GetColor idx)
-                canvasX <- canvasX + 1
-            let skipPixels count =
-                canvasX <- canvasX + int count
+            let minCanvasX = int originX + startX
+            let minCanvasY = int originY + startY
+            let maxCanvasX = int originX + endX
+            let maxCanvasY = int originY + endY
 
-            let mutable endRow = false
-            while not endRow do
-                let indicator = reader.ReadByte()
-                let length = indicator >>> 1
-                match indicator with
-                | 0uy -> endRow <- true
-                | 1uy -> skipPixels(reader.ReadByte())
-                | x when x &&& 1uy = 0uy ->
-                    let color = reader.ReadByte()
-                    for _ in 1uy..length do
-                        addPixel color
-                | _ -> reader.ReadBytes(int length) |> Seq.iter addPixel
+            input.Seek(sprite.DataOffset, SeekOrigin.Begin) |> ignore
+            use reader = new BinaryReader(input, Encoding.UTF8, leaveOpen = true)
+
+            for spriteY in 0..spriteHeight - 1 do
+                let canvasY = int originY + startY
+                if canvasY < minCanvasY || canvasY > maxCanvasY then
+                    failwith $"Pixel row {canvasY} is outside of allowed bounds [{minCanvasY}, {maxCanvasY}]"
+
+                let mutable canvasX = int originX + startX
+
+                let addPixel idx =
+                    if canvasX < minCanvasX || canvasX > maxCanvasX then
+                        failwith $"Pixel column {canvasX} is outside of allowed bounds [{minCanvasX}; {maxCanvasX}]"
+                    bitmap.SetPixel(canvasX, spriteY, palette.GetColor idx)
+                    canvasX <- canvasX + 1
+                let skipPixels count =
+                    canvasX <- canvasX + int count
+
+                let mutable endRow = false
+                while not endRow do
+                    let indicator = reader.ReadByte()
+                    let length = indicator >>> 1
+                    match indicator with
+                    | 0uy -> endRow <- true
+                    | 1uy -> skipPixels(reader.ReadByte())
+                    | x when x &&& 1uy = 0uy ->
+                        let color = reader.ReadByte()
+                        for _ in 1uy..length do
+                            addPixel color
+                    | _ -> reader.ReadBytes(int length) |> Seq.iter addPixel
 
         bitmap

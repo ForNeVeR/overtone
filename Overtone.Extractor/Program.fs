@@ -11,7 +11,10 @@ let private info name (file: ShapeFile) =
     headers |> Array.iteri (fun i header ->
         let sprint(struct (x, y)) = sprintf $"({x}, {y})"
 
-        let palette = if Option.isSome header.PaletteOffset then "present" else "absent"
+        let palette =
+            match header.PaletteOffset with
+            | Some offset -> string offset
+            | None -> "absent"
         printfn $"Sprite {i}. Offset {header.SpriteOffset}, custom palette: {palette}"
         let sprite = file.ReadSprite header
         let struct (width, height) = sprite.CanvasDimensions
@@ -25,22 +28,34 @@ let private info name (file: ShapeFile) =
 let private render inputFile outputDirectory =
     use stream = new FileStream(inputFile, FileMode.Open)
     let file = ShapeFile stream
-    info (Path.GetFileName inputFile) file
 
     let palFilePath = Path.Combine(Path.GetDirectoryName inputFile, ShapePalette.get inputFile)
     use palStream = new FileStream(palFilePath, FileMode.Open)
     let palette = Palette.Read palStream
 
-    file.ReadSpriteHeaders()
-    |> Seq.iteri (fun index header ->
-        Directory.CreateDirectory outputDirectory |> ignore
-        let outputFilePath = Path.Combine(outputDirectory,
-                                          $"{Path.GetFileNameWithoutExtension inputFile}_{index}.png")
+    let headers = file.ReadSpriteHeaders() |> Seq.toArray
+    printfn $"  ({headers.Length} sprites)"
+    if headers.[0].IsCorrupted then
+        printfn "  File skipped due to sprite 0 being corrupted."
+    else
+        headers
+        |> Seq.iteri (fun index header ->
+            Directory.CreateDirectory outputDirectory |> ignore
+            let outputFileName = $"{Path.GetFileNameWithoutExtension inputFile}_{index}.png"
+            let outputFilePath = Path.Combine(outputDirectory, outputFileName)
 
-        let sprite = file.ReadSprite header
-        use bitmap = file.Render palette sprite
-        bitmap.Save(outputFilePath, ImageFormat.Png)
-    )
+            printf $"  Saving sprite {index} as {outputFileName}: "
+
+            try
+                let sprite = file.ReadSprite header
+                if sprite.IsEmpty then printf "(empty) "
+                use bitmap = file.Render palette sprite
+                bitmap.Save(outputFilePath, ImageFormat.Png)
+                printfn "ok."
+            with
+            | e ->
+                printfn $"error: {e}"
+        )
 
 [<EntryPoint>]
 let main: string[] -> int = function
@@ -62,19 +77,13 @@ let main: string[] -> int = function
 | [| "render"; shpFilePattern; outputDirectory |] ->
     let parent = Path.GetDirectoryName shpFilePattern
     let files = Directory.GetFiles(parent, Path.GetFileName shpFilePattern)
-    let mutable success = 0
-    let mutable errors = 0
+    let mutable processed = 0
     for path in files do
-        try
-            render path outputDirectory
-            success <- success + 1
-        with
-        | e ->
-            errors <- errors + 1
-            printfn $"%A{e}"
-    printfn $"Success: {success}"
-    printfn $"Errors: {errors}"
-    if errors = 0 then 0 else 1
+        printfn $"Processing file \"{path}\"."
+        render path outputDirectory
+        processed <- processed + 1
+    printfn $"Processed: {processed}"
+    0
 | [| "palette"; inputDirectoryPath |] ->
     for file in Directory.GetFiles(inputDirectoryPath, "*.shp") do
         let name = Path.GetFileName file

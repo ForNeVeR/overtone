@@ -49,6 +49,22 @@ $ dotnet run --project Overtone.Cob -- ls <path to a COB archive>
 $ dotnet run --project Overtone.Cob -- x <path to a COB archive> <path to the output dir>
 ```
 
+### Overtone.Extractor
+
+This is a tool to extract game resources (currently, [shape files][docs.shp] rendering).
+
+```console
+$ dotnet run --project Overtone.Extractor -- args
+```
+
+Where `args` are:
+
+- `info path.shp`: print shape file information
+- `render path.shp output/directory`: render sprites from a shape file to a collection of png files in an output directory
+- `palette path.shp`: print a palette file name for a shape file
+
+All commands support wildcards (say, `render path/*.shp /output/dir`).
+
 Testimonials
 ------------
 

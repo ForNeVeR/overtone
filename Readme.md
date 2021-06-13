@@ -23,7 +23,9 @@ download the game from [My Abandonware][my-abandonware.the-tone-rebellion].
 
 Prerequisites
 -------------
-To develop the project, you'll need [.NET SDK][dotnet-sdk] 5.0 or later installed.
+To develop the project, you'll need [.NET SDK][dotnet.sdk] 5.0 or later installed.
+
+Notably, on macOS, [libgdiplus is required][dotnet.libgdiplus].
 
 Build
 -----
@@ -86,7 +88,8 @@ Author would like to thank the following people for their help with this project
 [docs.running-original]: docs/running-original.md
 [docs.shp]: ./docs/shp.md
 [docs.txt]: ./docs/txt.md
-[dotnet-sdk]: https://dot.net/
+[dotnet.libgdiplus]: https://docs.microsoft.com/en-us/dotnet/core/install/macos#libgdiplus
+[dotnet.sdk]: https://dot.net/
 [extractor.ru]: http://www.extractor.ru/
 [fadoli.tone-rebellion-extractor]: https://github.com/Fadoli/Tone-rebellion-extractor
 [fadoli]: https://github.com/Fadoli

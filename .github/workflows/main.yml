@@ -20,6 +20,10 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       NUGET_PACKAGES: ${{ github.workspace }}/.github/nuget-packages
     steps:
+      - name: Set up libgdiplus
+        run: brew install mono-libgdiplus
+        if: runner.os == 'macOS'
+
       - name: Checkout
         uses: actions/checkout@v2
 

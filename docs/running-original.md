@@ -30,18 +30,17 @@ Setting Up the Virtual Machine
 1. Create a virtual machine in VirtualBox, and add `VirtualXP.VHD` as a disk
    image to it. I've also added 1024 MiB RAM, though the game doesn't require as
    much.
-2. Then, install Windows XP as you usually would (no customization is expected
-   at this stage). When VirtualBox will allow to use mouse integration, disable
-   it (mouse integration doesn't worked well for me).
-3. At some point the machine may show you a black screen with only an
+2. When VirtualBox will allow to use mouse integration, disable it (mouse integration doesn't worked well for me).
+3. Then, install Windows XP as you usually would (no customization is expected at this stage).
+4. At some point the machine may show you a black screen with only an
    (immovable) mouse cursor in it. At this stage, just restart the VM: it will
    be fine. I've found that it's the usual state of the OS during restart, just
    be ready for it.
-4. After restart, disable automatic update, and allow OS to install any hardware
+5. After restart, disable automatic update, and allow OS to install any hardware
    it was able to install without Internet access (it is not required for the
    game at all). Allow the OS to correct your resolution if it offers to.
-5. Ensure sound is working on your VM (via the tray icon for sound devices).
-6. Insert the Guest Additions CD Image into the VM, and install everything
+6. Ensure sound is working on your VM (via the tray icon for sound devices).
+7. Insert the Guest Additions CD Image into the VM, and install everything
    available from it (the main thing being the graphics driver).
 
    You'll be required to confirm driver installation several times during the

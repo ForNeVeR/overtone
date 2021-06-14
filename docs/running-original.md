@@ -23,6 +23,8 @@ Follow [this guide][stackoverflow.windows-xp] to extract the image (up to and
 including the step 4). You'll now have a file `VirtualXP.VHD` on your disk
 somewhere.
 
+Please note that, as of writing this, the links to the Windows XP Mode in this answer are outdated. A download is still available [from the Internet archive][archive.windows-xp-mode].
+
 Setting Up the Virtual Machine
 ------------------------------
 1. Create a virtual machine in VirtualBox, and add `VirtualXP.VHD` as a disk
@@ -64,6 +66,7 @@ else here.
 You're now all set: either press the **Single Player** button on the welcome
 screen, or start the game from the Windows' **Start** menu.
 
+[archive.windows-xp-mode]: https://archive.org/details/windows-xp-mode_20200907
 [myabandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
 [stackoverflow.windows-xp]: https://superuser.com/a/1230653/286768
 [virtualbox.download]: https://www.virtualbox.org/wiki/Downloads

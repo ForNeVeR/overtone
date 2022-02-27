@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Include="GameDisc.fs" />
       <Compile Include="Cob.fs" />
       <Compile Include="Palette.fs" />
       <Compile Include="Shape.fs" />

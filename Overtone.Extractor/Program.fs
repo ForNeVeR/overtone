@@ -91,9 +91,14 @@ let main: string[] -> int = function
         let status = if File.Exists(Path.Combine(Path.GetDirectoryName file, palette)) then "ok" else "not found"
         printfn $"{name}: {palette}, {status}"
     0
+| [| "font"; inputFont |] ->
+    use input = new FileStream(inputFont, FileMode.Open)
+    Font.read input
+    0
 | _ ->
     printfn "Usage:"
     printfn "  info <path-to-shp-file>: print shp file info (accepts glob)"
     printfn "  render <path-to-shp-file> <output-directory>: render all the sprites from the file (accepts glob)"
     printfn "  palette <path-to-directory>: list the palettes for each file in the directory"
+    printfn "  font <path-to-fnt-file>: verify a font file"
     1

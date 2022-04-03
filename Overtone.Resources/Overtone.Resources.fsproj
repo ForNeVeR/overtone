@@ -10,6 +10,7 @@
       <Compile Include="Palette.fs" />
       <Compile Include="Shape.fs" />
       <Compile Include="ShapePalette.fs" />
+      <Compile Include="Font.fs" />
     </ItemGroup>
 
     <ItemGroup>

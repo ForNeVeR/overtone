@@ -93,7 +93,7 @@ let main: string[] -> int = function
     0
 | [| "font"; inputFont |] ->
     use input = new FileStream(inputFont, FileMode.Open)
-    Font.read input
+    let font = Font.read input
     0
 | _ ->
     printfn "Usage:"

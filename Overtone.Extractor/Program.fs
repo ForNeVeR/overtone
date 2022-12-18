@@ -1,8 +1,8 @@
 ﻿open System
 open System.Drawing.Imaging
 open System.IO
-
 open System.Text
+
 open Overtone.Resources
 open Overtone.Resources.Shape
 

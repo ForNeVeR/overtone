@@ -1,6 +1,8 @@
-﻿open System.Drawing.Imaging
+﻿open System
+open System.Drawing.Imaging
 open System.IO
 
+open System.Text
 open Overtone.Resources
 open Overtone.Resources.Shape
 
@@ -92,13 +94,37 @@ let main: string[] -> int = function
         printfn $"{name}: {palette}, {status}"
     0
 | [| "font"; inputFont |] ->
+    Console.OutputEncoding <- Encoding.UTF8
+    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance)
+
     use input = new FileStream(inputFont, FileMode.Open)
     let font = Font.read input
+    for char, glyph in font.Characters |> Map.toSeq |> Seq.sortBy fst do
+        let sizeX = glyph.Data.GetLength 0
+        let sizeY = glyph.Data.GetLength 1
+
+        printf $"{char}:"
+        for y in 0..sizeY - 1 do
+            match y with
+            | 0 -> ()
+            | _ -> printf "  "
+
+            for x in 0..sizeX - 1 do
+                let color = glyph.Data.[x, y]
+                let px =
+                    if color <> glyph.TransparentKey
+                    then color.ToString("x2")
+                    else "  "
+                printf $" {px}"
+
+            if y = 0 then
+                printf $" ({sizeX}×{sizeY})"
+            printfn ""
     0
 | _ ->
     printfn "Usage:"
     printfn "  info <path-to-shp-file>: print shp file info (accepts glob)"
     printfn "  render <path-to-shp-file> <output-directory>: render all the sprites from the file (accepts glob)"
     printfn "  palette <path-to-directory>: list the palettes for each file in the directory"
-    printfn "  font <path-to-fnt-file>: verify a font file"
+    printfn "  font <path-to-fnt-file>: verify and show a font file"
     1

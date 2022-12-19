@@ -123,14 +123,14 @@ COB Archive Contents
 --------------------
 The archives contain files in the following formats:
 
-- `*.fnt`: font files _(TODO: document the format)_
-- `*.gif`: a standard GIF file
-- `*.haz`: documented as "shading files" in the `README.md` file of the [ascendancy][daumiller.ascendancy] utilities repository; exact format is currently unknown
-- `*.hzt`: binary files of unknown format
-- `*.pal`: [palette files][docs.pal] corresponding to the shapes
-- `*.shp`: [shape files][docs.shp]
-- `*.txt`: [text configuration files][docs.txt]
-- `*.wav`: sound files of a well-known [Waveform Audio File Format][wav]
+- `*.fnt`: [font files][docs.fnt],
+- `*.gif`: a standard GIF file,
+- `*.haz`: documented as "shading files" in the `README.md` file of the [ascendancy][daumiller.ascendancy] utilities repository; exact format is currently unknown,
+- `*.hzt`: binary files of unknown format,
+- `*.pal`: [palette files][docs.pal] corresponding to the shapes,
+- `*.shp`: [shape files][docs.shp],
+- `*.txt`: [text configuration files][docs.txt],
+- `*.wav`: sound files of a well-known [Waveform Audio File Format][wav].
 
 ### `TONE00.COB`
 - `bldinf.txt`: "Building Animation Segments" description
@@ -282,6 +282,7 @@ The archives contain files in the following formats:
 
 [daumiller.ascendancy]: https://github.com/daumiller/ascendancy
 [docs.cob]: ./cob.md
+[docs.fnt]: fnt.md
 [docs.pal]: ./pal.md
 [docs.shp]: ./shp.md
 [docs.txt]: ./txt.md

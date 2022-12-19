@@ -10,6 +10,7 @@ Developer Documentation
 - [COB File Format][docs.cob]
 - [Palette File Format][docs.pal]
 - [Shape File Format][docs.shp]
+- [Font File Format][docs.fnt]
 - [Text Configuration Files][docs.txt]
 
 Getting the Game Resources
@@ -72,17 +73,20 @@ Testimonials
 
 Author would like to thank the following people for their help with this project (in no particular order):
 
-- Darcy ([@daumiller][daumiller]), the author of the [ascendancy][daumiller.ascendancy] utilities
-- Franck M. ([@Fadoli][fadoli]), the author of the [Tone Extractor Tools][fadoli.tone-rebellion-extractor]
-- Roger Braun ([@rogerbraun][rogerbraun]), the author of the [Ascendancy-tools][rogerbraun.ascendancy-tools]
-- [The Logic Factory][wikipedia.the-logic-factory], the authors of The Tone Rebellion
-- [Михаил Бесчетнов aka Terminus][extractor.ru], the author of the [Ascendancy Converter v1.0][ascendancy-converter]
+- Darcy ([@daumiller][daumiller]), the author of the [ascendancy][daumiller.ascendancy] utilities,
+- Franck M. ([@Fadoli][fadoli]), the author of the [Tone Extractor Tools][fadoli.tone-rebellion-extractor],
+- Roger Braun ([@rogerbraun][rogerbraun]), the author of the [Ascendancy-tools][rogerbraun.ascendancy-tools],
+- [The Logic Factory][wikipedia.the-logic-factory], the authors of The Tone Rebellion,
+- [Михаил Бесчетнов aka Terminus][extractor.ru], the author of the [Ascendancy Converter v1.0][ascendancy-converter],
+- Roman Tkachuk (2:4600/68.2@fidonet), the author of the [Ascendancy Font Editor v1.1+][ascendancy-font-editor].
 
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-umbra-
 [ascendancy-converter]: https://www.extractor.ru/files/051b8c7c6155fef1460fab189f7edb68/
+[ascendancy-font-editor]: https://www.extractor.ru/files/cbd334b175b9b8721a653077e37cbabd/
 [daumiller.ascendancy]: https://github.com/daumiller/ascendancy
 [daumiller]: https://github.com/daumiller
 [docs.cob]: docs/cob.md
+[docs.fnt]: docs/fnt.md
 [docs.pal]: ./docs/pal.md
 [docs.resources]: docs/resources.md
 [docs.running-original]: docs/running-original.md

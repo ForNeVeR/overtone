@@ -3,12 +3,14 @@
 open System.IO
 open System.Text
 
-type FontGlyph(transparentColor: byte, pixelData: byte[,]) =
-    member _.TransparentKey = transparentColor
-    member _.Data = pixelData
+[<StructuralEquality; StructuralComparison>]
+type Glyph = {
+    TransparentColor: byte
+    PixelData: byte[,]
+}
 
 type Font = {
-    Characters: Map<char, FontGlyph>
+    Characters: Map<char, Glyph>
 }
 
 let read(input: Stream): Font =
@@ -35,7 +37,10 @@ let read(input: Stream): Font =
                     data.[x, y] <- glyphReader.ReadByte()
 
             if cols = 0 then None
-            else Some <| FontGlyph(transparencyKey, data)
+            else Some <| {
+                TransparentColor = transparencyKey
+                PixelData = data
+            }
         finally
             input.Position <- oldPosition
 

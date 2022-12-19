@@ -23,6 +23,8 @@ Every character corresponds to the following structure:
 
 The color data is meant to be an array of indices corresponding to some palette, except for one color, marked by color `transparent-color`, which is transparent (despite what the palette says).
 
+Certain characters may have zero columns defined; this means those characters are absent from the font.
+
 Read more about palettes in [the corresponding format description][docs.pal].
 
 ## Oddities

@@ -10,6 +10,7 @@
         <Compile Include="Cob.fs" />
         <Compile Include="Pal.fs" />
         <Compile Include="Shp.fs" />
+        <Compile Include="Fnt.fs" />
     </ItemGroup>
 
     <ItemGroup>

@@ -11,7 +11,7 @@ let private info name (file: ShapeFile) =
     let headers = file.ReadSpriteHeaders() |> Seq.toArray
     printfn $"Sprite count: %d{headers.Length}"
     headers |> Array.iteri (fun i header ->
-        let sprint(struct (x, y)) = sprintf $"({x}, {y})"
+        let sprint(struct (x, y)) = $"({x}, {y})"
 
         let palette =
             match header.PaletteOffset with
@@ -100,8 +100,8 @@ let main: string[] -> int = function
     use input = new FileStream(inputFont, FileMode.Open)
     let font = Font.read input
     for char, glyph in font.Characters |> Map.toSeq |> Seq.sortBy fst do
-        let sizeX = glyph.Data.GetLength 0
-        let sizeY = glyph.Data.GetLength 1
+        let sizeX = glyph.PixelData.GetLength 0
+        let sizeY = glyph.PixelData.GetLength 1
 
         printf $"{char}:"
         for y in 0..sizeY - 1 do
@@ -110,9 +110,9 @@ let main: string[] -> int = function
             | _ -> printf "  "
 
             for x in 0..sizeX - 1 do
-                let color = glyph.Data.[x, y]
+                let color = glyph.PixelData.[x, y]
                 let px =
-                    if color <> glyph.TransparentKey
+                    if color <> glyph.TransparentColor
                     then color.ToString("x2")
                     else "  "
                 printf $" {px}"

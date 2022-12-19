@@ -24,7 +24,7 @@ download the game from [My Abandonware][my-abandonware.the-tone-rebellion].
 
 Prerequisites
 -------------
-To develop the project, you'll need [.NET SDK][dotnet.sdk] 5.0 or later installed.
+To develop the project, you'll need [.NET SDK][dotnet.sdk] 7.0 or later installed.
 
 Notably, on macOS, [libgdiplus is required][dotnet.libgdiplus].
 

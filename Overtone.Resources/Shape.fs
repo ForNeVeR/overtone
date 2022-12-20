@@ -34,6 +34,16 @@ type SpriteData = {
         let empty x = x &&& 0x7fff0000 = 0x7fff0000
         empty startX && empty startY && empty endX && empty endY
 
+    member this.Width: int =
+        let struct (x0, _) = this.Start
+        let struct (x1, _) = this.End
+        abs(x1 - x0)
+
+    member this.Height: int =
+        let struct (_, y0) = this.Start
+        let struct (_, y1) = this.End
+        abs(y1 - y0)
+
 type ShapeFile(input: Stream) =
     member _.ReadSpriteHeaders(): SpriteHeader seq =
         input.Seek(0L, SeekOrigin.Begin) |> ignore

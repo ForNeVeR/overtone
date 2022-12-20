@@ -27,7 +27,7 @@ let loadShape (device: GraphicsDevice) (disc: GameDisc) (name: string): Texture2
         use paletteStream = new MemoryStream(readFile paletteName)
         Palette.Read paletteStream
 
-    let header = shape.ReadSpriteHeaders() |> Seq.exactlyOne
+    let header = shape.ReadSpriteHeaders() |> Seq.head // TODO: Properly enumerate resources
     let sprite = shape.ReadSprite header
     let bitmap = shape.Render palette sprite
 

@@ -1,4 +1,4 @@
-module Overtone.Tests.Cob
+module Overtone.Tests.Resources.Cob
 
 open System
 open System.IO

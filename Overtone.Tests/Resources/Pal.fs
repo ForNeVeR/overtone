@@ -1,4 +1,4 @@
-﻿module Overtone.Tests.Pal
+﻿module Overtone.Tests.Resources.Pal
 
 open System.Drawing
 open System.IO

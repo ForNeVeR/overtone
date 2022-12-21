@@ -5,26 +5,15 @@ open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
 
 open Overtone.Resources
-open Overtone.Resources.Cob
 open Overtone.Resources.Shape
 
 let loadShape (device: GraphicsDevice) (disc: GameDisc) (name: string): Texture2D =
-    let paletteName = ShapePalette.get name
-
-    use stream = new FileStream(disc.DataArchivePath, FileMode.Open)
-    use cob = new CobFile(stream)
-
-    let readFile dataName =
-        cob.ReadEntries()
-        |> Seq.filter(fun x -> x.Path = dataName)
-        |> Seq.exactlyOne
-        |> cob.ReadEntry
-
-    use shapeStream = new MemoryStream(readFile name)
+    use shapeStream = new MemoryStream(disc.GetData name)
     let shape = ShapeFile shapeStream
 
+    let paletteName = ShapePalette.get name
     let palette =
-        use paletteStream = new MemoryStream(readFile paletteName)
+        use paletteStream = new MemoryStream(disc.GetData paletteName)
         Palette.Read paletteStream
 
     let header = shape.ReadSpriteHeaders() |> Seq.head // TODO: Properly enumerate resources

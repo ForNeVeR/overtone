@@ -4,14 +4,14 @@ open System
 
 open Microsoft.Xna.Framework
 
-open Overtone.Resources
+open Overtone.Game.Windows
 
-type OvertoneGame(disc: GameDisc) as this =
+type OvertoneGame(windowConfig: WindowConfiguration) as this =
     inherit Game()
 
     let graphics = new GraphicsDeviceManager(this)
     let scene = lazy (
-        new MenuScene(disc, this.GraphicsDevice)
+        new MenuScene(windowConfig, this.GraphicsDevice)
     )
 
     override this.Initialize() =

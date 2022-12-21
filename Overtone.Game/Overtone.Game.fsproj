@@ -8,7 +8,8 @@
 
     <ItemGroup>
         <Compile Include="Texture.fs" />
-        <Compile Include="MenuScene.fs" />
+        <Compile Include="Windows\WindowConfiguration.fs" />
+        <Compile Include="Windows\MenuScene.fs" />
         <Compile Include="OvertoneGame.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>

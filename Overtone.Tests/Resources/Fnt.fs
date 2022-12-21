@@ -1,4 +1,4 @@
-﻿module Overtone.Tests.Fnt
+﻿module Overtone.Tests.Resources.Fnt
 
 open System
 open System.IO

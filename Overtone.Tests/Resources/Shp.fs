@@ -1,4 +1,4 @@
-﻿module Overtone.Tests.Shp
+﻿module Overtone.Tests.Resources.Shp
 
 open System.Collections.Generic
 open System.Drawing

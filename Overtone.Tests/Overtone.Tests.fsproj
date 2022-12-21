@@ -7,10 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Cob.fs" />
-        <Compile Include="Pal.fs" />
-        <Compile Include="Shp.fs" />
-        <Compile Include="Fnt.fs" />
+        <Compile Include="Resources\Cob.fs" />
+        <Compile Include="Resources\Pal.fs" />
+        <Compile Include="Resources\Shp.fs" />
+        <Compile Include="Resources\Fnt.fs" />
+        <Compile Include="Game\Windows\WindowConfigurationTest.fs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -21,6 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Overtone.Game\Overtone.Game.fsproj" />
       <ProjectReference Include="..\Overtone.Resources\Overtone.Resources.fsproj" />
     </ItemGroup>
 

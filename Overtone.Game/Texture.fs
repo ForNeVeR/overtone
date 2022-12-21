@@ -7,7 +7,7 @@ open Microsoft.Xna.Framework.Graphics
 open Overtone.Resources
 open Overtone.Resources.Shape
 
-let loadShape (device: GraphicsDevice) (disc: GameDisc) (name: string): Texture2D =
+let loadShape (device: GraphicsDevice) (disc: GameDisc) (name: string) (spriteIndex: int): Texture2D =
     use shapeStream = new MemoryStream(disc.GetData name)
     let shape = ShapeFile shapeStream
 
@@ -16,7 +16,8 @@ let loadShape (device: GraphicsDevice) (disc: GameDisc) (name: string): Texture2
         use paletteStream = new MemoryStream(disc.GetData paletteName)
         Palette.Read paletteStream
 
-    let header = shape.ReadSpriteHeaders() |> Seq.head // TODO: Properly enumerate resources
+    // TODO: Better resource management, do not read the whole shape again for every new sprite
+    let header = shape.ReadSpriteHeaders()[spriteIndex]
     let sprite = shape.ReadSprite header
     let bitmap = shape.Render palette sprite
 

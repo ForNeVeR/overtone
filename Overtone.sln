@@ -38,6 +38,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Extractor", "Overt
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Game", "Overtone.Game\Overtone.Game.fsproj", "{C3823931-5020-4B2E-B903-F88AD8E44FC3}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Utils", "Overtone.Utils\Overtone.Utils.fsproj", "{AF16528C-6C4C-4E27-A8C4-09DD1C7120F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{C3823931-5020-4B2E-B903-F88AD8E44FC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3823931-5020-4B2E-B903-F88AD8E44FC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3823931-5020-4B2E-B903-F88AD8E44FC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF16528C-6C4C-4E27-A8C4-09DD1C7120F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF16528C-6C4C-4E27-A8C4-09DD1C7120F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF16528C-6C4C-4E27-A8C4-09DD1C7120F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF16528C-6C4C-4E27-A8C4-09DD1C7120F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{046B3949-4459-4EC5-8041-D00687495715} = {F7A92DCC-190F-4E09-949A-C0413800326A}

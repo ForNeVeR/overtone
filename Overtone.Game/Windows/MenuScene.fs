@@ -1,32 +1,24 @@
 ﻿namespace Overtone.Game.Windows
 
-open System
-
+open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
 
-type MenuScene(config: WindowConfiguration, graphicsDevice: GraphicsDevice) =
-    // TODO: Finalize this
-    //let sceneId = 0 // "Starting state" of windows.txt
-//
-    //let controls = config.GetControls sceneId
-    //let background = controls["BACKGRND"]
-    //let newGameButton = controls["NEWGAME"]
-    //let exitButton = controls["EXITAPP"]
-    //let resumeButton = controls["RESUME"]
-    //let loadButton = controls["LOADGAME"]
-//
-    interface IDisposable with
-        member _.Dispose() =
-            failwith "TODO"
-            //
-            // for control in controls.Values do
-            //     (control :> IDisposable).Dispose()
+open Overtone.Resources
+
+type MenuScene(lifetime: Lifetime, disc: GameDisc, config: WindowConfiguration, graphicsDevice: GraphicsDevice) =
+    let sceneId = 0 // "Starting state" of windows.txt
+
+    let controls = config.GetControls sceneId
+    let loadControl id = Controls.Load(lifetime, graphicsDevice, disc, controls[id])
+    let background = loadControl "BACKGRND"
+    let newGameButton = loadControl "NEWGAME"
+    let exitButton = loadControl "EXITAPP"
+    let resumeButton = loadControl "RESUME"
+    let loadButton = loadControl "LOADGAME"
 
     member _.Draw(gameTime: GameTime): unit =
-        failwith "TODO"
-        // use batch = new SpriteBatch(graphicsDevice)
-        // batch.Begin()
-        // for control in controls.Values do
-        //     control.Draw batch
-        // batch.End()
+        use batch = new SpriteBatch(graphicsDevice)
+        batch.Begin()
+        for control in [background; newGameButton; exitButton; resumeButton; loadButton] do
+            control.Draw batch

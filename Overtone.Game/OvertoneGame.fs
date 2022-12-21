@@ -1,17 +1,19 @@
 ﻿namespace Overtone.Game
 
-open System
-
+open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
 
 open Overtone.Game.Windows
+open Overtone.Resources
 
-type OvertoneGame(windowConfig: WindowConfiguration) as this =
+type OvertoneGame(disc: GameDisc, windowConfig: WindowConfiguration) as this =
     inherit Game()
+
+    let lifetimeDef = new LifetimeDefinition()
 
     let graphics = new GraphicsDeviceManager(this)
     let scene = lazy (
-        new MenuScene(windowConfig, this.GraphicsDevice)
+        MenuScene(lifetimeDef.Lifetime, disc, windowConfig, this.GraphicsDevice)
     )
 
     override this.Initialize() =
@@ -28,6 +30,5 @@ type OvertoneGame(windowConfig: WindowConfiguration) as this =
 
     override _.Dispose disposing =
         if disposing then
-            if scene.IsValueCreated then
-                (scene.Value :> IDisposable).Dispose()
+            lifetimeDef.Terminate()
             graphics.Dispose()

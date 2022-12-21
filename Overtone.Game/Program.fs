@@ -20,6 +20,6 @@ let main(args: string[]): int =
     use disc = new GameDisc(discRoot)
     let config = readWindowsConfiguration disc
 
-    use game = new OvertoneGame(config)
+    use game = new OvertoneGame(disc, config)
     game.Run()
     0

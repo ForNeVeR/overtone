@@ -45,7 +45,7 @@ type SpriteData = {
         abs(y1 - y0)
 
 type ShapeFile(input: Stream) =
-    member _.ReadSpriteHeaders(): SpriteHeader seq =
+    member _.ReadSpriteHeaders(): SpriteHeader[] =
         input.Seek(0L, SeekOrigin.Begin) |> ignore
         use reader = new BinaryReader(input, Encoding.UTF8, leaveOpen = true)
 
@@ -54,7 +54,7 @@ type ShapeFile(input: Stream) =
         if header <> "1.10" then failwithf $"Invalid shape file header: %s{BitConverter.ToString headerBytes}"
 
         let spriteCount = reader.ReadInt32()
-        upcast Array.init spriteCount (fun _ -> {
+        Array.init spriteCount (fun _ -> {
             SpriteOffset = reader.ReadInt32()
             PaletteOffset =
                 match reader.ReadInt32() with

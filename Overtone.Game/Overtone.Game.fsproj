@@ -9,17 +9,20 @@
     <ItemGroup>
         <Compile Include="Texture.fs" />
         <Compile Include="Windows\WindowConfiguration.fs" />
+        <Compile Include="Windows\Controls.fs" />
         <Compile Include="Windows\MenuScene.fs" />
         <Compile Include="OvertoneGame.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="JetBrains.Lifetimes" Version="2023.1.1" />
       <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Overtone.Resources\Overtone.Resources.fsproj" />
+      <ProjectReference Include="..\Overtone.Utils\Overtone.Utils.fsproj" />
     </ItemGroup>
 
 </Project>

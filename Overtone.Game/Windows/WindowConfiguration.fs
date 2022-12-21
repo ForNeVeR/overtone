@@ -3,6 +3,7 @@
 open System
 open System.IO
 open System.Threading.Tasks
+
 open Microsoft.FSharp.Core
 open Microsoft.Xna.Framework
 
@@ -10,19 +11,36 @@ type WindowEntry = {
     WindowType: int
     Name: string
     States: Set<int>
-    Shape: string
+    ShapeId: string
     ShapeFrame: int
     MouseFocus: bool
     Pane: Rectangle
     Message: int*int*int
     MessageDestination: string
     ContRedraw: bool voption
+    NumberOfStates: int voption
+    HighlightFrame: int voption
+    MovieName: string voption
+    OpenPane: Rectangle voption
 }
 
 type WindowConfiguration = {
     Entries: WindowEntry[]
 } with
     static member Read(reader: TextReader): Task<WindowConfiguration> = task {
+        let clearLine(line: string) =
+            let toOption int = if int < 0 then ValueNone else ValueSome int
+            let ``;`` = line.IndexOf ';' |> toOption
+            let ``//`` = line.IndexOf "//" |> toOption
+            let commentPos =
+                match ``;``, ``//`` with
+                | ValueNone, x -> x
+                | x, ValueNone -> x
+                | ValueSome x, ValueSome y -> ValueSome <| min x y
+            match commentPos with
+            | ValueNone -> line
+            | ValueSome pos -> line.Substring(0, pos)
+
         let readEntry(line: string) =
             let components = line.Split([| ' '; '\t' |], 2, StringSplitOptions.RemoveEmptyEntries)
             match components with
@@ -42,6 +60,10 @@ type WindowConfiguration = {
         let message = ref ValueNone
         let messageDestination = ref ValueNone
         let contRedraw = ref ValueNone
+        let numberOfStates = ref ValueNone
+        let highlightFrame = ref ValueNone
+        let movieName = ref ValueNone
+        let openPane = ref ValueNone
 
         let getValue = function
             | "WINTYPE" -> windowType
@@ -54,6 +76,10 @@ type WindowConfiguration = {
             | "SENDMESSAGE" -> message
             | "MSGDEST" -> messageDestination
             | "CONTREDRAW" -> contRedraw
+            | "NSTATES" -> numberOfStates
+            | "HILITEFRAME" -> highlightFrame
+            | "MOVIENAME" -> movieName
+            | "OPENPANE" -> openPane
             | other -> failwith $"Unrecognized window.txt entry key: {other}"
         let hasValue = getValue >> (fun c -> c.Value) >> ValueOption.isSome
         let setValue k v =
@@ -75,6 +101,11 @@ type WindowConfiguration = {
                 | 0 -> false
                 | 1 -> true
                 | o -> failwith $"Unrecognized bool value of field {field}: {o} for entry \"{entryName}\"."
+            let toRect field = function
+                | [| x0; y0; x1; y1 |] -> Rectangle(x0, y0, x1 - x0, y1 - y0)
+                | [| x0; y0; x1; y1; _; _ |] -> // TODO: Analyze the last two optional values
+                    Rectangle(x0, y0, x1 - x0, y1 - y0)
+                | _ -> failwith $"Unrecognized value of field {field} for entry \"{entryName}\"."
 
             let requiredString field = requiredString field entryName
             let requiredInt field = requiredString field |> int
@@ -84,30 +115,39 @@ type WindowConfiguration = {
             let requiredIntSet = requiredIntSeq >> Set.ofSeq
             let requiredBool field = requiredInt field |> toBool field
             let requiredIntArray = requiredIntSeq >> Seq.toArray
-            let requiredRect field =
-                let data = requiredIntArray field
-                match data with
-                | [| x0; y0; x1; y1 |] -> Rectangle(x0, y0, x1 - x0, y1 - y0)
-                | _ -> failwith $"Unrecognized value of field {field} for entry \"{entryName}\"."
+            let requiredRect field = requiredIntArray field |> toRect field
             let requiredMessage field =
                 let data = requiredIntArray field
                 match data with
                 | [| a; b; c |] -> a, b, c
                 | _ -> failwith $"Unrecognized value of field {field} for entry \"{entryName}\"."
 
-            let optionalBool field = (getValue field).Value |> ValueOption.map(int >> toBool field)
+            let optionalString field = (getValue field).Value
+            let optionalInt = optionalString >> ValueOption.map int
+            let optionalBool field = optionalInt field |> ValueOption.map(toBool field)
+            let optionalRect field =
+                optionalString field
+                |> ValueOption.map(fun s ->
+                    s.Split([| ' '; '\t' |], StringSplitOptions.RemoveEmptyEntries)
+                    |> Array.map int
+                    |> toRect field
+                )
 
             let entry = {
                 WindowType = requiredInt "WINTYPE"
                 Name = entryName
                 States = requiredIntSet "STATE"
-                Shape = requiredString "SHAPEID"
+                ShapeId = requiredString "SHAPEID"
                 ShapeFrame = requiredInt "SHAPEFRAME"
                 MouseFocus = requiredBool "MOUSEFOCUS"
                 Pane = requiredRect "PANE"
                 Message = requiredMessage "SENDMESSAGE"
                 MessageDestination = requiredString "MSGDEST"
                 ContRedraw = optionalBool "CONTREDRAW"
+                NumberOfStates = optionalInt "NSTATES"
+                HighlightFrame = optionalInt "HILITEFRAME"
+                MovieName = optionalString "MOVIENAME"
+                OpenPane = optionalRect "OPENPANE"
             }
 
             windowType.Value <- ValueNone
@@ -120,13 +160,17 @@ type WindowConfiguration = {
             message.Value <- ValueNone
             messageDestination.Value <- ValueNone
             contRedraw.Value <- ValueNone
+            numberOfStates.Value <- ValueNone
+            highlightFrame.Value <- ValueNone
+            movieName.Value <- ValueNone
+            openPane.Value <- ValueNone
 
             entries.Add entry
 
         let! line = reader.ReadLineAsync()
         let mutable line = line
         while not <| isNull line do
-            match readEntry line with
+            match clearLine line |> readEntry with
             | None -> ()
             | Some("SHAPECACHE_SIZE", _) -> ()
             | Some("END", _) -> ()

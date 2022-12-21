@@ -12,5 +12,6 @@ type Control(position: Rectangle, texture: Texture2D) =
         batch.Draw(texture, position, Color.Black)
 
 let Load(lifetime: Lifetime, device: GraphicsDevice, disc: GameDisc, entry: WindowEntry) =
-    let texture = Texture.loadShape device disc entry.Shape entry.ShapeFrame |> Lifetimes.attach lifetime
+    let shapeName = entry.ShapeId // TODO: Map from the shapes.txt
+    let texture = Texture.loadShape device disc shapeName entry.ShapeFrame |> Lifetimes.attach lifetime
     Control(entry.Pane, texture)

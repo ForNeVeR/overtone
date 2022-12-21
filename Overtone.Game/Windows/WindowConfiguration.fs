@@ -24,7 +24,7 @@ type WindowConfiguration = {
 } with
     static member Read(reader: TextReader): Task<WindowConfiguration> = task {
         let readEntry(line: string) =
-            let components = line.Split([| ' '; '\t' |], StringSplitOptions.RemoveEmptyEntries)
+            let components = line.Split([| ' '; '\t' |], 2, StringSplitOptions.RemoveEmptyEntries)
             match components with
             | [||] -> None
             | [|key; value|] -> Some(key, value)
@@ -62,34 +62,65 @@ type WindowConfiguration = {
 
         let finalizeEntry() =
             let undefined (valueName: string) (entityName: string) =
-                fun() -> failwith $"Value of {valueName} for entity \"{entityName}\" not defined."
+                fun() -> failwith $"Value of {valueName} for entry \"{entityName}\" not defined."
 
             let requiredString field entity =
                 (getValue field)
                 |> fun c -> c.Value
                 |> ValueOption.defaultWith(undefined field entity)
 
-            let entityName = requiredString "NAME" "<unknown>"
+            let entryName = requiredString "NAME" "<unknown>"
 
-            let requiredString field = requiredString field entityName
+            let toBool field = function
+                | 0 -> false
+                | 1 -> true
+                | o -> failwith $"Unrecognized bool value of field {field}: {o} for entry \"{entryName}\"."
+
+            let requiredString field = requiredString field entryName
             let requiredInt field = requiredString field |> int
-            let requiredIntSet field =
+            let requiredIntSeq field =
                 (requiredString field).Split([| ' '; '\t' |], StringSplitOptions.RemoveEmptyEntries)
                 |> Seq.map int
-                |> Set.ofSeq
+            let requiredIntSet = requiredIntSeq >> Set.ofSeq
+            let requiredBool field = requiredInt field |> toBool field
+            let requiredIntArray = requiredIntSeq >> Seq.toArray
+            let requiredRect field =
+                let data = requiredIntArray field
+                match data with
+                | [| x0; y0; x1; y1 |] -> Rectangle(x0, y0, x1 - x0, y1 - y0)
+                | _ -> failwith $"Unrecognized value of field {field} for entry \"{entryName}\"."
+            let requiredMessage field =
+                let data = requiredIntArray field
+                match data with
+                | [| a; b; c |] -> a, b, c
+                | _ -> failwith $"Unrecognized value of field {field} for entry \"{entryName}\"."
+
+            let optionalBool field = (getValue field).Value |> ValueOption.map(int >> toBool field)
 
             let entry = {
-                WindowType = requiredInt "WindowType"
-                Name = entityName
+                WindowType = requiredInt "WINTYPE"
+                Name = entryName
                 States = requiredIntSet "STATE"
-                Shape = failwith "todo"
-                ShapeFrame = failwith "todo"
-                MouseFocus = failwith "todo"
-                Pane = failwith "todo"
-                Message = failwith "todo"
-                MessageDestination = failwith "todo"
-                ContRedraw = failwith "todo"
+                Shape = requiredString "SHAPEID"
+                ShapeFrame = requiredInt "SHAPEFRAME"
+                MouseFocus = requiredBool "MOUSEFOCUS"
+                Pane = requiredRect "PANE"
+                Message = requiredMessage "SENDMESSAGE"
+                MessageDestination = requiredString "MSGDEST"
+                ContRedraw = optionalBool "CONTREDRAW"
             }
+
+            windowType.Value <- ValueNone
+            name.Value <- ValueNone
+            states.Value <- ValueNone
+            shape.Value <- ValueNone
+            shapeFrame.Value <- ValueNone
+            mouseFocus.Value <- ValueNone
+            pane.Value <- ValueNone
+            message.Value <- ValueNone
+            messageDestination.Value <- ValueNone
+            contRedraw.Value <- ValueNone
+
             entries.Add entry
 
         let! line = reader.ReadLineAsync()

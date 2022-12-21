@@ -69,7 +69,7 @@ let ``WindowConfiguration should read correctly``(): Task = task {
             Name = "XXY"
             States = Set.singleton 0
             Shape = "SCR"
-            Pane = Rectangle(0, 0, 639, 479)
+            Pane = Rectangle(0, 0, 1, 1)
             Message = 0, 1, 0
             MessageDestination = "DEST"
         }

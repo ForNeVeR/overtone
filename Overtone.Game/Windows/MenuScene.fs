@@ -4,13 +4,17 @@ open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
 
-open Overtone.Resources
+open Overtone.Game
+open Overtone.Game.Config
 
-type MenuScene(lifetime: Lifetime, disc: GameDisc, config: WindowConfiguration, graphicsDevice: GraphicsDevice) =
+type MenuScene(lifetime: Lifetime,
+               graphicsDevice: GraphicsDevice,
+               textureManager: TextureManager,
+               config: WindowsConfiguration) =
     let sceneId = 0 // "Starting state" of windows.txt
 
     let controls = config.GetControls sceneId
-    let loadControl id = Controls.Load(lifetime, graphicsDevice, disc, controls[id])
+    let loadControl id = Controls.Load(lifetime, textureManager, controls[id])
     let background = loadControl "BACKGRND"
     let newGameButton = loadControl "NEWGAME"
     let exitButton = loadControl "EXITAPP"

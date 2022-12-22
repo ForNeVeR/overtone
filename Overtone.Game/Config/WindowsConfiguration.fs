@@ -1,11 +1,11 @@
-﻿namespace Overtone.Game.Windows
+﻿namespace Overtone.Game.Config
 
 open System
-open System.IO
-open System.Threading.Tasks
 
 open Microsoft.FSharp.Core
 open Microsoft.Xna.Framework
+
+open Overtone.Resources
 
 type WindowEntry = {
     WindowType: int
@@ -24,30 +24,10 @@ type WindowEntry = {
     OpenPane: Rectangle voption
 }
 
-type WindowConfiguration = {
+type WindowsConfiguration = {
     Entries: WindowEntry[]
 } with
-    static member Read(reader: TextReader): Task<WindowConfiguration> = task {
-        let clearLine(line: string) =
-            let toOption int = if int < 0 then ValueNone else ValueSome int
-            let ``;`` = line.IndexOf ';' |> toOption
-            let ``//`` = line.IndexOf "//" |> toOption
-            let commentPos =
-                match ``;``, ``//`` with
-                | ValueNone, x -> x
-                | x, ValueNone -> x
-                | ValueSome x, ValueSome y -> ValueSome <| min x y
-            match commentPos with
-            | ValueNone -> line
-            | ValueSome pos -> line.Substring(0, pos)
-
-        let readEntry(line: string) =
-            let components = line.Split([| ' '; '\t' |], 2, StringSplitOptions.RemoveEmptyEntries)
-            match components with
-            | [||] -> None
-            | [|key; value|] -> Some(key, value)
-            | _ -> failwithf $"Cannot parse windows.txt line: \"{line}\"."
-
+    static member Read(windowsTxt: byte[]): WindowsConfiguration =
         let entries = ResizeArray()
 
         let windowType = ref ValueNone
@@ -167,27 +147,23 @@ type WindowConfiguration = {
 
             entries.Add entry
 
-        let! line = reader.ReadLineAsync()
-        let mutable line = line
-        while not <| isNull line do
-            match clearLine line |> readEntry with
-            | None -> ()
-            | Some("SHAPECACHE_SIZE", _) -> ()
-            | Some("END", _) -> ()
-            | Some(key, value) ->
+        TextConfiguration.extractLines windowsTxt
+        |> Seq.map TextConfiguration.readKeyValueEntry
+        |> Seq.iter(
+            function
+            | "SHAPECACHE_SIZE", _ -> ()
+            | "END", _ -> ()
+            | key, value ->
                 if hasValue key then
                     finalizeEntry()
                 setValue key value
-
-            let! newLine = reader.ReadLineAsync()
-            line <- newLine
+        )
 
         finalizeEntry()
 
-        return {
+        {
             Entries = Seq.toArray entries
         }
-    }
 
     member this.GetControls(stateId: int): Map<string, WindowEntry> =
         this.Entries

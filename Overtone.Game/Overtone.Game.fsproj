@@ -7,8 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Texture.fs" />
-        <Compile Include="Windows\WindowConfiguration.fs" />
+        <Compile Include="Config\WindowsConfiguration.fs" />
+        <Compile Include="Config\ShapesConfiguration.fs" />
+        <Compile Include="TextureManager.fs" />
         <Compile Include="Windows\Controls.fs" />
         <Compile Include="Windows\MenuScene.fs" />
         <Compile Include="OvertoneGame.fs" />

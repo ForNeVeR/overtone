@@ -12,6 +12,7 @@
       <Compile Include="Shape.fs" />
       <Compile Include="ShapePalette.fs" />
       <Compile Include="Font.fs" />
+      <Compile Include="TextConfiguration.fs" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,13 +1,10 @@
 ﻿module Overtone.Tests.Game.Windows.WindowConfigurationTest
 
-open System.IO
 open System.Text
-open System.Threading.Tasks
 
 open Microsoft.Xna.Framework
+open Overtone.Game.Config
 open Xunit
-
-open Overtone.Game.Windows
 
 let private mockedConfig = @"
 SHAPECACHE_SIZE 1
@@ -41,11 +38,9 @@ END -1
 "
 
 [<Fact>]
-let ``WindowConfiguration should read correctly``(): Task = task {
+let ``WindowConfiguration should read correctly``(): unit =
     let bytes = Encoding.UTF8.GetBytes mockedConfig
-    use stream = new MemoryStream(bytes)
-    use reader = new StreamReader(stream)
-    let! config = WindowConfiguration.Read reader
+    let config = WindowsConfiguration.Read bytes
 
     let emptyEntry = {
         WindowType = 0
@@ -86,4 +81,3 @@ let ``WindowConfiguration should read correctly``(): Task = task {
             OpenPane = ValueSome <| Rectangle(1, 1, 3, 3)
         }
     |], config.Entries)
-}

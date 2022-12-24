@@ -35,4 +35,3 @@ type TextureManager(disc: GameDisc, device: GraphicsDevice, config: ShapesConfig
         )
         texture.SetData colors
         texture
-

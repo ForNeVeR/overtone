@@ -64,7 +64,7 @@ let ``WindowConfiguration should read correctly``(): unit =
             Name = "XXX"
             States = Set.ofArray [| 0; 1 |]
             ShapeId = "SCR"
-            Pane = Rectangle(0, 0, 639, 479)
+            Pane = Rectangle(0, 0, width = 640, height = 480)
             MessageDestination = "DEST"
             ContRedraw = ValueSome false
             MovieName = ValueSome "aaa.avi"
@@ -73,11 +73,11 @@ let ``WindowConfiguration should read correctly``(): unit =
             Name = "XXY"
             States = Set.singleton 0
             ShapeId = "SCR"
-            Pane = Rectangle(0, 0, 1, 1)
+            Pane = Rectangle(0, 0, width = 2, height = 2)
             Message = 0, 1, 0
             MessageDestination = "DEST"
             NumberOfStates = ValueSome 11
             HighlightFrame = ValueSome 4
-            OpenPane = ValueSome <| Rectangle(1, 1, 3, 3)
+            OpenPane = ValueSome <| Rectangle(1, 1, width = 4, height = 4)
         }
     |], config.Entries)

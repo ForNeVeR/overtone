@@ -20,9 +20,11 @@ type MenuScene(lifetime: Lifetime,
     let exitButton = loadControl "EXITAPP"
     let resumeButton = loadControl "RESUME"
     let loadButton = loadControl "LOADGAME"
+    let allControls = [| background; newGameButton; exitButton; resumeButton; loadButton |]
 
     member _.Draw(gameTime: GameTime): unit =
         use batch = new SpriteBatch(graphicsDevice)
         batch.Begin()
-        for control in [background; newGameButton; exitButton; resumeButton; loadButton] do
+        for control in allControls do
             control.Draw batch
+        batch.End()

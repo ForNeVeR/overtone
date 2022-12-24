@@ -2,19 +2,20 @@
 
 open System.IO
 
+open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
 
 open Overtone.Game.Config
 open Overtone.Resources
-open Overtone.Resources.Shape
+open Overtone.Utils
 
 type TextureManager(disc: GameDisc, device: GraphicsDevice, config: ShapesConfiguration) =
 
-    member _.LoadTexture(shapeId: string, spriteIndex: int): Texture2D =
+    member _.LoadTexture(lifetime: Lifetime, shapeId: string, spriteIndex: int): Texture2D =
         let shapeName = config.GetShapeName shapeId
         use shapeStream = new MemoryStream(disc.GetData shapeName)
-        let shape = ShapeFile shapeStream
+        let shape = Shape.ShapeFile shapeStream
 
         let paletteName = ShapePalette.get shapeName
         let palette =
@@ -26,12 +27,16 @@ type TextureManager(disc: GameDisc, device: GraphicsDevice, config: ShapesConfig
         let sprite = shape.ReadSprite header
         let bitmap = shape.Render palette sprite
 
-        let texture = new Texture2D(device, sprite.Width, sprite.Height)
-        let colors = Array.init (sprite.Width * sprite.Height) (fun i ->
-            let x = i % sprite.Width
-            let y = i / sprite.Width
+        let struct (width, height) = sprite.CanvasDimensions
+        let width = int width
+        let height = int height
+
+        let texture = new Texture2D(device, width, height) |> Lifetimes.attach lifetime
+        let colors = Array.init (width * height) (fun i ->
+            let x = i % width
+            let y = i / width
             let drawingColor = bitmap.GetPixel(x, y)
-            Color(r = int drawingColor.R, g = int drawingColor.G, b = int drawingColor.B)
+            Color(r = int drawingColor.R, g = int drawingColor.G, b = int drawingColor.B, alpha = int drawingColor.A)
         )
         texture.SetData colors
         texture

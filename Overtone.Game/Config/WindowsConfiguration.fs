@@ -6,6 +6,7 @@ open Microsoft.FSharp.Core
 open Microsoft.Xna.Framework
 
 open Overtone.Resources
+open Overtone.Utils
 
 type WindowEntry = {
     WindowType: int
@@ -82,9 +83,9 @@ type WindowsConfiguration = {
                 | 1 -> true
                 | o -> failwith $"Unrecognized bool value of field {field}: {o} for entry \"{entryName}\"."
             let toRect field = function
-                | [| x0; y0; x1; y1 |] -> Rectangle(x0, y0, width = x1 - x0 + 1, height = y1 - y0 + 1)
+                | [| x0; y0; x1; y1 |] -> Geometry.rectFromCorners(struct(x0, y0), struct(x1, y1))
                 | [| x0; y0; x1; y1; _; _ |] -> // TODO: Analyze the last two optional values
-                    Rectangle(x0, y0, width = x1 - x0 + 1, height = y1 - y0 + 1)
+                    Geometry.rectFromCorners(struct(x0, y0), struct(x1, y1))
                 | _ -> failwith $"Unrecognized value of field {field} for entry \"{entryName}\"."
 
             let requiredString field = requiredString field entryName

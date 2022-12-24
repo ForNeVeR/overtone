@@ -31,7 +31,7 @@ let private render inputFile outputDirectory =
     use stream = new FileStream(inputFile, FileMode.Open)
     let file = ShapeFile stream
 
-    let palFilePath = Path.Combine(Path.GetDirectoryName inputFile, ShapePalette.get inputFile)
+    let palFilePath = Path.Combine(Path.GetDirectoryName inputFile, "..", ShapePalette.get inputFile)
     use palStream = new FileStream(palFilePath, FileMode.Open)
     let palette = Palette.Read palStream
 

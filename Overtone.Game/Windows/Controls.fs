@@ -6,13 +6,16 @@ open Microsoft.Xna.Framework.Graphics
 
 open Overtone.Game
 open Overtone.Game.Config
-open Overtone.Utilities
 
-type Control(position: Rectangle, texture: Texture2D) =
+type Control(texture: Texture2D, position: Rectangle) =
     member _.Draw(batch: SpriteBatch): unit =
         let colorMask = Color.White
-        batch.Draw(texture, position, colorMask)
+        batch.Draw(
+            texture,
+            destinationRectangle = position,
+            color = colorMask
+        )
 
 let Load(lifetime: Lifetime, textureManager: TextureManager, entry: WindowEntry) =
-    let texture = textureManager.LoadTexture(entry.ShapeId, entry.ShapeFrame) |> Lifetimes.attach lifetime
-    Control(entry.Pane, texture)
+    let texture = textureManager.LoadTexture(lifetime, entry.ShapeId, entry.ShapeFrame)
+    Control(texture, entry.Pane)

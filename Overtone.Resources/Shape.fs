@@ -110,7 +110,7 @@ type ShapeFile(input: Stream) =
                 let addPixel idx =
                     if canvasX < minCanvasX || canvasX > maxCanvasX then
                         failwith $"Pixel column {canvasX} is outside of allowed bounds [{minCanvasX}; {maxCanvasX}]"
-                    bitmap.SetPixel(canvasX, spriteY, palette.GetColor idx)
+                    bitmap.SetPixel(canvasX, canvasY + spriteY, palette.GetColor idx)
                     canvasX <- canvasX + 1
                 let skipPixels count =
                     canvasX <- canvasX + int count

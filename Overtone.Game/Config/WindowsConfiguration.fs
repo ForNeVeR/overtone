@@ -84,7 +84,7 @@ type WindowsConfiguration = {
                 | o -> failwith $"Unrecognized bool value of field {field}: {o} for entry \"{entryName}\"."
             let toRect field = function
                 | [| x0; y0; x1; y1 |] -> Geometry.rectFromCorners(struct(x0, y0), struct(x1, y1))
-                | [| x0; y0; x1; y1; _; _ |] -> // TODO: Analyze the last two optional values
+                | [| x0; y0; x1; y1; _; _ |] -> // TODO[#31]: Analyze the last two optional values
                     Geometry.rectFromCorners(struct(x0, y0), struct(x1, y1))
                 | _ -> failwith $"Unrecognized value of field {field} for entry \"{entryName}\"."
 

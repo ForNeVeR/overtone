@@ -22,7 +22,7 @@ type TextureManager(disc: GameDisc, device: GraphicsDevice, config: ShapesConfig
             use paletteStream = new MemoryStream(disc.GetData paletteName)
             Palette.Read paletteStream
 
-        // TODO: Better resource management, do not read the whole shape again for every new sprite
+        // TODO[#30]: Better resource management, do not read the whole shape again for every new sprite
         let header = shape.ReadSpriteHeaders()[spriteIndex]
         let sprite = shape.ReadSprite header
         let bitmap = shape.Render palette sprite

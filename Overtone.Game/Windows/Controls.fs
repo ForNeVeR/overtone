@@ -1,4 +1,4 @@
-﻿module Overtone.Game.Windows.Controls
+﻿namespace Overtone.Game.Windows
 
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
@@ -16,6 +16,7 @@ type Control(texture: Texture2D, position: Rectangle) =
             color = colorMask
         )
 
-let Load(lifetime: Lifetime, textureManager: TextureManager, entry: WindowEntry) =
-    let texture = textureManager.LoadTexture(lifetime, entry.ShapeId, entry.ShapeFrame)
-    Control(texture, entry.Pane)
+module Controls =
+    let Load(lifetime: Lifetime, textureManager: TextureManager, entry: WindowEntry) =
+        let texture = textureManager.LoadTexture(lifetime, entry.ShapeId, entry.ShapeFrame)
+        Control(texture, entry.Pane)

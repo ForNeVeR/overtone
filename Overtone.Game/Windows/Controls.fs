@@ -10,7 +10,8 @@ open Overtone.Utilities
 
 type Control(position: Rectangle, texture: Texture2D) =
     member _.Draw(batch: SpriteBatch): unit =
-        batch.Draw(texture, position, Color.Black)
+        let colorMask = Color.White
+        batch.Draw(texture, position, colorMask)
 
 let Load(lifetime: Lifetime, textureManager: TextureManager, entry: WindowEntry) =
     let texture = textureManager.LoadTexture(entry.ShapeId, entry.ShapeFrame) |> Lifetimes.attach lifetime

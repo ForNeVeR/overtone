@@ -121,10 +121,18 @@ let main: string[] -> int = function
                 printf $" ({sizeX}×{sizeY})"
             printfn ""
     0
+| [| "cursor"; inputFile; outputDirectory |] ->
+    let input = File.ReadAllBytes inputFile
+    Directory.CreateDirectory outputDirectory |> ignore
+    let cursors = Cursor.Load input
+    Cursor.Save outputDirectory cursors
+    printfn $"Saved {cursors.Length} cursors."
+    0
 | _ ->
     printfn "Usage:"
     printfn "  info <path-to-shp-file>: print shp file info (accepts glob)"
     printfn "  render <path-to-shp-file> <output-directory>: render all the sprites from the file (accepts glob)"
     printfn "  palette <path-to-directory>: list the palettes for each file in the directory"
     printfn "  font <path-to-fnt-file>: verify and show a font file"
+    printfn "  cursor <path-to-pe-file> <output-directory>: extract cursor resources from a PE32 file"
     1

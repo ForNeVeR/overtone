@@ -11,6 +11,9 @@
         <Compile Include="Config\ShapesConfiguration.fs" />
         <Compile Include="Shapes.fs" />
         <Compile Include="TextureManager.fs" />
+        <Compile Include="Input.fs" />
+        <Compile Include="IScene.fs" />
+        <Compile Include="Input\Mouse.fs" />
         <Compile Include="Windows\Controls.fs" />
         <Compile Include="Windows\MenuScene.fs" />
         <Compile Include="OvertoneGame.fs" />

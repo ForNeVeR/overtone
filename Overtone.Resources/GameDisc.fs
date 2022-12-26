@@ -2,6 +2,7 @@
 
 open System
 open System.IO
+open System.Threading.Tasks
 
 open Overtone.Resources.Cob
 
@@ -23,6 +24,9 @@ type GameDisc(rootPath: string) =
         dataArchive.ReadEntries()
         |> Seq.map(fun e -> e.Path, e)
         |> Map.ofSeq
+
+    member _.ReadFile(relativePath: string): Task<byte[]> =
+        Path.Combine(rootPath, relativePath) |> File.ReadAllBytesAsync
 
     member _.GetConfig(name: string): byte[] = configEntries[name] |> configArchive.ReadEntry
     member _.GetData(name: string): byte[] = dataEntries[name] |> dataArchive.ReadEntry

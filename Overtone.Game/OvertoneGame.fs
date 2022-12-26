@@ -3,7 +3,10 @@
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
 
+open Microsoft.Xna.Framework.Input
+
 open Overtone.Game.Config
+open Overtone.Game.Input
 open Overtone.Game.Windows
 open Overtone.Resources
 
@@ -14,7 +17,8 @@ type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfi
 
     let graphics = new GraphicsDeviceManager(this)
     let textureManager = lazy TextureManager(disc, this.GraphicsDevice, shapesConfig)
-    let scene = lazy MenuScene(lifetimeDef.Lifetime, this.GraphicsDevice, textureManager.Value, windowConfig)
+    let mouse = Mouse.Load (disc.ReadFile "THING1/FLOAT.EXE").Result // TODO: Show a loader at start instead of .Result
+    let scene = lazy MenuScene(lifetimeDef.Lifetime, this.GraphicsDevice, textureManager.Value, windowConfig, mouse)
 
     override this.Initialize() =
         this.Window.Title <- "Overtone"
@@ -22,6 +26,11 @@ type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfi
         graphics.PreferredBackBufferWidth <- 640
         graphics.PreferredBackBufferHeight <- 480
         graphics.ApplyChanges()
+
+    override this.Update gameTime =
+        let mouseState = Mouse.GetState()
+        // TODO: Update scene based on the mouse state
+        mouse.UpdateCursor(mouseState, scene.Value)
 
     override this.Draw gameTime =
         this.GraphicsDevice.Clear(Color.Black)

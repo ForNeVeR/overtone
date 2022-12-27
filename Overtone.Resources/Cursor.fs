@@ -1,5 +1,9 @@
 ﻿module Overtone.Resources.Cursor
 
+open System
+open System.Collections
+open System.Drawing
+open System.Drawing.Imaging
 open System.IO
 
 open AsmResolver.PE
@@ -68,3 +72,49 @@ let Save (outDir: string) (cursors: NamedCursor seq): unit =
             yield! cursor.Blob
         |]
         File.WriteAllBytes(path, file)
+
+let Render (outDir: string) (cursors: NamedCursor seq): unit =
+    for cursor in cursors do
+        let outPath = Path.Combine(outDir, $"{string cursor.Id}.png")
+        let cursor = cursor.Cursor
+        let infoHeader = cursor.Blob |> Seq.take 40
+
+        let width = infoHeader |> Seq.skip 4 |> Seq.take 4 |> Seq.toArray |> BitConverter.ToInt32
+        let height = infoHeader |> Seq.skip 8 |> Seq.take 4 |> Seq.toArray |> BitConverter.ToInt32
+        assert (width = 32)
+        assert (height = 64) // 32 for xor bitmap + 32 for and bitmap
+
+        let colors = cursor.Blob |> Seq.skip 40 |> Seq.take 8
+        let readColor offset =
+            match colors |> Seq.skip offset |> Seq.take 3 |> Seq.toArray with
+            | [| r; g; b |] -> Color.FromArgb(int r, int g, int b)
+            | _ -> failwith "Not enough bytes for color."
+        let color1 = readColor 0
+        let color2 = readColor 4
+
+        let bitmaps = cursor.Blob |> Seq.skip 48
+        let xorBitmap = bitmaps |> Seq.take(32 * 32 / 8) |> Seq.toArray // 32×32 px, 8 px per byte
+        let andBitmap = bitmaps |> Seq.skip(32 * 32 / 8) |> Seq.take(32 * 32 / 8) |> Seq.toArray
+
+        let xorBits = xorBitmap |> BitArray
+        let andBits = andBitmap |> BitArray
+
+        let getColor x y =
+            let lineIndex = (31 - y) * 32
+            let byteIndex = x / 8
+            let bitIndexInsideByte = 8 - x % 8 - 1
+            let bitIndex = lineIndex + byteIndex * 8 + bitIndexInsideByte
+            match andBits[bitIndex], xorBits[bitIndex] with
+            | false, false -> color1
+            | false, true -> color2
+            | true, false -> Color.Transparent
+            | true, true -> failwith "Inverted background pixel requested"
+
+        use cursorBitmap = new Bitmap(width, height / 2)
+        for x in 0..31 do
+            for y in 0..31 do
+                cursorBitmap.SetPixel(x, y, getColor x y)
+
+        cursorBitmap.Save(outPath, ImageFormat.Png)
+
+        ()

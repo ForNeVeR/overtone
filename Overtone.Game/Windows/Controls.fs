@@ -17,6 +17,6 @@ type Control(texture: Texture2D, position: Rectangle) =
         )
 
 module Controls =
-    let Load(lifetime: Lifetime, textureManager: TextureManager, entry: WindowEntry) =
+    let Load(lifetime: Lifetime, textureManager: Textures.Manager, entry: WindowEntry) =
         let texture = textureManager.LoadTexture(lifetime, entry.ShapeId, entry.ShapeFrame)
         Control(texture, entry.Pane)

@@ -1,7 +1,10 @@
 ﻿namespace Overtone.Game.Input
 
+open JetBrains.Lifetimes
+open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
 open Microsoft.Xna.Framework.Input
+
 open Overtone.Game
 open Overtone.Resources
 
@@ -9,24 +12,28 @@ type Mouse(cursors: Map<CursorShape, MouseCursor>) =
 
     let getCursor shape = cursors[shape]
 
-    let mutable cursorShape = CursorShape.Normal
+    let mutable cursorParameters = None
 
-    member _.UpdateCursor(state: MouseState, scene: IScene): unit =
-        let newCursorShape = scene.GetCursor state
-        if cursorShape <> newCursorShape then
-            cursorShape <- newCursorShape
-            Mouse.SetCursor(getCursor cursorShape)
+    member _.UpdateCursor(state: MouseState, scene: IScene, game: Game): unit =
+        let newCursorParameters = scene.GetCursor state
+        if cursorParameters <> Some newCursorParameters then
+            cursorParameters <- Some newCursorParameters
 
-    member _.Draw(sprite: SpriteBatch): unit = failwith "TODO"
+            let (CursorParameters(shape, isVisible)) = newCursorParameters
+            Mouse.SetCursor(getCursor shape)
+            game.IsMouseVisible <- isVisible
 
 module Mouse =
 
-    let private loadTexture cursor = failwith "TODO"
+    let Load(lifetime: Lifetime, device: GraphicsDevice, floatExeFile: byte[]): Mouse =
+        let loadTexture(cursor: Cursor.CursorStructure) =
+            use bitmap = Cursor.Render cursor
+            let texture = bitmap |> Textures.toTexture(lifetime, device)
+            MouseCursor.FromTexture2D(texture, int cursor.HotspotX, int cursor.HotspotY)
 
-    let Load(floatExeFile: byte[]): Mouse =
         let allCursors =
             Cursor.Load floatExeFile
-            |> Seq.map (fun c -> c.Id, c)
+            |> Seq.map (fun c -> c.Id, c.Cursor)
             |> Map.ofSeq
         let cursorMap =
             [| CursorShape.Normal, loadTexture allCursors[4u] |]

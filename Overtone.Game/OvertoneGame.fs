@@ -14,11 +14,16 @@ type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfi
     inherit Game()
 
     let lifetimeDef = new LifetimeDefinition()
+    let lifetime = lifetimeDef.Lifetime
 
     let graphics = new GraphicsDeviceManager(this)
-    let textureManager = lazy TextureManager(disc, this.GraphicsDevice, shapesConfig)
-    let mouse = Mouse.Load (disc.ReadFile "THING1/FLOAT.EXE").Result // TODO: Show a loader at start instead of .Result
-    let scene = lazy MenuScene(lifetimeDef.Lifetime, this.GraphicsDevice, textureManager.Value, windowConfig, mouse)
+    let textureManager = lazy Textures.Manager(disc, this.GraphicsDevice, shapesConfig)
+    let mouse = lazy Mouse.Load(
+        lifetime,
+        this.GraphicsDevice,
+        (disc.ReadFile "THING1/FLOAT.EXE").Result // TODO: Show a loader at start instead of .Result
+    )
+    let scene = lazy MenuScene(lifetime, this.GraphicsDevice, textureManager.Value, windowConfig)
 
     override this.Initialize() =
         this.Window.Title <- "Overtone"
@@ -30,7 +35,7 @@ type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfi
     override this.Update gameTime =
         let mouseState = Mouse.GetState()
         // TODO: Update scene based on the mouse state
-        mouse.UpdateCursor(mouseState, scene.Value)
+        mouse.Value.UpdateCursor(mouseState, scene.Value, this)
 
     override this.Draw gameTime =
         this.GraphicsDevice.Clear(Color.Black)

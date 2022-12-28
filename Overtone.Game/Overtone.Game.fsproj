@@ -10,7 +10,7 @@
         <Compile Include="Config\WindowsConfiguration.fs" />
         <Compile Include="Config\ShapesConfiguration.fs" />
         <Compile Include="Shapes.fs" />
-        <Compile Include="TextureManager.fs" />
+        <Compile Include="Textures.fs" />
         <Compile Include="Input.fs" />
         <Compile Include="IScene.fs" />
         <Compile Include="Input\Mouse.fs" />

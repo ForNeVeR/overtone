@@ -132,7 +132,7 @@ let main: string[] -> int = function
     let input = File.ReadAllBytes inputFile
     Directory.CreateDirectory outputDirectory |> ignore
     let cursors = Cursor.Load input
-    Cursor.Render outputDirectory cursors
+    Cursor.RenderAll outputDirectory cursors
     printfn $"Saved {cursors.Length} cursors."
     0
 | _ ->

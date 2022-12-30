@@ -20,6 +20,7 @@ type MenuScene(lifetime: Lifetime,
     let background = loadControl "BACKGRND"
     let title = Control(
         textureManager.LoadTexture(lifetime, Shapes.TitleScreen.Id, Shapes.TitleScreen.TitleFrame),
+        None,
         Rectangle(0, -41, 640, 480)
     )
     let newGameButton = loadControl "NEWGAME"
@@ -27,6 +28,9 @@ type MenuScene(lifetime: Lifetime,
     let resumeButton = loadControl "RESUME"
     let loadButton = loadControl "LOADGAME"
     let allControls = [| background; title; newGameButton; exitButton; resumeButton; loadButton |]
+
+    member _.Update(mouseState: MouseState): unit =
+        allControls |> Array.iter(fun c -> c.Update mouseState)
 
     member _.Draw(gameTime: GameTime): unit =
         use batch = new SpriteBatch(graphicsDevice)

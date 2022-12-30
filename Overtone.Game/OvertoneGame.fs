@@ -34,7 +34,7 @@ type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfi
 
     override this.Update gameTime =
         let mouseState = Mouse.GetState()
-        // TODO: Update scene based on the mouse state
+        scene.Value.Update mouseState
         mouse.Value.UpdateCursor(mouseState, scene.Value, this)
 
     override this.Draw gameTime =

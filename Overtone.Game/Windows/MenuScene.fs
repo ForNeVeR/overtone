@@ -3,8 +3,8 @@
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
-
 open Microsoft.Xna.Framework.Input
+
 open Overtone.Game
 open Overtone.Game.Config
 open Overtone.Game.Input

@@ -2,7 +2,6 @@
 
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
-
 open Microsoft.Xna.Framework.Input
 
 open Overtone.Game.Config
@@ -32,7 +31,7 @@ type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfi
         graphics.PreferredBackBufferHeight <- 480
         graphics.ApplyChanges()
 
-    override this.Update gameTime =
+    override this.Update _ =
         let mouseState = Mouse.GetState()
         scene.Value.Update mouseState
         mouse.Value.UpdateCursor(mouseState, scene.Value, this)

@@ -21,7 +21,7 @@ type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfi
     let mouse = lazy Mouse.Load(
         lifetime,
         this.GraphicsDevice,
-        (disc.ReadFile "THING1/FLOAT.EXE").Result // TODO: Show a loader at start instead of .Result
+        (disc.ReadFile "THING1/FLOAT.EXE").Result // TODO[#35]: Show a loader at start instead of .Result
     )
     let scene = lazy MenuScene(lifetime, this.GraphicsDevice, textureManager.Value, windowConfig)
 

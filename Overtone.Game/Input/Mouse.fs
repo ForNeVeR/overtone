@@ -36,6 +36,6 @@ module Mouse =
             |> Seq.map (fun c -> c.Id, c.Cursor)
             |> Map.ofSeq
         let cursorMap =
-            [| CursorShape.Normal, loadTexture allCursors[4u] |]
+            [| CursorShape.Normal, loadTexture allCursors[19u] |]
             |> Map.ofSeq
         Mouse cursorMap

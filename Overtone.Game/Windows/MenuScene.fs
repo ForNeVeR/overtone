@@ -32,7 +32,7 @@ type MenuScene(lifetime: Lifetime,
     member _.Update(mouseState: MouseState): unit =
         allControls |> Array.iter(fun c -> c.Update mouseState)
 
-    member _.Draw(gameTime: GameTime): unit =
+    member _.Draw _: unit =
         use batch = new SpriteBatch(graphicsDevice)
         batch.Begin()
         for control in allControls do
@@ -40,6 +40,5 @@ type MenuScene(lifetime: Lifetime,
         batch.End()
 
     interface IScene with
-        member this.GetCursor(mouseState: MouseState) =
-            // TODO: Figure out the focused control
+        member this.GetCursor _ =
             CursorParameters(CursorShape.Normal, isVisible = true)

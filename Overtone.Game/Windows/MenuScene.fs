@@ -10,7 +10,7 @@ open Overtone.Game.Config
 open Overtone.Game.Input
 
 type MenuScene(lifetime: Lifetime,
-               graphicsDevice: GraphicsDevice,
+               device: GraphicsDevice,
                textureManager: Textures.Manager,
                config: WindowsConfiguration) =
     let sceneId = 0 // "Starting state" of windows.txt
@@ -28,15 +28,18 @@ type MenuScene(lifetime: Lifetime,
     let resumeButton = loadControl "RESUME"
     let loadButton = loadControl "LOADGAME"
     let allControls = [| background; title; newGameButton; exitButton; resumeButton; loadButton |]
+    let sparkles = Sparkles(lifetime, device)
 
-    member _.Update(mouseState: MouseState): unit =
+    member _.Update(time: GameTime, mouseState: MouseState): unit =
         allControls |> Array.iter(fun c -> c.Update mouseState)
+        sparkles.Update time
 
     member _.Draw _: unit =
-        use batch = new SpriteBatch(graphicsDevice)
+        use batch = new SpriteBatch(device)
         batch.Begin()
         for control in allControls do
             control.Draw batch
+        sparkles.Draw batch
         batch.End()
 
     interface IScene with

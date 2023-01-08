@@ -15,6 +15,7 @@
         <Compile Include="IScene.fs" />
         <Compile Include="Input\Mouse.fs" />
         <Compile Include="Windows\Controls.fs" />
+        <Compile Include="Windows\Sparkles.fs" />
         <Compile Include="Windows\MenuScene.fs" />
         <Compile Include="OvertoneGame.fs" />
         <Compile Include="Program.fs" />

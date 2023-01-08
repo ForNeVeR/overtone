@@ -31,9 +31,9 @@ type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfi
         graphics.PreferredBackBufferHeight <- 480
         graphics.ApplyChanges()
 
-    override this.Update _ =
+    override this.Update time =
         let mouseState = Mouse.GetState()
-        scene.Value.Update mouseState
+        scene.Value.Update(time, mouseState)
         mouse.Value.UpdateCursor(mouseState, scene.Value, this)
 
     override this.Draw gameTime =

@@ -1,31 +1,35 @@
 ﻿namespace Overtone.Game.Windows
 
 open System
+open System.Runtime.InteropServices
+
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
+
 open Overtone.Utils
 
 type private Sparkle(texture: Texture2D, position: Point, initialPhase: int) =
+    static let periodMs = 3000 // TODO: Determine better parameters
     let mutable φ = initialPhase
 
     member _.Update(time: GameTime): unit =
-        φ <- (initialPhase + int time.TotalGameTime.TotalMilliseconds) % 2000
+        φ <- (initialPhase + int time.TotalGameTime.TotalMilliseconds) % periodMs
 
     member _.Draw(sprite: SpriteBatch): unit =
         let brightness =
-            (double φ / 2000.0) * Math.PI
+            (double φ / double periodMs) * Math.PI * 2.0
             |> sin
             |> fun x -> Math.Clamp(x, 0.0, 1.0)
         let value = int(brightness * 255.0)
         let mask = Color(value, value, value)
         sprite.Draw(texture, position.ToVector2(), mask)
 
-    static member Initialize (texture: Texture2D) (seed: byte): Sparkle =
+    static member Initialize (texture: Texture2D) (seed: uint16): Sparkle =
         // TODO: Better parameters
-        let x = int seed * 3 % 640
+        let x = (int seed >>> 8) * 3 % 640
         let y = int seed * 2 % 480
-        let initialPhase = int seed * 4 % 2000
+        let initialPhase = int seed * 4 % periodMs
         Sparkle(texture, Point(x, y), initialPhase)
 
 type Sparkles(lifetime: Lifetime, device: GraphicsDevice) =
@@ -34,12 +38,11 @@ type Sparkles(lifetime: Lifetime, device: GraphicsDevice) =
         t.SetData [| Color.White |] // TODO: Figure out the real color boundaries
         t |> Lifetimes.attach lifetime
 
-    let randomBuffer =
-        let arr = Array.zeroCreate 200
-        Random(42).NextBytes arr
-        arr
-
-    let sparkles = randomBuffer |> Array.map(Sparkle.Initialize texture)
+    let sparkles =
+        let arr = Array.zeroCreate 75
+        let bytes = MemoryMarshal.Cast(arr.AsSpan())
+        Random(42).NextBytes bytes
+        arr |> Array.map(Sparkle.Initialize texture)
 
     member _.Update(time: GameTime): unit =
         sparkles |> Array.iter(fun x -> x.Update time)

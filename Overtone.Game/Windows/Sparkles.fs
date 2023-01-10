@@ -10,7 +10,7 @@ open Microsoft.Xna.Framework.Graphics
 open Overtone.Utils
 
 type private Sparkle(texture: Texture2D, position: Point, initialPhase: int) =
-    static let periodMs = 3000 // TODO: Determine better parameters
+    static let periodMs = 3000
     let mutable φ = initialPhase
 
     member _.Update(time: GameTime): unit =
@@ -26,7 +26,6 @@ type private Sparkle(texture: Texture2D, position: Point, initialPhase: int) =
         sprite.Draw(texture, position.ToVector2(), mask)
 
     static member Initialize (texture: Texture2D) (seed: uint16): Sparkle =
-        // TODO: Better parameters
         let x = (int seed >>> 8) * 3 % 640
         let y = int seed * 2 % 480
         let initialPhase = int seed * 4 % periodMs
@@ -35,11 +34,11 @@ type private Sparkle(texture: Texture2D, position: Point, initialPhase: int) =
 type Sparkles(lifetime: Lifetime, device: GraphicsDevice) =
     let texture =
         let t = new Texture2D(device, 1, 1)
-        t.SetData [| Color.White |] // TODO: Figure out the real color boundaries
+        t.SetData [| Color.White |]
         t |> Lifetimes.attach lifetime
 
     let sparkles =
-        let arr = Array.zeroCreate 75
+        let arr = Array.zeroCreate 20
         let bytes = MemoryMarshal.Cast(arr.AsSpan())
         Random(42).NextBytes bytes
         arr |> Array.map(Sparkle.Initialize texture)

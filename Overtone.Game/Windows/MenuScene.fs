@@ -34,7 +34,7 @@ type MenuScene(lifetime: Lifetime,
         allControls |> Array.iter(fun c -> c.Update mouseState)
         sparkles.Update time
 
-    member _.Draw _: unit =
+    member _.Draw(): unit =
         use batch = new SpriteBatch(device)
         batch.Begin()
         for control in allControls do

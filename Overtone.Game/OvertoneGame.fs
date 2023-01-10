@@ -38,7 +38,7 @@ type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfi
 
     override this.Draw gameTime =
         this.GraphicsDevice.Clear(Color.Black)
-        scene.Value.Draw(gameTime)
+        scene.Value.Draw()
         base.Draw gameTime
 
     override _.Dispose disposing =

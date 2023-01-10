@@ -36,10 +36,9 @@ type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfi
         scene.Value.Update(time, mouseState)
         mouse.Value.UpdateCursor(mouseState, scene.Value, this)
 
-    override this.Draw gameTime =
+    override this.Draw _ =
         this.GraphicsDevice.Clear(Color.Black)
         scene.Value.Draw()
-        base.Draw gameTime
 
     override _.Dispose disposing =
         if disposing then

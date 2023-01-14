@@ -32,8 +32,8 @@ Files on the CD
     - `TONE00.COB`–`TONE01.COB`: the game data archives in the
       [COB format][docs.cob], see the description below
 - `THING2` directory (files from this directory are always read from the CD)
-    - `ACT1.WAV`–`ACT4.WAV`: main in-game music, presumably remastered versions of these are available in the "Bonus Content" archive from the [Internet Archive][archive-org.the-tone-rebellion] (TODO: yet to determine)
-    - `AMBIENT1.WAV`–`AMBIENT4.WAV`: other game music files, presumably remastered versions of these are available in the "Bonus Content" archive from the [Internet Archive][archive-org.the-tone-rebellion] (TODO: yet to determine)
+    - `ACT1.WAV`–`ACT4.WAV`: main in-game music, presumably remastered versions of these are available in the "Bonus Content" archive from the [Internet Archive][archive-org.the-tone-rebellion] (TODO\[#3]: yet to determine)
+    - `AMBIENT1.WAV`–`AMBIENT4.WAV`: other game music files, presumably remastered versions of these are available in the "Bonus Content" archive from the [Internet Archive][archive-org.the-tone-rebellion] (TODO\[#3]: yet to determine)
     - `INTRO.AVI`: the introduction video; it wasn't shown in-game, but there's
       a **Start** menu item to show it in the standard video player.
 

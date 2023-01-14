@@ -54,9 +54,7 @@ fixed by [this forum post][virtualbox.snapshot-troubleshooting].
 
 Installing the Game
 -------------------
-You'll need to download the game ISO file to install. I've used the "Alternative
-ISO Version" from [My Abandonware][myabandonware.the-tone-rebellion]. Download
-the archive and extract `TONE116E.iso` file from it somewhere to your disk.
+You'll need to download the game ISO file to install. I've used the "Alternative ISO Version" from the [Internet Archive][archive-org.the-tone-rebellion]. Download the archive and extract `TONE116E.iso` file from it somewhere to your disk.
 
 Insert it onto your virtual machine, and the game will offer you the welcome
 screen. Press the **Install the Tone Rebellion** button, we don't need anything
@@ -65,8 +63,8 @@ else here.
 You're now all set: either press the **Single Player** button on the welcome
 screen, or start the game from the Windows' **Start** menu.
 
+[archive-org.the-tone-rebellion]: https://archive.org/details/the-tone-rebellion
 [archive.windows-xp-mode]: https://archive.org/details/windows-xp-mode_20200907
-[myabandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
 [stackoverflow.windows-xp]: https://superuser.com/a/1230653/286768
 [virtualbox.download]: https://www.virtualbox.org/wiki/Downloads
 [virtualbox.snapshot-troubleshooting]: https://forums.virtualbox.org/viewtopic.php?f=6&t=79896

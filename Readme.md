@@ -19,8 +19,7 @@ Overtone will reuse the original resources as much as possible. To run the game,
 the user will have to provide the resources (it is unlikely we'll ever be able
 to provide these resources ourselves).
 
-The game is considered [abandonware][wikipedia.abandonware], so feel free to
-download the game from [My Abandonware][my-abandonware.the-tone-rebellion].
+The game is considered [abandonware][wikipedia.abandonware], so feel free to download the game from the [Internet Archive][archive-org.the-tone-rebellion].
 
 Prerequisites
 -------------
@@ -81,6 +80,7 @@ Author would like to thank the following people for their help with this project
 - Roman Tkachuk (2:4600/68.2@fidonet), the author of the [Ascendancy Font Editor v1.1+][ascendancy-font-editor].
 
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-umbra-
+[archive-org.the-tone-rebellion]: https://archive.org/details/the-tone-rebellion
 [ascendancy-converter]: https://www.extractor.ru/files/051b8c7c6155fef1460fab189f7edb68/
 [ascendancy-font-editor]: https://www.extractor.ru/files/cbd334b175b9b8721a653077e37cbabd/
 [daumiller.ascendancy]: https://github.com/daumiller/ascendancy
@@ -97,7 +97,6 @@ Author would like to thank the following people for their help with this project
 [extractor.ru]: http://www.extractor.ru/
 [fadoli.tone-rebellion-extractor]: https://github.com/Fadoli/Tone-rebellion-extractor
 [fadoli]: https://github.com/Fadoli
-[my-abandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
 [rogerbraun.ascendancy-tools]: https://github.com/rogerbraun/Ascendancy-tools
 [rogerbraun]: https://github.com/rogerbraun
 [wikipedia.abandonware]: https://en.wikipedia.org/wiki/Abandonware

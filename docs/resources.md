@@ -1,11 +1,6 @@
 Game Resources
 ==============
-Overtone is utilizing the resources from the original CD. We consider the
-English ISO of the game from [My Abandonware][my-abandonware.the-tone-rebellion]
-(the "Alternative ISO Version") to serve as the reference, though other versions
-of the game are known to exist (e.g. check [these][fadoli.title-screen] French
-title screen buttons). Ideally, they shouldn't differ in resource contents too
-much from the English one.
+Overtone is utilizing the resources from the original CD. We consider the English ISO of the game from the [Internet Archive][archive-org.the-tone-rebellion] (the "Alternative ISO Version") to serve as the reference, though other versions of the game are known to exist (e.g. check [these][fadoli.title-screen] French title screen buttons). Ideally, they shouldn't differ in resource contents too much from the English one.
 
 Files on the CD
 ---------------
@@ -37,13 +32,8 @@ Files on the CD
     - `TONE00.COB`–`TONE01.COB`: the game data archives in the
       [COB format][docs.cob], see the description below
 - `THING2` directory (files from this directory are always read from the CD)
-    - `ACT1.WAV`–`ACT4.WAV`: main in-game music, presumably remastered versions
-      of these are available in the "Bonus Content" archive from [My
-      Abandonware][my-abandonware.the-tone-rebellion] (TODO: yet to determine)
-    - `AMBIENT1.WAV`–`AMBIENT4.WAV`: other game music files, presumably
-      remastered versions of these are available in the "Bonus Content" archive
-      from [My Abandonware][my-abandonware.the-tone-rebellion] (TODO: yet to
-      determine)
+    - `ACT1.WAV`–`ACT4.WAV`: main in-game music, presumably remastered versions of these are available in the "Bonus Content" archive from the [Internet Archive][archive-org.the-tone-rebellion] (TODO: yet to determine)
+    - `AMBIENT1.WAV`–`AMBIENT4.WAV`: other game music files, presumably remastered versions of these are available in the "Bonus Content" archive from the [Internet Archive][archive-org.the-tone-rebellion] (TODO: yet to determine)
     - `INTRO.AVI`: the introduction video; it wasn't shown in-game, but there's
       a **Start** menu item to show it in the standard video player.
 
@@ -280,6 +270,7 @@ The archives contain files in the following formats:
 - `data\logo.gif`: The Logic Factory logo
 - `data\worldpos.txt`: definitions of the islands shown on the main map screen
 
+[archive-org.the-tone-rebellion]: https://archive.org/details/the-tone-rebellion
 [daumiller.ascendancy]: https://github.com/daumiller/ascendancy
 [docs.cob]: ./cob.md
 [docs.fnt]: fnt.md
@@ -287,6 +278,5 @@ The archives contain files in the following formats:
 [docs.shp]: ./shp.md
 [docs.txt]: ./txt.md
 [fadoli.title-screen]: https://github.com/Fadoli/ToneRebellion_Raw/tree/932909a9561b9f3666fb7b25ac011016a010fe6f/extracted_shp/TITSCRN
-[my-abandonware.the-tone-rebellion]: https://www.myabandonware.com/game/the-tone-rebellion-cjc
 [nomacs]: https://nomacs.org/
 [wav]: https://en.wikipedia.org/wiki/WAV

@@ -25,8 +25,6 @@ Prerequisites
 -------------
 To develop the project, you'll need [.NET SDK][dotnet.sdk] 7.0 or later installed.
 
-Notably, on macOS, [libgdiplus is required][dotnet.libgdiplus].
-
 Build
 -----
 ```console
@@ -92,7 +90,6 @@ Author would like to thank the following people for their help with this project
 [docs.running-original]: docs/running-original.md
 [docs.shp]: ./docs/shp.md
 [docs.txt]: ./docs/txt.md
-[dotnet.libgdiplus]: https://docs.microsoft.com/en-us/dotnet/core/install/macos#libgdiplus
 [dotnet.sdk]: https://dot.net/
 [extractor.ru]: http://www.extractor.ru/
 [fadoli.tone-rebellion-extractor]: https://github.com/Fadoli/Tone-rebellion-extractor

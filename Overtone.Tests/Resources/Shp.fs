@@ -1,10 +1,10 @@
 ﻿module Overtone.Tests.Resources.Shp
 
 open System.Collections.Generic
-open System.Drawing
 open System.IO
 open System.Text
 
+open SkiaSharp
 open Xunit
 
 open Overtone.Resources
@@ -111,11 +111,11 @@ let blackPalette =
     use stream = new MemoryStream(data)
     Palette.Read stream
 
-let private assertColor (expected: Color) (actual: Color) =
-    if expected.A = 0uy
-    then Assert.Equal(expected.A, actual.A)
+let private assertColor (expected: SKColor) (actual: SKColor) =
+    if expected.Alpha = 0uy
+    then Assert.Equal(expected.Alpha, actual.Alpha)
     else
-        Assert.Equal(Color.FromArgb(int expected.A, int expected.R, int expected.G, int expected.B), actual)
+        Assert.Equal(expected, actual)
 
 [<Fact>]
 let ``Empty sprite should render to an empty image``(): unit =
@@ -125,19 +125,19 @@ let ``Empty sprite should render to an empty image``(): unit =
     use bitmap = file.ReadSpriteHeaders() |> Seq.exactlyOne |> file.ReadSprite |> file.Render blackPalette
     Assert.Equal(1, bitmap.Width)
     Assert.Equal(1, bitmap.Height)
-    assertColor Color.Transparent (bitmap.GetPixel(0, 0))
+    assertColor SKColors.Transparent (bitmap.GetPixel(0, 0))
 
 module private Draw =
-    let color palette (clr: Color) =
+    let color palette (clr: SKColor) =
         palette.Colors
-        |> Array.findIndex (fun c -> c.ToArgb() = clr.ToArgb())
+        |> Array.findIndex (fun c -> c = clr)
         |> byte
 
     let skip(count: byte) = seq {
         1uy
         count
     }
-    let fill (palette: Palette) (length: byte) (c: Color) =
+    let fill (palette: Palette) (length: byte) (c: SKColor) =
         if length >= 128uy then failwith $"Length of {length} is invalid for fill"
         seq {
             length <<< 1
@@ -159,7 +159,7 @@ let ``Zero indicator should switch to a new row``(): unit =
     }
     let data = [|
         yield! Draw.endRow
-        yield! Draw.pixels blackPalette [| Color.Black |]
+        yield! Draw.pixels blackPalette [| SKColors.Black |]
         yield! Draw.endRow
     |]
 
@@ -167,10 +167,10 @@ let ``Zero indicator should switch to a new row``(): unit =
     let file = ShapeFile input
     use bitmap = file.ReadSpriteHeaders() |> Seq.exactlyOne |> file.ReadSprite |> file.Render blackPalette
 
-    assertColor Color.Transparent (bitmap.GetPixel(0, 0))
-    assertColor Color.Transparent (bitmap.GetPixel(1, 0))
-    assertColor Color.Black (bitmap.GetPixel(0, 1))
-    assertColor Color.Transparent (bitmap.GetPixel(1, 1))
+    assertColor SKColors.Transparent (bitmap.GetPixel(0, 0))
+    assertColor SKColors.Transparent (bitmap.GetPixel(1, 0))
+    assertColor SKColors.Black (bitmap.GetPixel(0, 1))
+    assertColor SKColors.Transparent (bitmap.GetPixel(1, 1))
 
 [<Fact>]
 let ``One indicator should skip pixels``(): unit =
@@ -181,7 +181,7 @@ let ``One indicator should skip pixels``(): unit =
     }
     let data = [|
         yield! Draw.skip 1uy
-        yield! Draw.pixels blackPalette [| Color.Black |]
+        yield! Draw.pixels blackPalette [| SKColors.Black |]
         yield! Draw.endRow
     |]
 
@@ -189,9 +189,9 @@ let ``One indicator should skip pixels``(): unit =
     let file = ShapeFile input
     use bitmap = file.ReadSpriteHeaders() |> Seq.exactlyOne |> file.ReadSprite |> file.Render blackPalette
 
-    assertColor Color.Transparent (bitmap.GetPixel(0, 0))
-    assertColor Color.Black (bitmap.GetPixel(1, 0))
-    assertColor Color.Transparent (bitmap.GetPixel(2, 0))
+    assertColor SKColors.Transparent (bitmap.GetPixel(0, 0))
+    assertColor SKColors.Black (bitmap.GetPixel(1, 0))
+    assertColor SKColors.Transparent (bitmap.GetPixel(2, 0))
 
 [<Fact>]
 let ``Even indicator should do fill``(): unit =
@@ -201,7 +201,7 @@ let ``Even indicator should do fill``(): unit =
             End = struct (5, 0)
     }
     let data = [|
-        yield! Draw.fill blackPalette 3uy Color.Black
+        yield! Draw.fill blackPalette 3uy SKColors.Black
         yield! Draw.endRow
     |]
 
@@ -209,13 +209,13 @@ let ``Even indicator should do fill``(): unit =
     let file = ShapeFile input
     use bitmap = file.ReadSpriteHeaders() |> Seq.exactlyOne |> file.ReadSprite |> file.Render blackPalette
 
-    for x in 0..2 do assertColor Color.Black (bitmap.GetPixel(x, 0))
-    for x in 3..5 do assertColor Color.Transparent (bitmap.GetPixel(x, 0))
+    for x in 0..2 do assertColor SKColors.Black (bitmap.GetPixel(x, 0))
+    for x in 3..5 do assertColor SKColors.Transparent (bitmap.GetPixel(x, 0))
 
 [<Fact>]
 let ``Odd indicator should do several pixels in a row``(): unit =
     let palette = {
-        Colors = [| Color.Red; Color.Green; Color.Blue |]
+        Colors = [| SKColors.Red; SKColors.Green; SKColors.Blue |]
     }
     let sprite = {
         zeroSprite with
@@ -223,7 +223,7 @@ let ``Odd indicator should do several pixels in a row``(): unit =
             End = struct (4, 0)
     }
     let data = [|
-        yield! Draw.pixels palette [| Color.Red; Color.Green; Color.Blue |]
+        yield! Draw.pixels palette [| SKColors.Red; SKColors.Green; SKColors.Blue |]
         yield! Draw.endRow
     |]
 
@@ -231,7 +231,7 @@ let ``Odd indicator should do several pixels in a row``(): unit =
     let file = ShapeFile input
     use bitmap = file.ReadSpriteHeaders() |> Seq.exactlyOne |> file.ReadSprite |> file.Render palette
 
-    assertColor Color.Red (bitmap.GetPixel(0, 0))
-    assertColor Color.Green (bitmap.GetPixel(1, 0))
-    assertColor Color.Blue (bitmap.GetPixel(2, 0))
-    for x in 3..4 do assertColor Color.Transparent (bitmap.GetPixel(x, 0))
+    assertColor SKColors.Red (bitmap.GetPixel(0, 0))
+    assertColor SKColors.Green (bitmap.GetPixel(1, 0))
+    assertColor SKColors.Blue (bitmap.GetPixel(2, 0))
+    for x in 3..4 do assertColor SKColors.Transparent (bitmap.GetPixel(x, 0))

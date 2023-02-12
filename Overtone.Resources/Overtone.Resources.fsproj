@@ -13,11 +13,13 @@
       <Compile Include="ShapePalette.fs" />
       <Compile Include="Font.fs" />
       <Compile Include="TextConfiguration.fs" />
+      <Compile Include="SkiaUtils.fs" />
       <Compile Include="Cursor.fs" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="AsmResolver.PE.Win32Resources" Version="5.0.0" />
+      <PackageReference Include="SkiaSharp" Version="2.88.3" />
       <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
     </ItemGroup>
 

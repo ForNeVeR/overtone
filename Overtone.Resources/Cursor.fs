@@ -2,14 +2,13 @@
 
 open System
 open System.Collections
-open System.Drawing
-open System.Drawing.Imaging
 open System.IO
 
 open AsmResolver.PE
 open AsmResolver.PE.Win32Resources
+open SkiaSharp
 
-open type System.BitConverter
+open type BitConverter
 
 [<Struct>]
 type CursorStructure = {
@@ -73,7 +72,7 @@ let Save (outDir: string) (cursors: NamedCursor seq): unit =
         |]
         File.WriteAllBytes(path, file)
 
-let Render(cursor: CursorStructure): Bitmap =
+let Render(cursor: CursorStructure): SKBitmap =
     let infoHeader = cursor.Blob |> Seq.take 40
 
     let width = infoHeader |> Seq.skip 4 |> Seq.take 4 |> Seq.toArray |> BitConverter.ToInt32
@@ -84,7 +83,7 @@ let Render(cursor: CursorStructure): Bitmap =
     let colors = cursor.Blob |> Seq.skip 40 |> Seq.take 8
     let readColor offset =
         match colors |> Seq.skip offset |> Seq.take 3 |> Seq.toArray with
-        | [| r; g; b |] -> Color.FromArgb(int r, int g, int b)
+        | [| r; g; b |] -> SKColor(r, g, b)
         | _ -> failwith "Not enough bytes for color."
     let color1 = readColor 0
     let color2 = readColor 4
@@ -104,10 +103,10 @@ let Render(cursor: CursorStructure): Bitmap =
         match andBits[bitIndex], xorBits[bitIndex] with
         | false, false -> color1
         | false, true -> color2
-        | true, false -> Color.Transparent
+        | true, false -> SKColors.Transparent
         | true, true -> failwith "Inverted background pixel requested"
 
-    let cursorBitmap = new Bitmap(width, height / 2)
+    let cursorBitmap = new SKBitmap(width, height / 2)
     for x in 0..31 do
         for y in 0..31 do
             cursorBitmap.SetPixel(x, y, getColor x y)
@@ -117,4 +116,4 @@ let RenderAll (outDir: string) (cursors: NamedCursor seq): unit =
     for cursor in cursors do
         let outPath = Path.Combine(outDir, $"{string cursor.Id}.png")
         use bitmap = Render cursor.Cursor
-        bitmap.Save(outPath, ImageFormat.Png)
+        SkiaUtils.Render(bitmap, outPath)

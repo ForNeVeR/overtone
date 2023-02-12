@@ -1,17 +1,17 @@
 ﻿module Overtone.Game.Textures
 
-open System.Drawing
 open System.IO
 
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
+open SkiaSharp
 
 open Overtone.Game.Config
 open Overtone.Resources
 open Overtone.Utils
 
-let toTexture (lifetime: Lifetime, device: GraphicsDevice) (bitmap: Bitmap): Texture2D =
+let toTexture (lifetime: Lifetime, device: GraphicsDevice) (bitmap: SKBitmap): Texture2D =
     let width = bitmap.Width
     let height = bitmap.Height
     let texture = new Texture2D(device, width, height) |> Lifetimes.attach lifetime
@@ -19,7 +19,12 @@ let toTexture (lifetime: Lifetime, device: GraphicsDevice) (bitmap: Bitmap): Tex
         let x = i % width
         let y = i / width
         let drawingColor = bitmap.GetPixel(x, y)
-        Color(r = int drawingColor.R, g = int drawingColor.G, b = int drawingColor.B, alpha = int drawingColor.A)
+        Color(
+            r = int drawingColor.Red,
+            g = int drawingColor.Green,
+            b = int drawingColor.Blue,
+            alpha = int drawingColor.Alpha
+        )
     )
     texture.SetData colors
     texture |> Lifetimes.attach lifetime

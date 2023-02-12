@@ -1,9 +1,10 @@
 ﻿namespace Overtone.Resources.Shape
 
 open System
-open System.Drawing
 open System.IO
 open System.Text
+
+open SkiaSharp
 
 open Overtone.Resources
 
@@ -82,9 +83,9 @@ type ShapeFile(input: Stream) =
             DataOffset = input.Position
         }
 
-    member _.Render (palette: Palette) (sprite: SpriteData): Bitmap =
+    member _.Render (palette: Palette) (sprite: SpriteData): SKBitmap =
         let struct (canvasWidth, canvasHeight) = sprite.CanvasDimensions
-        let bitmap = new Bitmap(int canvasWidth, int canvasHeight)
+        let bitmap = new SKBitmap(int canvasWidth, int canvasHeight)
 
         if not sprite.IsEmpty then
             let struct (originX, originY) = sprite.Origin

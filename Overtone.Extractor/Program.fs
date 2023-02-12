@@ -1,5 +1,4 @@
 ﻿open System
-open System.Drawing.Imaging
 open System.IO
 open System.Text
 
@@ -52,7 +51,7 @@ let private render inputFile outputDirectory =
                 let sprite = file.ReadSprite header
                 if sprite.IsEmpty then printf "(empty) "
                 use bitmap = file.Render palette sprite
-                bitmap.Save(outputFilePath, ImageFormat.Png)
+                SkiaUtils.Render(bitmap, outputFilePath)
                 printfn "ok."
             with
             | e ->

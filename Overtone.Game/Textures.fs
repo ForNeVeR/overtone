@@ -27,7 +27,7 @@ let toTexture (lifetime: Lifetime, device: GraphicsDevice) (bitmap: SKBitmap): T
         )
     )
     texture.SetData colors
-    texture |> Lifetimes.attach lifetime
+    texture
 
 type Manager(disc: GameDisc, device: GraphicsDevice, config: ShapesConfiguration) =
 

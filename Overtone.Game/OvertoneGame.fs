@@ -4,6 +4,7 @@ open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Input
 
+open Overtone.Game.Constants
 open Overtone.Game.Config
 open Overtone.Game.Input
 open Overtone.Game.Windows
@@ -26,7 +27,7 @@ type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfi
 
     override this.Initialize() =
         this.Window.Title <- "Overtone"
-        scene.Value.changeSceneId 0
+        scene.Value.changeSceneId Scenes.MainMenu
 
         graphics.PreferredBackBufferWidth <- 640
         graphics.PreferredBackBufferHeight <- 480

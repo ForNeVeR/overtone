@@ -1,4 +1,4 @@
-namespace Overtone.Game.Windows
+﻿namespace Overtone.Game.Windows
 
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
@@ -7,6 +7,7 @@ open Microsoft.Xna.Framework.Graphics
 open Microsoft.Xna.Framework.Input
 open Overtone.Game
 open Overtone.Game.Config
+open Overtone.Game.Constants
 
 type Control(normalTexture: Texture2D, hoverTexture: Texture2D option, position: Rectangle) =
 
@@ -32,7 +33,7 @@ module Controls =
     let Load(lifetime: Lifetime, textureManager: Textures.Manager, entry: WindowEntry) =
         let normalTexture = textureManager.LoadTexture(lifetime, entry.ShapeId, entry.ShapeFrame)
         let hoverTexture =
-            if entry.MouseFocus && entry.WindowType = 1
+            if entry.MouseFocus && entry.WindowType = WindowTypes.Button
             then Some <| textureManager.LoadTexture(lifetime, entry.ShapeId, entry.ShapeFrame + 1)
             else None
         Control(normalTexture, hoverTexture, entry.Pane)

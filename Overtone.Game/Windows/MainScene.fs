@@ -7,13 +7,14 @@ open Microsoft.Xna.Framework.Input
 
 open Overtone.Game
 open Overtone.Game.Config
+open Overtone.Game.Constants
 open Overtone.Game.Input
 
 type MainScene(lifetime: Lifetime,
                device: GraphicsDevice,
                textureManager: Textures.Manager,
                config: WindowsConfiguration) =
-    let mutable sceneId = 0 // "Starting state" of windows.txt
+    let mutable sceneId = Scenes.MainMenu // "Starting state" of windows.txt
 
     let mutable controls = config.GetControlsArray sceneId
     let loadControl element = Controls.Load(lifetime, textureManager, element)
@@ -36,7 +37,7 @@ type MainScene(lifetime: Lifetime,
 
     member _.Update(time: GameTime, mouseState: MouseState): unit =
         allControls |> Array.iter(fun c -> c.Update mouseState)
-        if sceneId = 0 then
+        if sceneId = Scenes.MainMenu then
             sparkles.Update time
 
     member _.Draw(): unit =
@@ -44,7 +45,7 @@ type MainScene(lifetime: Lifetime,
         batch.Begin()
         for control in allControls do
             control.Draw batch
-        if sceneId = 0 then
+        if sceneId = Scenes.MainMenu then
             sparkles.Draw batch
         batch.End()
 

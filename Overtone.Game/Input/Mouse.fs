@@ -28,7 +28,7 @@ module Mouse =
     let Load(lifetime: Lifetime, device: GraphicsDevice, floatExeFile: byte[]): Mouse =
         let loadTexture(cursor: Cursor.CursorStructure) =
             use bitmap = Cursor.Render cursor
-            let texture = bitmap |> Textures.toTexture(lifetime, device)
+            let texture = Textures.toTexture(bitmap, lifetime, device)
             MouseCursor.FromTexture2D(texture, int cursor.HotspotX, int cursor.HotspotY)
 
         let allCursors =

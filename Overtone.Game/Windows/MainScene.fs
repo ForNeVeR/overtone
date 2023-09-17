@@ -13,20 +13,18 @@ open Overtone.Game.Input
 type MainScene
     (lifetime: Lifetime, device: GraphicsDevice, textureManager: Textures.Manager, config: WindowsConfiguration) =
 
-
     let mutable sceneId = Scenes.MainMenu // "Starting state" of windows.txt
 
     let mutable controls = config.GetControlsArray sceneId
 
     let loadControl element =
         Controls.Load(lifetime, textureManager, element)
-
-    // let title = Control(
-    //     textureManager.LoadTexture(lifetime, Shapes.TitleScreen.Id, Shapes.TitleScreen.TitleFrame),
-    //     None,
-    //     Rectangle(0, -41, 640, 480),
-    // )
-    let mutable allControls: Control[] = [||]
+    
+    let title: IControlable = Basic(
+        textureManager.LoadTexture(lifetime, Shapes.TitleScreen.Id, Shapes.TitleScreen.TitleFrame),
+        Rectangle(0, -41, 640, 480)
+    )
+    let mutable allControls: IControlable[] = [||]
     let sparkles = Sparkles(lifetime, device)
 
 
@@ -34,12 +32,12 @@ type MainScene
         sceneId <- newSceneId
         controls <- config.GetControlsArray sceneId
         allControls <- controls |> Seq.map (fun e -> loadControl e) |> Seq.toArray
+        
 
     member this.event(id: int, id2: int, id3: int) : unit =
         match (id, id2) with
+        | (1, id) -> this.changeSceneId id // Only 0 and 4 are actually used. event 5-0 should be 1-1
         | (2, _) -> exit 0
-        | (1, 0) -> this.changeSceneId Scenes.MainMenu // TODO load events use that as well for some reason
-        | (1, 4) -> this.changeSceneId Scenes.LoadingMenu
         | (5, _) -> this.changeSceneId Scenes.NewGame
         | any -> ()
 
@@ -61,6 +59,7 @@ type MainScene
 
         if sceneId = Scenes.MainMenu then
             sparkles.Draw batch
+            title.Draw batch
 
         batch.End()
 

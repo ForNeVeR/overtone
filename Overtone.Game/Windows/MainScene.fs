@@ -1,4 +1,4 @@
-﻿namespace Overtone.Game.Windows
+namespace Overtone.Game.Windows
 
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
@@ -19,12 +19,12 @@ type MainScene(lifetime: Lifetime,
     let mutable controls = config.GetControlsArray sceneId
     let loadControl element = Controls.Load(lifetime, textureManager, element)
 
-    // let title = Control(
-    //     textureManager.LoadTexture(lifetime, Shapes.TitleScreen.Id, Shapes.TitleScreen.TitleFrame),
-    //     None,
-    //     Rectangle(0, -41, 640, 480),
-    // )
-    let mutable allControls = [| |]
+    let title = Control(
+        textureManager.LoadTexture(lifetime, Shapes.TitleScreen.Id, Shapes.TitleScreen.TitleFrame),
+        None,
+        Rectangle(0, -41, 640, 480)
+    )
+    let mutable allControls: Control[] = [||]
     let sparkles = Sparkles(lifetime, device)
 
     member _.changeSceneId(newSceneId: int): unit=
@@ -47,6 +47,8 @@ type MainScene(lifetime: Lifetime,
             control.Draw batch
         if sceneId = Scenes.MainMenu then
             sparkles.Draw batch
+            title.Draw batch
+
         batch.End()
 
     interface IScene with

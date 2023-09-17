@@ -18,6 +18,7 @@ ProjectSection(SolutionItems) = preProject
 	docs\pal.md = docs\pal.md
 	docs\shp.md = docs\shp.md
 	docs\fnt.md = docs\fnt.md
+	docs\cursor.md = docs\cursor.md
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FFCC3BCD-5592-4C94-9AD7-CFDB9405B304}"
@@ -39,6 +40,12 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Game", "Overtone.Game\Overtone.Game.fsproj", "{C3823931-5020-4B2E-B903-F88AD8E44FC3}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Utils", "Overtone.Utils\Overtone.Utils.fsproj", "{AF16528C-6C4C-4E27-A8C4-09DD1C7120F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "game", "game", "{D0816536-A309-44B8-82E4-F445B3E9F663}"
+	ProjectSection(SolutionItems) = preProject
+		docs\game\events.md = docs\game\events.md
+		docs\game\windows.md = docs\game\windows.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,5 +80,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{046B3949-4459-4EC5-8041-D00687495715} = {F7A92DCC-190F-4E09-949A-C0413800326A}
+		{D0816536-A309-44B8-82E4-F445B3E9F663} = {81501330-B010-4924-8262-3A08B435CF03}
 	EndGlobalSection
 EndGlobal

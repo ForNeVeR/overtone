@@ -1,5 +1,5 @@
 Events
-===============
+======
 
 This is just guesses, based on what happens in the game, and the windows code : <https://github.com/Fadoli/ToneRebellion_Raw/blob/master/original_content/windows.txt>
 

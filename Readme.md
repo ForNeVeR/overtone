@@ -12,6 +12,9 @@ Developer Documentation
 - [Shape File Format][docs.shp]
 - [Font File Format][docs.fnt]
 - [Text Configuration Files][docs.txt]
+  - [Events][docs.events]
+  - [Windows][docs.windows]
+- [Cursors][docs.cursors]
 
 Getting the Game Resources
 --------------------------
@@ -84,12 +87,15 @@ Author would like to thank the following people for their help with this project
 [daumiller.ascendancy]: https://github.com/daumiller/ascendancy
 [daumiller]: https://github.com/daumiller
 [docs.cob]: docs/cob.md
+[docs.cursors]: docs/cursor.md
+[docs.events]: docs/game/events.md
 [docs.fnt]: docs/fnt.md
 [docs.pal]: ./docs/pal.md
 [docs.resources]: docs/resources.md
 [docs.running-original]: docs/running-original.md
 [docs.shp]: ./docs/shp.md
 [docs.txt]: ./docs/txt.md
+[docs.windows]: docs/game/windows.md
 [dotnet.sdk]: https://dot.net/
 [extractor.ru]: http://www.extractor.ru/
 [fadoli.tone-rebellion-extractor]: https://github.com/Fadoli/Tone-rebellion-extractor

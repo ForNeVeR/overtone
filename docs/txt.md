@@ -10,5 +10,11 @@ Some configuration files are divided into explicit sections (say, `BLDNAME` stat
 
 Some files (say, `TONE00.COB\floater.txt`) have a table-like structure. Indentation between columns in these tables is not strict, and may include any number of space or tab characters (as seen in `TONE00.COB\fltinf.txt`). Redundant spaces after the end of the line are ignored.
 
+See more in the corresponding documentation files:
+- [Events][docs.events]
+- [Windows][docs.windows]
+
 [docs.cob]: ./cob.md
+[docs.events]: game/events.md
 [docs.resources]: ./resources.md
+[docs.windows]: game/windows.md

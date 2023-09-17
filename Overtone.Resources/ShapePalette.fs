@@ -2,6 +2,7 @@
 
 open System
 open System.IO
+open Overtone.Resources
 
 let private (|Island|_|): string -> string option = function
 | island when island.StartsWith("i") && Char.IsDigit island.[1] && Char.IsDigit island.[2] ->
@@ -9,23 +10,26 @@ let private (|Island|_|): string -> string option = function
 | _ -> None
 
 let get(shapeFilePath: string): string =
-    let palette = Path.ChangeExtension(shapeFilePath, "pal")
-    let name =
-        // TODO: Rewrite to COB VFS instead of real File.Exists.
-        if File.Exists palette then
-            Path.GetFileName palette
-        else if shapeFilePath.EndsWith "titscrn.shp" then
-            // TODO: Get rid of this block.
-            "titscrn.pal"
-        else
-            let name = Path.GetFileName shapeFilePath
-            match name with
-            | Island(number) -> $"island{number}.pal"
-            | "bigfloat.shp" | "glyphs.shp" | "levidif.shp" | "newback.shp" -> "newgame.pal"
-            | "l-cryton.shp" | "l-enrich.shp" | "l-extend.shp" -> "newgame.pal"
-            | "end.shp" | "endglw.shp" | "mapback.shp" | "smisle.shp" -> "mainmap.pal"
-            | "endtemp.shp" -> "endgame.pal"
-            | endtem when endtem.StartsWith("endtem") -> $"endgam{endtem.[6]}.pal"
-            | "smrealms.shp" | "life.shp" | "seek.shp" -> "endgame.pal"
-            | _ -> "game.pal"
-    $@"data\{name}"
+    let name = Path.GetFileName shapeFilePath
+    let resName =
+        match name with
+        | Island(number) -> $"island{number}.pal"
+        | "bigfloat.shp" | "glyphs.shp" | "levidif.shp" | "newback.shp" -> "newgame.pal"
+        | "l-cryton.shp" | "l-enrich.shp" | "l-extend.shp" -> "newgame.pal"
+        | "end.shp" | "endglw.shp" | "mapback.shp" | "smisle.shp" -> "mainmap.pal"
+        | "endtemp.shp" -> "endgame.pal"
+        | ngb when ngb.StartsWith("ngb") -> "mainmap.pal"
+        | ng when ng.StartsWith("ng") -> "newgame.pal"
+        | endtem when endtem.StartsWith("endtem") -> $"endgam{endtem.[6]}.pal"
+        | "smrealms.shp" | "life.shp" | "seek.shp" -> "endgame.pal"
+        | _ -> "game.pal"
+    $@"data\{resName}"
+
+let getWithDisk(shapeFilePath: string, disc: GameDisc): string =
+    let name = Path.GetFileName shapeFilePath
+    let simpleRename = "data\\"+Path.ChangeExtension(name, "pal")
+    if disc.hasDataEntry simpleRename
+    then
+        simpleRename
+    else
+        get shapeFilePath

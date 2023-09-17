@@ -7,7 +7,6 @@ open Microsoft.Xna.Framework.Input
 open Overtone.Game.Config
 open Overtone.Game.Input
 open Overtone.Game.Windows
-open Overtone.Game.Logics
 open Overtone.Resources
 
 type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfig: WindowsConfiguration) as this =

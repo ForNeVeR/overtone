@@ -9,31 +9,45 @@ open Overtone.Game
 open Overtone.Game.Config
 open Overtone.Game.Constants
 
-type Control(normalTexture: Texture2D, hoverTexture: Texture2D option, position: Rectangle) =
-
+type Control(normalTexture: Texture2D, hoverTexture: Texture2D option, entry: WindowEntry) =
     let mutable isHover = false
 
-    member _.Update(mouseState: MouseState): unit =
-        isHover <- position.Contains mouseState.Position
+    member _.Update(mouseState: MouseState) : (int * int * int) =
+        isHover <- entry.Pane.Contains mouseState.Position
 
-    member _.Draw(batch: SpriteBatch): unit =
+        if
+            isHover
+            && mouseState.LeftButton = ButtonState.Pressed
+            && entry.WindowType = WindowTypes.Button
+        then
+            // Debug for now
+            printfn "should act !"
+            entry.Message
+        else
+            (0, 0, 0)
+
+    member _.Draw(batch: SpriteBatch) : unit =
         let colorMask = Color.White
+
         let texture =
             match isHover, hoverTexture with
             | true, Some t -> t
             | _ -> normalTexture
 
-        batch.Draw(
-            texture,
-            position = position.Location.ToVector2(),
-            color = colorMask
-        )
+        batch.Draw(texture, position = entry.Pane.Location.ToVector2(), color = colorMask)
 
 module Controls =
-    let Load(lifetime: Lifetime, textureManager: Textures.Manager, entry: WindowEntry) =
-        let normalTexture = textureManager.LoadTexture(lifetime, entry.ShapeId, entry.ShapeFrame)
+    let Load (lifetime: Lifetime, textureManager: Textures.Manager, entry: WindowEntry) =
+        printfn "Try loading : %s at frame %d" entry.ShapeId entry.ShapeFrame
+
+        let normalTexture =
+            textureManager.LoadTexture(lifetime, entry.ShapeId, entry.ShapeFrame)
+
         let hoverTexture =
-            if entry.MouseFocus && entry.WindowType = WindowTypes.Button
-            then Some <| textureManager.LoadTexture(lifetime, entry.ShapeId, entry.ShapeFrame + 1)
-            else None
-        Control(normalTexture, hoverTexture, entry.Pane)
+            if entry.MouseFocus && entry.WindowType = WindowTypes.Button then
+                Some
+                <| textureManager.LoadTexture(lifetime, entry.ShapeId, entry.ShapeFrame + 1)
+            else
+                None
+
+        Control(normalTexture, hoverTexture, entry)

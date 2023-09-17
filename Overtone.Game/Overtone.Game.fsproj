@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -16,7 +16,7 @@
         <Compile Include="Input\Mouse.fs" />
         <Compile Include="Windows\Controls.fs" />
         <Compile Include="Windows\Sparkles.fs" />
-        <Compile Include="Windows\MenuScene.fs" />
+        <Compile Include="Windows\MainScene.fs" />
         <Compile Include="OvertoneGame.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>

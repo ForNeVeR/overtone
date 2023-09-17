@@ -171,3 +171,8 @@ type WindowsConfiguration = {
         |> Seq.filter(fun e -> e.States.Contains stateId)
         |> Seq.map(fun e -> e.Name, e)
         |> Map.ofSeq
+
+    member this.GetControlsArray(stateId: int): WindowEntry[] =
+        this.Entries
+        |> Seq.filter(fun e -> e.States.Contains stateId)
+        |> Seq.toArray

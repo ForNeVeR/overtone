@@ -1,9 +1,10 @@
-﻿/.idea/
+/.idea/
+.vs/
+.vscode/
+
 /data/
 
 bin/
 obj/
 
 *.user
-
-.vs/

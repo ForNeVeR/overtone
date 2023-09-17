@@ -36,7 +36,7 @@ type Manager(disc: GameDisc, device: GraphicsDevice, config: ShapesConfiguration
         use shapeStream = new MemoryStream(disc.GetData shapeName)
         let shape = Shape.ShapeFile shapeStream
 
-        let paletteName = ShapePalette.get shapeName
+        let paletteName = ShapePalette.getWithDisk(shapeName,disc)
         let palette =
             use paletteStream = new MemoryStream(disc.GetData paletteName)
             Palette.Read paletteStream

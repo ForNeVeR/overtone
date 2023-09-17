@@ -1,4 +1,4 @@
-﻿namespace Overtone.Resources
+namespace Overtone.Resources
 
 open System
 open System.IO
@@ -30,6 +30,9 @@ type GameDisc(rootPath: string) =
 
     member _.GetConfig(name: string): byte[] = configEntries[name] |> configArchive.ReadEntry
     member _.GetData(name: string): byte[] = dataEntries[name] |> dataArchive.ReadEntry
+
+    member _.hasDataEntry(name: string): bool = 
+        dataEntries.ContainsKey name
 
     interface IDisposable with
         member _.Dispose() =

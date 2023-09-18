@@ -13,4 +13,8 @@ type ShapesConfiguration(names: Map<string, string>) =
         |> ShapesConfiguration
 
     member _.GetShapeName(shapeId: string): string =
-        names[shapeId]
+        // printfn "Loading shape : %s" shapeId
+        if names.ContainsKey shapeId then
+            names[shapeId]
+        else
+            shapeId

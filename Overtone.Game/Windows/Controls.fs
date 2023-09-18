@@ -5,13 +5,13 @@ open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
 
 open Microsoft.Xna.Framework.Input
-open Overtone.Game
+
 open Overtone.Game.Config
 open Overtone.Game.Constants
 open Overtone.Game.Textures
 
 
-type IControlable =
+type IDrawableUI =
     abstract member isHover: bool 
     abstract member Update: (MouseState) -> (int * int * int) 
     abstract member Draw: (SpriteBatch) -> unit
@@ -21,7 +21,7 @@ type Button(normalTexture: Texture2DWithOffset, hoverTexture: Texture2DWithOffse
 
     let mutable isHover = false
 
-    interface IControlable with
+    interface IDrawableUI with
 
         member _.isHover= isHover
         member _.Update(mouseState: MouseState) : (int * int * int) =
@@ -51,7 +51,7 @@ type Button(normalTexture: Texture2DWithOffset, hoverTexture: Texture2DWithOffse
 type Basic(texture: Texture2DWithOffset, position: Rectangle) =
     let mutable isHover = false
 
-    interface IControlable with
+    interface IDrawableUI with
         member _.isHover= isHover
 
         member _.Update(mouseState: MouseState) : (int * int * int) =
@@ -63,7 +63,7 @@ type Basic(texture: Texture2DWithOffset, position: Rectangle) =
             batch.Draw(texture.texture, position = position.Location.ToVector2() + texture.offset, color = colorMask)
 
 module Controls =
-    let Load (lifetime: Lifetime, textureManager: Textures.Manager, entry: WindowEntry): IControlable =
+    let Load (lifetime: Lifetime, textureManager: Manager, entry: WindowEntry): IDrawableUI =
 
         let normalTexture =
             textureManager.LoadTexture(lifetime, entry.ShapeId, entry.ShapeFrame)
@@ -75,7 +75,7 @@ module Controls =
             Basic(normalTexture, entry.Pane)
 
 
-    let LoadImg (lifetime: Lifetime, textureManager: Textures.Manager, entry: WindowEntry): IControlable =
+    let LoadImg (lifetime: Lifetime, textureManager: Manager, entry: WindowEntry): IDrawableUI =
 
         let normalTexture =
             textureManager.LoadTexture(lifetime, entry.ShapeId, entry.ShapeFrame)

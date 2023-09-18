@@ -12,11 +12,12 @@
         <Compile Include="Shapes.fs" />
         <Compile Include="Textures.fs" />
         <Compile Include="Input.fs" />
-        <Compile Include="IScene.fs" />
+        <Compile Include="IController.fs" />
         <Compile Include="Input\Mouse.fs" />
         <Compile Include="Windows\Controls.fs" />
         <Compile Include="Windows\Sparkles.fs" />
-        <Compile Include="Windows\MainScene.fs" />
+        <Compile Include="Windows\GameController.fs" />
+        <Compile Include="Scenes\MainMenu.fs" />
         <Compile Include="OvertoneGame.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>

@@ -172,7 +172,7 @@ type ShapeFile(input: Stream) =
             printfn "Canvas size : %d x %d" canvasWidth canvasHeight
             printfn "Actual pixels size : %d x %d" width heigh
             let size = (int(canvasWidth)*int(canvasHeight))
-            printfn "Saved memory : %d" (100 - (100*width*heigh)/size)
+            printfn "Saved memory : %d" (100 - (100*(width+1)*(heigh+1))/size)
             let bitmap = new SKBitmap(width+1, heigh+1)
 
             input.Seek(sprite.DataOffset, SeekOrigin.Begin) |> ignore

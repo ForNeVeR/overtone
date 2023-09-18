@@ -37,15 +37,22 @@ type Texture2DWithOffset (texture:Texture2D, offsetX:int, offsetY:int)=
     member _.offsetX=offsetX
     member _.offsetY=offsetY
     member _.offset:Vector2 = Vector2(float32(offsetX),float32(offsetY))
+    
 
 type Manager(disc: GameDisc, device: GraphicsDevice, config: ShapesConfiguration) =
 
     let mutable InternalCache: Map<string, Texture2DWithOffset[]> = Map.empty
 
+    let emptyTexture = Texture2DWithOffset(new Texture2D(device,1,1),0,0)
+
     member _.LoadWholeShape(lifetime: Lifetime, shapeId: string) : Texture2DWithOffset[] =
         let key = shapeId
-
-        if not (InternalCache.ContainsKey key) then
+        if key = "NONE" then
+            let emptyTextureArray= 
+                [emptyTexture]
+                |> Seq.toArray
+            InternalCache <- InternalCache.Add(key, emptyTextureArray);
+        else if not (InternalCache.ContainsKey key) then
             let shapeName = config.GetShapeName shapeId
             use shapeStream = new MemoryStream(disc.GetData shapeName)
             let shape = Shape.ShapeFile shapeStream

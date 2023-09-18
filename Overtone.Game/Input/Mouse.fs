@@ -14,7 +14,7 @@ type Mouse(cursors: Map<CursorShape, MouseCursor>) =
 
     let mutable cursorParameters = None
 
-    member _.UpdateCursor(state: MouseState, scene: IScene, game: Game): unit =
+    member _.UpdateCursor(state: MouseState, scene: IController, game: Game): unit =
         let newCursorParameters = scene.GetCursor state
         if cursorParameters <> Some newCursorParameters then
             cursorParameters <- Some newCursorParameters

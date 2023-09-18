@@ -46,14 +46,14 @@ type Manager(disc: GameDisc, device: GraphicsDevice, config: ShapesConfiguration
     let emptyTexture = Texture2DWithOffset(new Texture2D(device,1,1),0,0)
 
     member _.LoadWholeShape(lifetime: Lifetime, shapeId: string) : Texture2DWithOffset[] =
-        let key = shapeId
+        let key = shapeId.ToUpper()
         if key = "NONE" then
             let emptyTextureArray= 
                 [emptyTexture]
                 |> Seq.toArray
             InternalCache <- InternalCache.Add(key, emptyTextureArray);
         else if not (InternalCache.ContainsKey key) then
-            let shapeName = config.GetShapeName shapeId
+            let shapeName = config.GetShapeName key
             use shapeStream = new MemoryStream(disc.GetData shapeName)
             let shape = Shape.ShapeFile shapeStream
 

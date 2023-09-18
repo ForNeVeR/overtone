@@ -31,11 +31,11 @@ let toTexture (bitmap: SKBitmap, lifetime: Lifetime, device: GraphicsDevice): Te
 
 type Manager(disc: GameDisc, device: GraphicsDevice, config: ShapesConfiguration) =
 
-    let mutable InternalCache: Map<(string*int), Texture2D> = Map.empty;
+    let mutable InternalCache: Map<string, Texture2D[]> = Map.empty;
 
-    member _.LoadTexture(lifetime: Lifetime, shapeId: string, spriteIndex: int): Texture2D =
-        let key = (shapeId, spriteIndex);
-        printfn "Try loading : %s index %d" shapeId spriteIndex
+    member _.LoadWholeShape(lifetime: Lifetime, shapeId: string): Texture2D[] =
+        let key = shapeId;
+        printfn "Try loading : %s" shapeId
         if not (InternalCache.ContainsKey key) then
             let shapeName = config.GetShapeName shapeId
             use shapeStream = new MemoryStream(disc.GetData shapeName)
@@ -47,11 +47,16 @@ type Manager(disc: GameDisc, device: GraphicsDevice, config: ShapesConfiguration
                 Palette.Read paletteStream
 
             // TODO[#30]: Better resource management, do not read the whole shape again for every new sprite
-            let header = shape.ReadSpriteHeaders()[spriteIndex]
-            let sprite = shape.ReadSprite header
-            use bitmap = shape.Render palette sprite
-            let texture = toTexture(bitmap, lifetime, device)
-            InternalCache <- InternalCache.Add(key,texture)
+            let array = 
+                shape.ReadSpriteHeaders()
+                |> Seq.map (fun header -> shape.ReadSprite header)
+                |> Seq.map (fun sprite -> shape.Render palette sprite)
+                |> Seq.map (fun bitmap -> toTexture(bitmap, lifetime, device))
+                |> Seq.toArray
+            InternalCache <- InternalCache.Add(key,array)
         else
             printfn "Entry was in cache !"
-        InternalCache[(shapeId,spriteIndex)]
+        InternalCache[key]
+
+    member this.LoadTexture(lifetime: Lifetime, shapeId: string, spriteIndex: int): Texture2D =
+        this.LoadWholeShape(lifetime,shapeId)[spriteIndex]

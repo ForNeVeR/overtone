@@ -1,4 +1,4 @@
-namespace Overtone.Game.Windows
+﻿namespace Overtone.Game.Windows
 
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
@@ -29,8 +29,8 @@ type GameController (lifetime: Lifetime, device: GraphicsDevice, textureManager:
     member _.changeSceneId(newSceneId: int) : unit =
         sceneId <- newSceneId
         controls <- config.GetControlsArray sceneId
-        UIElements <- controls |> Seq.filter (fun e -> e.WindowType <> 1 && e.WindowType < 5) |> Seq.map (fun e -> Controls.LoadImg(lifetime, textureManager, e)) |> Seq.toArray
-        UIButton <- controls |> Seq.filter (fun e -> e.WindowType = 1) |> Seq.map (fun e -> Controls.Load(lifetime, textureManager, e)) |> Seq.toArray
+        // UIElements <- controls |> Seq.filter (fun e -> e.WindowType <> 1 && e.ShapeFrame <> -1) |> Seq.map (fun e -> Controls.LoadImg(lifetime, textureManager, e)) |> Seq.toArray
+        UIButton <- controls |> Seq.filter (fun e -> e.ShapeFrame <> -1) |> Seq.map (fun e -> Controls.Load(lifetime, textureManager, e)) |> Seq.toArray
         
 
     member this.event(id: int, id2: int, id3: int) : unit =
@@ -49,7 +49,6 @@ type GameController (lifetime: Lifetime, device: GraphicsDevice, textureManager:
             |> Array.map (fun c -> c.Update mouseState)
             |> Array.filter (fun (a, b, c) -> a <> 0)
             |> Array.iter (fun (a, b, c) -> this.event (a, b, c))
-            
         // We can only interact when we release the button
         canInteract <- (mouseState.LeftButton = ButtonState.Released)
 

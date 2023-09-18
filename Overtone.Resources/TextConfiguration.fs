@@ -1,4 +1,4 @@
-﻿module Overtone.Resources.TextConfiguration
+module Overtone.Resources.TextConfiguration
 
 open System
 open System.IO

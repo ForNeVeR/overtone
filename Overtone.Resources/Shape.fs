@@ -45,6 +45,16 @@ type SpriteData = {
         let struct (_, y1) = this.End
         abs(y1 - y0)
 
+type SKBitmapWithOffset(bitmap: SKBitmap, offsetX: int, offsetY: int) =
+
+    member _.bitmap = bitmap
+    member _.offsetX = offsetX
+    member _.offsetY = offsetY
+
+    static member Empty(): SKBitmapWithOffset =
+        SKBitmapWithOffset(new SKBitmap(0,0),0,0)
+
+
 type ShapeFile(input: Stream) =
     member _.ReadSpriteHeaders(): SpriteHeader[] =
         input.Seek(0L, SeekOrigin.Begin) |> ignore
@@ -87,6 +97,7 @@ type ShapeFile(input: Stream) =
         let struct (canvasWidth, canvasHeight) = sprite.CanvasDimensions
         let bitmap = new SKBitmap(int canvasWidth, int canvasHeight)
 
+
         if not sprite.IsEmpty then
             let struct (originX, originY) = sprite.Origin
             let struct (startX, startY) = sprite.Start
@@ -97,6 +108,14 @@ type ShapeFile(input: Stream) =
             let minCanvasY = int originY + startY
             let maxCanvasX = int originX + endX
             let maxCanvasY = int originY + endY
+
+            let width = (maxCanvasX - minCanvasX+1)
+            let heigh = (maxCanvasY - minCanvasY+1)
+
+            printfn "Canvas size : %d x %d" canvasWidth canvasHeight
+            printfn "Actual pixels size : %d x %d" width heigh
+            let size = (int(canvasWidth)*int(canvasHeight))
+            printfn "Saved memory : %d" (100 - (100*width*heigh)/size)
 
             input.Seek(sprite.DataOffset, SeekOrigin.Begin) |> ignore
             use reader = new BinaryReader(input, Encoding.UTF8, leaveOpen = true)
@@ -130,3 +149,54 @@ type ShapeFile(input: Stream) =
                     | _ -> reader.ReadBytes(int length) |> Seq.iter addPixel
 
         bitmap
+
+    member _.SmallRender (palette: Palette) (sprite: SpriteData): SKBitmapWithOffset =
+        let struct (canvasWidth, canvasHeight) = sprite.CanvasDimensions
+
+        if sprite.IsEmpty then
+            SKBitmapWithOffset.Empty()
+        else
+            let struct (originX, originY) = sprite.Origin
+            let struct (startX, startY) = sprite.Start
+            let struct (endX, endY) = sprite.End
+            let spriteHeight = endY - startY + 1
+
+            let minCanvasX = int originX + startX
+            let minCanvasY = int originY + startY
+            let maxCanvasX = int originX + endX
+            let maxCanvasY = int originY + endY
+
+            let width = (maxCanvasX - minCanvasX)
+            let heigh = (maxCanvasY - minCanvasY)
+
+            printfn "Canvas size : %d x %d" canvasWidth canvasHeight
+            printfn "Actual pixels size : %d x %d" width heigh
+            let size = (int(canvasWidth)*int(canvasHeight))
+            printfn "Saved memory : %d" (100 - (100*width*heigh)/size)
+            let bitmap = new SKBitmap(width+1, heigh+1)
+
+            input.Seek(sprite.DataOffset, SeekOrigin.Begin) |> ignore
+            use reader = new BinaryReader(input, Encoding.UTF8, leaveOpen = true)
+
+            for spriteY in 0..heigh do
+                let mutable canvasX = 0
+
+                let addPixel idx =
+                    if canvasX > width then
+                        failwith $"Pixel column {canvasX} is outside of allowed bounds [{minCanvasX}; {maxCanvasX}]"
+                    bitmap.SetPixel(canvasX, spriteY, palette.GetColor idx)
+                    canvasX <- canvasX + 1
+
+                let mutable endRow = false
+                while not endRow do
+                    let indicator = reader.ReadByte()
+                    let length = indicator >>> 1
+                    match indicator with
+                    | 0uy -> endRow <- true
+                    | 1uy -> canvasX <- canvasX + int(reader.ReadByte())
+                    | x when x &&& 1uy = 0uy ->
+                        let color = reader.ReadByte()
+                        for _ in 1uy..length do
+                            addPixel color
+                    | _ -> reader.ReadBytes(int length) |> Seq.iter addPixel
+            new SKBitmapWithOffset(bitmap,minCanvasX,minCanvasY)

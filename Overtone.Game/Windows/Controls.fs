@@ -8,6 +8,7 @@ open Microsoft.Xna.Framework.Input
 open Overtone.Game
 open Overtone.Game.Config
 open Overtone.Game.Constants
+open Overtone.Game.Textures
 
 
 type IControlable =
@@ -16,7 +17,7 @@ type IControlable =
     abstract member Draw: (SpriteBatch) -> unit
 
 
-type Button(normalTexture: Texture2D, hoverTexture: Texture2D, entry: WindowEntry) =
+type Button(normalTexture: Texture2DWithOffset, hoverTexture: Texture2DWithOffset, entry: WindowEntry) =
 
     let mutable isHover = false
 
@@ -45,9 +46,9 @@ type Button(normalTexture: Texture2D, hoverTexture: Texture2D, entry: WindowEntr
                 | true, t -> t
                 | _ -> normalTexture
 
-            batch.Draw(texture, position = entry.Pane.Location.ToVector2(), color = colorMask)
+            batch.Draw(texture.texture, position = entry.Pane.Location.ToVector2() + texture.offset, color = colorMask)
 
-type Basic(normalTexture: Texture2D, position: Rectangle) =
+type Basic(texture: Texture2DWithOffset, position: Rectangle) =
     let mutable isHover = false
 
     interface IControlable with
@@ -59,7 +60,7 @@ type Basic(normalTexture: Texture2D, position: Rectangle) =
 
         member _.Draw(batch: SpriteBatch) : unit =
             let colorMask = Color.White
-            batch.Draw(normalTexture, position = position.Location.ToVector2(), color = colorMask)
+            batch.Draw(texture.texture, position = position.Location.ToVector2() + texture.offset, color = colorMask)
 
 module Controls =
     let Load (lifetime: Lifetime, textureManager: Textures.Manager, entry: WindowEntry): IControlable =

@@ -23,7 +23,7 @@ type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfi
         this.GraphicsDevice,
         (disc.ReadFile "THING1/FLOAT.EXE").Result // TODO[#35]: Show a loader at start instead of .Result
     )
-    let scene = lazy MainScene(lifetime, this.GraphicsDevice, textureManager.Value, windowConfig)
+    let scene = lazy GameController(lifetime, this.GraphicsDevice, textureManager.Value, windowConfig)
 
     override this.Initialize() =
         this.Window.Title <- "Overtone"

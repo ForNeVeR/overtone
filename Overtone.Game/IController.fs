@@ -3,5 +3,5 @@
 open Microsoft.Xna.Framework.Input
 open Overtone.Game.Input
 
-type IScene =
+type IController =
     abstract member GetCursor: MouseState -> CursorParameters

@@ -109,14 +109,6 @@ type ShapeFile(input: Stream) =
             let maxCanvasX = int originX + endX
             let maxCanvasY = int originY + endY
 
-            let width = (maxCanvasX - minCanvasX+1)
-            let heigh = (maxCanvasY - minCanvasY+1)
-
-            printfn "Canvas size : %d x %d" canvasWidth canvasHeight
-            printfn "Actual pixels size : %d x %d" width heigh
-            let size = (int(canvasWidth)*int(canvasHeight))
-            printfn "Saved memory : %d" (100 - (100*width*heigh)/size)
-
             input.Seek(sprite.DataOffset, SeekOrigin.Begin) |> ignore
             use reader = new BinaryReader(input, Encoding.UTF8, leaveOpen = true)
 
@@ -159,20 +151,20 @@ type ShapeFile(input: Stream) =
             let struct (originX, originY) = sprite.Origin
             let struct (startX, startY) = sprite.Start
             let struct (endX, endY) = sprite.End
-            let spriteHeight = endY - startY + 1
 
             let minCanvasX = int originX + startX
             let minCanvasY = int originY + startY
             let maxCanvasX = int originX + endX
             let maxCanvasY = int originY + endY
+            
 
             let width = (maxCanvasX - minCanvasX)
             let heigh = (maxCanvasY - minCanvasY)
+            // let size = (int(canvasWidth)*int(canvasHeight))
+            // printfn "Canvas size : %d x %d" canvasWidth canvasHeight
+            // printfn "Actual pixels size : %d x %d" width heigh
+            // printfn "Saved memory : %d" (100 - (100*width*heigh)/size)
 
-            printfn "Canvas size : %d x %d" canvasWidth canvasHeight
-            printfn "Actual pixels size : %d x %d" width heigh
-            let size = (int(canvasWidth)*int(canvasHeight))
-            printfn "Saved memory : %d" (100 - (100*(width+1)*(heigh+1))/size)
             let bitmap = new SKBitmap(width+1, heigh+1)
 
 

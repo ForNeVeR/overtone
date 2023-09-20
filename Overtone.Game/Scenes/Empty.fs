@@ -5,20 +5,14 @@ open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
 open Microsoft.Xna.Framework.Input
 
-open Overtone.Utils.Constants
-open Overtone.Game
-open Overtone.Game.UI
-
-type NewGame (lifetime: Lifetime, device: GraphicsDevice, textureManager: Textures.Manager) =
-
-
+type Empty () =
     interface IScene with
 
         member _.Draw(batch: SpriteBatch): unit =
-            printfn "Draw main menu !"
+            printfn "Draw empty menu !"
 
         member _.Update(time: GameTime, mouse: MouseState): unit =
-            printfn "Update main menu !"
+            printfn "Update empty menu !"
 
 // Ressources to display :
 

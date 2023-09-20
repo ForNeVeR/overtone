@@ -1,4 +1,4 @@
-﻿module Overtone.Game.Textures
+module Overtone.Game.Textures
 
 open System.IO
 
@@ -37,7 +37,6 @@ type Texture2DWithOffset (texture:Texture2D, offsetX:int, offsetY:int)=
     member _.offsetX=offsetX
     member _.offsetY=offsetY
     member _.offset:Vector2 = Vector2(float32(offsetX),float32(offsetY))
-    
 
 type Manager(disc: GameDisc, device: GraphicsDevice, config: ShapesConfiguration) =
 

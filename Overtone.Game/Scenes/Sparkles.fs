@@ -1,4 +1,4 @@
-﻿namespace Overtone.Game.Windows
+namespace Overtone.Game.Scenes
 
 open System
 open System.Runtime.InteropServices

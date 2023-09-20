@@ -1,4 +1,4 @@
-module Overtone.Game.Constants
+module Overtone.Utils.Constants
 
 module Scenes =
     let MainMenu: int = 0
@@ -22,3 +22,8 @@ module WindowTypes =
     let WorldView: int = 11 // actual worlds map, for scene 2
     let Video: int = 12
     let DropDownMenu: int = 13
+
+module Shapes =
+    module TitleScreen =
+        let Id: string = "TITSCRN"
+        let TitleFrame: int = 1

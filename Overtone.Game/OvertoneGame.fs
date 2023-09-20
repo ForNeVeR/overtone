@@ -4,10 +4,9 @@ open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Input
 
-open Overtone.Game.Constants
+open Overtone.Utils.Constants
 open Overtone.Game.Config
-open Overtone.Game.Input
-open Overtone.Game.Windows
+open Overtone.Game.Controller
 open Overtone.Resources
 
 type OvertoneGame(disc: GameDisc, shapesConfig: ShapesConfiguration, windowConfig: WindowsConfiguration) as this =

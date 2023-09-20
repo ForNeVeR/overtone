@@ -1,4 +1,4 @@
-﻿namespace Overtone.Game.Input
+namespace Overtone.Game.Controller
 
 type CursorShape =
     Normal = 0

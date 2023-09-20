@@ -1,4 +1,4 @@
-﻿namespace Overtone.Game.Input
+namespace Overtone.Game.Controller
 
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
@@ -7,6 +7,7 @@ open Microsoft.Xna.Framework.Input
 
 open Overtone.Game
 open Overtone.Resources
+open Overtone.Game.Controller
 
 type Mouse(cursors: Map<CursorShape, MouseCursor>) =
 

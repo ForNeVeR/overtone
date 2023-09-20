@@ -1,4 +1,4 @@
-﻿namespace Overtone.Game.Windows
+namespace Overtone.Game.Controller
 
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
@@ -6,9 +6,10 @@ open Microsoft.Xna.Framework.Graphics
 open Microsoft.Xna.Framework.Input
 
 open Overtone.Game
+open Overtone.Game.UI
 open Overtone.Game.Config
-open Overtone.Game.Constants
-open Overtone.Game.Input
+open Overtone.Game.Scenes
+open Overtone.Utils.Constants
 
 type GameController (lifetime: Lifetime, device: GraphicsDevice, textureManager: Textures.Manager, config: WindowsConfiguration) =
 
@@ -16,14 +17,10 @@ type GameController (lifetime: Lifetime, device: GraphicsDevice, textureManager:
 
     let mutable controls = config.GetControlsArray sceneId
     
-    let title: IDrawableUI = Basic(
-        textureManager.LoadTexture(lifetime, Shapes.TitleScreen.Id, Shapes.TitleScreen.TitleFrame),
-        Rectangle(0, -41, 640, 480)
-    )
     let mutable UIElements: IDrawableUI[] = [||]
     let mutable UIButton: IDrawableUI[] = [||]
     let mutable canInteract: bool = false
-    let sparkles = Sparkles(lifetime, device)
+    let mutable currentScene: IScene = Empty()
 
 
     member _.changeSceneId(newSceneId: int) : unit =
@@ -31,7 +28,7 @@ type GameController (lifetime: Lifetime, device: GraphicsDevice, textureManager:
         controls <- config.GetControlsArray sceneId
         // UIElements <- controls |> Seq.filter (fun e -> e.WindowType <> 1 && e.ShapeFrame <> -1) |> Seq.map (fun e -> Controls.LoadImg(lifetime, textureManager, e)) |> Seq.toArray
         UIButton <- controls |> Seq.filter (fun e -> e.ShapeFrame <> -1) |> Seq.map (fun e -> Controls.Load(lifetime, textureManager, e)) |> Seq.toArray
-        
+        currentScene <- SceneFactory.GetScene(sceneId, lifetime, device, textureManager)
 
     member this.event(id: int, id2: int, id3: int) : unit =
         // Disable further interactions
@@ -51,22 +48,17 @@ type GameController (lifetime: Lifetime, device: GraphicsDevice, textureManager:
             |> Array.iter (fun (a, b, c) -> this.event (a, b, c))
         // We can only interact when we release the button
         canInteract <- (mouseState.LeftButton = ButtonState.Released)
-
-        if sceneId = Scenes.MainMenu then
-            sparkles.Update time
+        currentScene.Update(time, mouseState)
 
     member _.Draw() : unit =
         use batch = new SpriteBatch(device)
         batch.Begin()
-
+        
         for control in UIElements do
             control.Draw batch
         for control in UIButton do
             control.Draw batch
-
-        if sceneId = Scenes.MainMenu then
-            sparkles.Draw batch
-            title.Draw batch
+        currentScene.Draw batch
 
         batch.End()
 

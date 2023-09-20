@@ -1,4 +1,4 @@
-﻿namespace Overtone.Resources.Shape
+namespace Overtone.Resources.Shape
 
 open System
 open System.IO
@@ -175,17 +175,21 @@ type ShapeFile(input: Stream) =
             printfn "Saved memory : %d" (100 - (100*(width+1)*(heigh+1))/size)
             let bitmap = new SKBitmap(width+1, heigh+1)
 
+
             input.Seek(sprite.DataOffset, SeekOrigin.Begin) |> ignore
             use reader = new BinaryReader(input, Encoding.UTF8, leaveOpen = true)
-
+            
+            let pixels = bitmap.Pixels
+            let mutable yOffset = 0
             for spriteY in 0..heigh do
                 let mutable canvasX = 0
 
-                let addPixel idx =
-                    if canvasX > width then
+                let addPixel (idx:byte, length:byte) =
+                    if canvasX > (width + (int length)) then
                         failwith $"Pixel column {canvasX} is outside of allowed bounds [{minCanvasX}; {maxCanvasX}]"
-                    bitmap.SetPixel(canvasX, spriteY, palette.GetColor idx)
-                    canvasX <- canvasX + 1
+                    for _ in 1uy..length do
+                        pixels[yOffset + canvasX] <- palette.GetColor idx
+                        canvasX <- canvasX + 1
 
                 let mutable endRow = false
                 while not endRow do
@@ -196,7 +200,8 @@ type ShapeFile(input: Stream) =
                     | 1uy -> canvasX <- canvasX + int(reader.ReadByte())
                     | x when x &&& 1uy = 0uy ->
                         let color = reader.ReadByte()
-                        for _ in 1uy..length do
-                            addPixel color
-                    | _ -> reader.ReadBytes(int length) |> Seq.iter addPixel
+                        addPixel(color,length)
+                    | _ -> reader.ReadBytes(int length) |> Seq.iter (fun col -> addPixel(col,1uy) )
+                yOffset <- yOffset + width + 1;
+            bitmap.Pixels <- pixels 
             new SKBitmapWithOffset(bitmap,minCanvasX,minCanvasY)

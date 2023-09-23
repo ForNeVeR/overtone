@@ -7,17 +7,23 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="GameState.fs" />
+        <Compile Include="Config\SoundsConfiguration.fs" />
+        <Compile Include="Config\SpellsConfiguration.fs" />
+        <Compile Include="Config\DescriptionConfiguration.fs" />
         <Compile Include="Config\IslandsConfiguration.fs" />
         <Compile Include="Config\WindowsConfiguration.fs" />
         <Compile Include="Config\ShapesConfiguration.fs" />
         <Compile Include="Textures.fs" />
+        <Compile Include="Audio\SoundEffect.fs" />
         <Compile Include="UI\IDrawableUI.fs" />
         <Compile Include="UI\Image.fs" />
         <Compile Include="UI\Button.fs" />
         <Compile Include="UI\PauseMenu.fs" />
         <Compile Include="UI\Controls.fs" />
-        <Compile Include="Scenes\Sparkles.fs" />
         <Compile Include="Scenes\IScene.fs" />
+        <Compile Include="Scenes\Sparkles.fs" />
+        <Compile Include="Scenes\Planets.fs" />
         <Compile Include="Scenes\MainMenu.fs" />
         <Compile Include="Scenes\NewGame.fs" />
         <Compile Include="Scenes\Empty.fs" />

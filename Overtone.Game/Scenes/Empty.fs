@@ -7,12 +7,12 @@ open Microsoft.Xna.Framework.Input
 
 type Empty () =
     interface IScene with
+    
+        member _.DrawBackground(batch: SpriteBatch): unit = ()
 
-        member _.Draw(batch: SpriteBatch): unit =
-            printfn "Draw empty menu !"
+        member _.Draw(batch: SpriteBatch): unit = ()
 
-        member _.Update(time: GameTime, mouse: MouseState): unit =
-            printfn "Update empty menu !"
+        member _.Update(time: GameTime, mouse: MouseState): unit = ()
 
 // Ressources to display :
 

@@ -13,6 +13,7 @@ type SceneFactory () =
             match sceneId with
             | id when id = Constants.Scenes.MainMenu -> MainMenu(lifetime,device,textureManager)
             | id when id = Constants.Scenes.NewGame -> NewGame(lifetime,device,textureManager)
+            | id when id = Constants.Scenes.IslandsView -> Planets(lifetime,device,textureManager)
             | _ -> Empty()
 
 // Ressources to display :

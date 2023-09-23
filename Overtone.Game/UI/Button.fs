@@ -24,7 +24,7 @@ type Button(normalTexture: Texture2DWithOffset, hoverTexture: Texture2DWithOffse
                 && mouseState.LeftButton = ButtonState.Pressed
             then
                 // Debug for now
-                printfn "should act !"
+                // printfn "should act !"
                 entry.Message
             else
                 (0, 0, 0)

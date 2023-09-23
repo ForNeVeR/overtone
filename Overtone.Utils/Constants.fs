@@ -23,7 +23,31 @@ module WindowTypes =
     let Video: int = 12
     let DropDownMenu: int = 13
 
+module GameData =
+    let IslandsCount: int = 15 // Hardcoded max islands counts
+    let DifficultyCount: int = 5
+    let WorldSizeCount: int = 3
+    module NewGameMenu =
+        module Glyphs=
+            let FrameCount:int = 20
+            let OffsetPerRace:int = FrameCount
+            let FrameFrequency:int = 6 // divide frames per 6 to get the currentFrameAnim
+        module BigFloat=
+            let FrameCount:int = 16 // Main body + 16 frames for the legs
+            let OffsetPerRace:int = (1+FrameCount) // Main body + 16 frames for the legs
+            let BouncynessFrequency:float32 = 3f // change convertion between frames and radian angle of the sin
+            let Bouncyness:float32 = 3f // +- 3px in vertical position
+            let FrameFrequency:int = 6 // divide frames per 6 to get the currentFrameAnim
+        let DifficultyRendering: string = "LEVIDIFF"
+        let RealmRendering: string = "NGREALMS"
+        let FloaterRendering: string = "BIGFLOAT"
+        let GlyphRendering: string = "GLYPHS"
+
+module Sounds =
+    let Button: string = "data\\BUTTON.WAV"
+
 module Shapes =
+    let PlanetsRendering: string = "SMISLE"
     module TitleScreen =
         let Id: string = "TITSCRN"
         let TitleFrame: int = 1

@@ -18,8 +18,11 @@ type MainMenu (lifetime: Lifetime, device: GraphicsDevice, textureManager: Textu
     )
 
     interface IScene with
-        member _.Draw(batch: SpriteBatch): unit =
+
+        member _.DrawBackground(batch: SpriteBatch): unit =
             sparkles.Draw(batch)
+
+        member _.Draw(batch: SpriteBatch): unit =
             title.Draw(batch)
 
         member _.Update(time: GameTime, mouse: MouseState): unit =

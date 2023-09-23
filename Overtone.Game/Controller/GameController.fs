@@ -3,6 +3,7 @@ namespace Overtone.Game.Controller
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
+open Microsoft.Xna.Framework.Audio
 open Microsoft.Xna.Framework.Input
 
 open Overtone.Game
@@ -18,16 +19,17 @@ type GameController (lifetime: Lifetime, device: GraphicsDevice, textureManager:
     let mutable controls = config.GetControlsArray sceneId
     
     let mutable UIElements: IDrawableUI[] = [||]
+    let mutable UIBackground: IDrawableUI[] = [||]
     let mutable UIButton: IDrawableUI[] = [||]
     let mutable canInteract: bool = false
     let mutable currentScene: IScene = Empty()
-
 
     member _.changeSceneId(newSceneId: int) : unit =
         sceneId <- newSceneId
         controls <- config.GetControlsArray sceneId
         // UIElements <- controls |> Seq.filter (fun e -> e.WindowType <> 1 && e.ShapeFrame <> -1) |> Seq.map (fun e -> Controls.LoadImg(lifetime, textureManager, e)) |> Seq.toArray
-        UIButton <- controls |> Seq.filter (fun e -> e.ShapeFrame <> -1) |> Seq.map (fun e -> Controls.Load(lifetime, textureManager, e)) |> Seq.toArray
+        UIBackground <- controls |> Seq.filter (fun e -> e.WindowType = 3) |> Seq.map (fun e -> Controls.Load(lifetime, textureManager, e)) |> Seq.toArray
+        UIButton <- controls |> Seq.filter (fun e -> e.ShapeFrame <> -1) |> Seq.filter (fun e -> e.WindowType <> 3) |> Seq.map (fun e -> Controls.Load(lifetime, textureManager, e)) |> Seq.toArray
         currentScene <- SceneFactory.GetScene(sceneId, lifetime, device, textureManager)
 
     member this.event(id: int, id2: int, id3: int) : unit =
@@ -36,8 +38,22 @@ type GameController (lifetime: Lifetime, device: GraphicsDevice, textureManager:
         match (id, id2) with
         | (1, id) -> this.changeSceneId id // Only 0 and 4 are actually used. event 5-0 should be 1-1
         | (2, _) -> exit 0
-        | (5, _) -> this.changeSceneId Scenes.NewGame
-        | (52, _) -> this.changeSceneId Scenes.IslandsView // hacks !
+        | (5, _) ->
+            // Reinit game state
+            GameState.currentRace <- -1
+            GameState.currentDifficulty <- 0
+            GameState.currentMapSize <- 0
+            this.changeSceneId Scenes.NewGame
+        | (52, _) ->
+            // Change only if a race is selected !
+            if (GameState.currentRace <> -1) then
+                this.changeSceneId Scenes.IslandsView 
+        | (53, _) -> GameState.ChangeWorldSize()
+        | (55, _) -> GameState.ChangeDifficulty()
+        | (60, -1) -> GameState.SelectRace(0)
+        | (61, -1) -> GameState.SelectRace(1)
+        | (62, -1) -> GameState.SelectRace(2)
+        | (63, -1) -> GameState.SelectRace(3)
         | any -> printfn "unhandled event %d - %d - %d" id id2 id3
 
     member this.Update(time: GameTime, mouseState: MouseState) : unit =
@@ -54,6 +70,9 @@ type GameController (lifetime: Lifetime, device: GraphicsDevice, textureManager:
         use batch = new SpriteBatch(device)
         batch.Begin()
         
+        for control in UIBackground do
+            control.Draw batch
+        currentScene.DrawBackground batch
         for control in UIElements do
             control.Draw batch
         for control in UIButton do

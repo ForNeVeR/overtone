@@ -152,10 +152,10 @@ type ShapeFile(input: Stream) =
             let struct (startX, startY) = sprite.Start
             let struct (endX, endY) = sprite.End
 
-            let minCanvasX = int originX + startX
-            let minCanvasY = int originY + startY
-            let maxCanvasX = int originX + endX
-            let maxCanvasY = int originY + endY
+            let minCanvasX = int startX
+            let minCanvasY = int startY
+            let maxCanvasX = int endX
+            let maxCanvasY = int endY
             
 
             let width = (maxCanvasX - minCanvasX)

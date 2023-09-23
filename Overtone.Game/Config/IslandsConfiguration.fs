@@ -1,6 +1,10 @@
 namespace Overtone.Game.Config
 
+open System
+open System.IO
+open System.Text
 open Overtone.Resources
+open Overtone.Utils.Constants
 
 //
 // HIGH LEVEL FILE FORMAT
@@ -18,19 +22,50 @@ open Overtone.Resources
 // END
 //
 
-type IslandsConfiguration(names: Map<string, string>) =
 
-    static member Read(shapesTxt: byte[]): IslandsConfiguration =
+//
+// shapedId is visible planet
+// shapedId + GameData.IslandsCount is the same planet but in "not opened" state
+// shapedId + GameData.IslandsCount*2 is the same planet but in opened and mouse-hovered state
+//
+
+//
+// Bridges should connect iterating on their initial order to each bridge pair on each planet, taking the first "free" bridge entity
+//
+
+type IslandData (shapedId: int, distance: int, baseAngle: int)=
+    member _.shapeIndexDisplayed=shapedId
+    member _.shapeIndexHidden=shapedId + GameData.IslandsCount
+    member _.shapeIndexHovered=shapedId + GameData.IslandsCount*2
+    member _.distance=distance
+    member _.baseAngle=baseAngle
+
+type WorldDefinition ()=
+    member _.IslandData=0
+
+type IslandsConfiguration() =
+
+    let mutable currentId = 0
+    let mutable currentIsland = 0
+
+    member this.Read(shapesTxt: byte[]): unit =
+
+        let mutable currentWorldEdition = new WorldDefinition()
+        let mutable islandData = new IslandData(0,0,0)
+
+        let parseline(line:string):unit =
+            let components = line.Split([| ' '; '\t' |], 4, StringSplitOptions.RemoveEmptyEntries)
+            match components with
+            | [|"-1"|] ->
+                currentId <- currentId + 1
+                printfn($"Switch to world size {currentId}")
+                currentIsland <- 0
+            | [|bridgeFrom; bridgeTo|] -> printfn($"{bridgeFrom} -> {bridgeTo}")
+            | [|angle; range; _; shapeid|] ->
+                printfn($"Island {currentIsland} shape : {shapeid} at angle {angle}, range {range}")
+                currentIsland <- currentIsland + 1
+            | _ -> printfn($"noop : {line}")
+
         shapesTxt
         |> TextConfiguration.extractLines
-        |> Seq.map TextConfiguration.readKeyValueEntry
-        |> Seq.map(fun(a, b) -> b, a)
-        |> Map.ofSeq
-        |> IslandsConfiguration
-
-    member _.GetShapeName(shapeId: string): string =
-        // printfn "Loading shape : %s" shapeId
-        if names.ContainsKey shapeId then
-            names[shapeId]
-        else
-            shapeId
+        |> Seq.iter parseline

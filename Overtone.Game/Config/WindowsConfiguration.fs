@@ -1,4 +1,4 @@
-﻿namespace Overtone.Game.Config
+namespace Overtone.Game.Config
 
 open System
 

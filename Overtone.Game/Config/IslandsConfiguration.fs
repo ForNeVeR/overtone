@@ -43,6 +43,11 @@ type IslandData (shapedId: int, distance: int, baseAngle: int)=
 type WorldDefinition ()=
     member _.IslandData=0
 
+    member _.islands: ResizeArray<IslandData> = new ResizeArray<IslandData>()
+
+    member this.addIslandEntry(angle:int, distance:int, shapeid:int)=
+        this.islands.Add(new IslandData(shapeid,distance,angle))
+
 type IslandsConfiguration() =
 
     let mutable currentId = 0
@@ -61,8 +66,8 @@ type IslandsConfiguration() =
                 printfn($"Switch to world size {currentId}")
                 currentIsland <- 0
             | [|bridgeFrom; bridgeTo|] -> printfn($"{bridgeFrom} -> {bridgeTo}")
-            | [|angle; range; _; shapeid|] ->
-                printfn($"Island {currentIsland} shape : {shapeid} at angle {angle}, range {range}")
+            | [|angle; distance; _; shapeid|] ->
+                printfn($"Island {currentIsland} shape : {shapeid} at angle {angle}, distance {distance}")
                 currentIsland <- currentIsland + 1
             | _ -> printfn($"noop : {line}")
 

@@ -16,5 +16,7 @@ let main(args: string[]): int =
     let windowsConfig = WindowsConfiguration.Read <| disc.GetConfig "windows.txt"
 
     use game = new OvertoneGame(disc, shapesConfig, windowsConfig)
+    let mainTheme = soundsConfig.GetSoundPerName("START.WAV",disc)
+    mainTheme.Play() |> ignore
     game.Run()
     0

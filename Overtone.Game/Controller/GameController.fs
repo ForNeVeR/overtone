@@ -68,7 +68,7 @@ type GameController (lifetime: Lifetime, device: GraphicsDevice, textureManager:
 
     member _.Draw() : unit =
         use batch = new SpriteBatch(device)
-        batch.Begin()
+        batch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone);
         
         for control in UIBackground do
             control.Draw batch

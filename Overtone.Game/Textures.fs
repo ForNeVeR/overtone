@@ -34,8 +34,6 @@ let toTexture (bitmap: SKBitmap, lifetime: Lifetime, device: GraphicsDevice) : T
 
 type Texture2DWithOffset (texture:Texture2D, offsetX:int, offsetY:int)=
     member _.texture=texture
-    member _.offsetX=offsetX
-    member _.offsetY=offsetY
     member _.offset:Vector2 = Vector2(float32(offsetX),float32(offsetY))
 
 type Manager(disc: GameDisc, device: GraphicsDevice, config: ShapesConfiguration) =

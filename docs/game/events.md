@@ -61,7 +61,7 @@ Note : this list is most likely not complete
 | 2000 | Go to map view (in game islands selection) |
 | 2001 | Resume previous game (title screen) |
 | 2002 | PANIC ! Toggle : make worker fight ? |
-| 2003 | ?? TOGREALM ?? |
+| 2003 | Display status on unit (hp / energy / realm) |
 | 2005 | Open task list |
 | 3001 | CLIPBD1 |
 | 3002 | CLIPBD2 |

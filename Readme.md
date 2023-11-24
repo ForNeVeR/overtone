@@ -68,8 +68,8 @@ Where `args` are:
 
 All commands support wildcards (say, `render path/*.shp /output/dir`).
 
-Testimonials
-------------
+Acknowledgments
+---------------
 
 Author would like to thank the following people for their help with this project (in no particular order):
 

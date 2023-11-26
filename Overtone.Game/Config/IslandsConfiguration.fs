@@ -53,7 +53,7 @@ type IslandsConfiguration() =
     let mutable currentId = 0
     let mutable currentIsland = 0
 
-    member this.Read(shapesTxt: byte[]): unit =
+    member _.Read(shapesTxt: byte[]): unit =
 
         let mutable currentWorldEdition = new WorldDefinition()
         let mutable islandData = new IslandData(0,0,0)

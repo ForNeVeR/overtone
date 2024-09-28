@@ -47,6 +47,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "game", "game", "{D0816536-A
 		docs\game\windows.md = docs\game\windows.md
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Overtone.Video", "Overtone.Video\Overtone.Video.fsproj", "{9B8DDEBD-C06A-4E2C-8AA0-C89335D194C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{AF16528C-6C4C-4E27-A8C4-09DD1C7120F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF16528C-6C4C-4E27-A8C4-09DD1C7120F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF16528C-6C4C-4E27-A8C4-09DD1C7120F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B8DDEBD-C06A-4E2C-8AA0-C89335D194C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B8DDEBD-C06A-4E2C-8AA0-C89335D194C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B8DDEBD-C06A-4E2C-8AA0-C89335D194C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B8DDEBD-C06A-4E2C-8AA0-C89335D194C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{046B3949-4459-4EC5-8041-D00687495715} = {F7A92DCC-190F-4E09-949A-C0413800326A}

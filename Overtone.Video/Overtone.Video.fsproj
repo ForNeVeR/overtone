@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <PackageReference Include="Accord.Video.VFW" Version="3.8.0" />
+      <PackageReference Include="KaitaiStruct.Runtime.CSharp" Version="0.10.0" />
     </ItemGroup>
 
 </Project>

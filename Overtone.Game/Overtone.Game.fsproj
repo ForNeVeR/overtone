@@ -38,7 +38,7 @@
 
     <ItemGroup>
       <PackageReference Include="JetBrains.Lifetimes" Version="2025.1.1" />
-      <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
+      <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.2.1105" />
     </ItemGroup>
 
     <ItemGroup>

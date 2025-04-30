@@ -8,7 +8,7 @@ type ShapesConfiguration(names: Map<string, string>) =
         shapesTxt
         |> TextConfiguration.extractLines
         |> Seq.map TextConfiguration.readKeyValueEntry
-        |> Seq.map(fun(a, b) -> b, a)
+        |> Seq.map(fun(a, b) -> b.ToUpper(), a.ToUpper())
         |> Map.ofSeq
         |> ShapesConfiguration
 

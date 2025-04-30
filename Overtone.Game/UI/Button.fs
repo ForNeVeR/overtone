@@ -7,6 +7,7 @@ open Microsoft.Xna.Framework.Input
 
 open Overtone.Game.Config
 open Overtone.Game.Textures
+open Overtone.Game
 
 
 type Button(normalTexture: Texture2DWithOffset, hoverTexture: Texture2DWithOffset, entry: WindowEntry) =
@@ -25,6 +26,8 @@ type Button(normalTexture: Texture2DWithOffset, hoverTexture: Texture2DWithOffse
             then
                 // Debug for now
                 // printfn "should act !"
+                let sound = GameState.soundsConfig.GetSoundPerName("BUTTON",GameState.getDisc())
+                sound.Play() |> ignore
                 entry.Message
             else
                 (0, 0, 0)

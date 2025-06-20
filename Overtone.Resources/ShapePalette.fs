@@ -1,4 +1,4 @@
-﻿module Overtone.Resources.ShapePalette
+module Overtone.Resources.ShapePalette
 
 open System
 open System.IO
@@ -10,7 +10,7 @@ let private (|Island|_|): string -> string option = function
 | _ -> None
 
 let get(shapeFilePath: string): string =
-    let name = Path.GetFileName shapeFilePath
+    let name = (Path.GetFileName (shapeFilePath)).ToLower()
     let resName =
         match name with
         | Island(number) -> $"island{number}.pal"
@@ -27,7 +27,7 @@ let get(shapeFilePath: string): string =
 
 let getWithDisk(shapeFilePath: string, disc: GameDisc): string =
     let name = Path.GetFileName shapeFilePath
-    let simpleRename = "data\\"+Path.ChangeExtension(name, "pal")
+    let simpleRename = "data\\"+Path.ChangeExtension(name, "pal").ToUpper()
     if disc.hasDataEntry simpleRename
     then
         simpleRename

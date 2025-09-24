@@ -7,13 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="GameState.fs" />
         <Compile Include="Config\SoundsConfiguration.fs" />
         <Compile Include="Config\SpellsConfiguration.fs" />
         <Compile Include="Config\DescriptionConfiguration.fs" />
         <Compile Include="Config\IslandsConfiguration.fs" />
         <Compile Include="Config\WindowsConfiguration.fs" />
         <Compile Include="Config\ShapesConfiguration.fs" />
+        <Compile Include="GameState.fs" />
         <Compile Include="Textures.fs" />
         <Compile Include="Audio\SoundEffect.fs" />
         <Compile Include="UI\IDrawableUI.fs" />

@@ -22,7 +22,7 @@ jobs:
       NUGET_PACKAGES: ${{ github.workspace }}/.github/nuget-packages
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - if: runner.os != 'macOS' # TODO[#94]: Enable this back after actions/runner-images#13341 is fixed.
         name: NuGet cache

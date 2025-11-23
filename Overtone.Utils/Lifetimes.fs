@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022-2025 Friedrich von Never <friedrich@fornever.me>
+//
+// SPDX-License-Identifier: MIT
+
 module Overtone.Utils.Lifetimes
 
 open System

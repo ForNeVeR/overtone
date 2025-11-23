@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2020-2025 Friedrich von Never <friedrich@fornever.me>
+
+SPDX-License-Identifier: MIT
+-->
+
 Overtone [![Status Umbra][status-umbra]][andivionian-status-classifier]
 ========
 Overtone is a remake of [The Tone Rebellion][wikipedia.the-tone-rebellion], a

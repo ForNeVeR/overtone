@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2020-2025 Friedrich von Never <friedrich@fornever.me>
+
+SPDX-License-Identifier: MIT
+-->
+
 Running the Original Game
 =========================
 These days, it's not so easy to run a game from 1998. Here're the steps I've

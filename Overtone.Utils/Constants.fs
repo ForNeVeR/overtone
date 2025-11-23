@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023-2025 Overtone contributors <https://github.com/ForNeVeR/overtone>
+//
+// SPDX-License-Identifier: MIT
+
 module Overtone.Utils.Constants
 
 module Scenes =

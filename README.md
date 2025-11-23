@@ -65,6 +65,12 @@ Author would like to thank the following people for their help with this project
 - [Михаил Бесчетнов aka Terminus][extractor.ru], the author of the [Ascendancy Converter v1.0][ascendancy-converter],
 - Roman Tkachuk (2:4600/68.2@fidonet), the author of the [Ascendancy Font Editor v1.1+][ascendancy-font-editor].
 
+License
+-------
+The project is distributed under the terms of [the MIT license][docs.license].
+
+The license indication in the project's sources is compliant with the [REUSE specification v3.3][reuse.spec].
+
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-umbra-
 [archive-org.the-tone-rebellion]: https://archive.org/details/the-tone-rebellion
 [ascendancy-converter]: https://www.extractor.ru/files/051b8c7c6155fef1460fab189f7edb68/
@@ -76,6 +82,7 @@ Author would like to thank the following people for their help with this project
 [docs.cursors]: docs/cursor.md
 [docs.events]: docs/game/events.md
 [docs.fnt]: docs/fnt.md
+[docs.license]: LICENSE.txt
 [docs.pal]: ./docs/pal.md
 [docs.resources]: docs/resources.md
 [docs.running-original]: docs/running-original.md
@@ -85,6 +92,7 @@ Author would like to thank the following people for their help with this project
 [extractor.ru]: http://www.extractor.ru/
 [fadoli.tone-rebellion-extractor]: https://github.com/Fadoli/Tone-rebellion-extractor
 [fadoli]: https://github.com/Fadoli
+[reuse.spec]: https://reuse.software/spec-3.3/
 [rogerbraun.ascendancy-tools]: https://github.com/rogerbraun/Ascendancy-tools
 [rogerbraun]: https://github.com/rogerbraun
 [status-umbra]: https://img.shields.io/badge/status-umbra-red.svg

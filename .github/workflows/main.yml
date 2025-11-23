@@ -23,6 +23,14 @@ jobs:
         shell: pwsh
         run: Install-Module VerifyEncoding -Repository PSGallery -RequiredVersion 2.2.1 -Force && Test-Encoding
 
+  licenses:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the sources
+        uses: actions/checkout@v5
+      - name: REUSE license check
+        uses: fsfe/reuse-action@v5
+
   main:
     runs-on: ${{ matrix.image }}
     strategy:

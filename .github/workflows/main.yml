@@ -24,7 +24,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: NuGet cache
+      - if: runner.os != 'macOS' # TODO[#94]: Enable this back after actions/runner-images#13341 is fixed.
+        name: NuGet cache
         uses: actions/cache@v4
         with:
           path: ${{ env.NUGET_PACKAGES }}

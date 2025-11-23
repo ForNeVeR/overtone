@@ -1,4 +1,4 @@
-﻿module Overtone.Resources.Cursor
+module Overtone.Resources.Cursor
 
 open System
 open System.Collections

@@ -1,4 +1,4 @@
-﻿Shape File Format
+Shape File Format
 =================
 
 Author would like to thank authors of the following tools (in no particular order) for providing the information about the shape file format (which is the same in The Tone Rebellion and an older game from The Logic Factory, Ascendancy):

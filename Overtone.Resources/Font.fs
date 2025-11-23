@@ -1,4 +1,4 @@
-﻿module Overtone.Resources.Font
+module Overtone.Resources.Font
 
 open System.IO
 open System.Text

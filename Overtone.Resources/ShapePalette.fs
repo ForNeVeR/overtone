@@ -1,4 +1,4 @@
-﻿module Overtone.Resources.ShapePalette
+module Overtone.Resources.ShapePalette
 
 open System
 open System.IO

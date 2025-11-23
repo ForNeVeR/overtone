@@ -1,4 +1,4 @@
-﻿module Overtone.Utils.Lifetimes
+module Overtone.Utils.Lifetimes
 
 open System
 open JetBrains.Lifetimes

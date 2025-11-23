@@ -1,4 +1,4 @@
-﻿Text Configuration Files
+Text Configuration Files
 ------------------------
 Most of the game configuration data is stored in the text files inside [the COB archives][docs.cob]. See the full file list in [the Game Resources document][docs.resources].
 

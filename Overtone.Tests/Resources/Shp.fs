@@ -1,4 +1,4 @@
-﻿module Overtone.Tests.Resources.Shp
+module Overtone.Tests.Resources.Shp
 
 open System.Collections.Generic
 open System.IO

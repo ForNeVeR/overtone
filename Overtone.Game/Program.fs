@@ -1,4 +1,4 @@
-﻿module Overtone.Game.Program
+module Overtone.Game.Program
 
 open Overtone.Game.Config
 open Overtone.Resources

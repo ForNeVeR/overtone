@@ -1,4 +1,4 @@
-﻿module Overtone.Resources.SkiaUtils
+module Overtone.Resources.SkiaUtils
 
 open System.IO
 

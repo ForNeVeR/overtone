@@ -1,4 +1,4 @@
-﻿namespace Overtone.Resources.Cob
+namespace Overtone.Resources.Cob
 
 open System
 open System.IO

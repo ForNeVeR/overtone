@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021-2025 Overtone contributors <https://github.com/ForNeVeR/overtone>
+
+SPDX-License-Identifier: MIT
+-->
+
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
@@ -28,6 +34,8 @@
         <Compile Include="Scenes\NewGame.fs" />
         <Compile Include="Scenes\Empty.fs" />
         <Compile Include="Scenes\SceneFactory.fs" />
+        <Compile Include="Scenes\Game.fs" />
+        <Compile Include="Scenes\LoadMenu.fs" />
         <Compile Include="Controller\Input.fs" />
         <Compile Include="Controller\IController.fs" />
         <Compile Include="Controller\Mouse.fs" />

@@ -1,0 +1,13 @@
+version = 1
+SPDX-PackageName = "overtone"
+SPDX-PackageSupplier = "Overtone contributors <https://github.com/ForNeVeR/overtone>"
+SPDX-PackageDownloadLocation = "https://github.com/ForNeVeR/overtone"
+
+[[annotations]]
+path = [
+    ".idea/**/**",
+    "*.DotSettings"
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2021-2023 Friedrich von Never <friedrich@fornever.me>"
+SPDX-License-Identifier = "MIT"

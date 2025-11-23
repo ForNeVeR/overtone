@@ -1,9 +1,12 @@
+// SPDX-FileCopyrightText: 2022-2025 Overtone contributors <https://github.com/ForNeVeR/overtone>
+//
+// SPDX-License-Identifier: MIT
+
 namespace Overtone.Game.Controller
 
 open JetBrains.Lifetimes
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
-open Microsoft.Xna.Framework.Audio
 open Microsoft.Xna.Framework.Input
 
 open Overtone.Game

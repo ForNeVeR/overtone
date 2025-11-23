@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2021-2025 Friedrich von Never <friedrich@fornever.me>
+//
+// SPDX-License-Identifier: MIT
+
 open System
 open System.IO
 open System.Text

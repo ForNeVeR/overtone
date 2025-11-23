@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2020-2025 Friedrich von Never <friedrich@fornever.me>
+
+SPDX-License-Identifier: MIT
+-->
+
 Game Resources
 ==============
 Overtone is utilizing the resources from the original CD. We consider the English ISO of the game from the [Internet Archive][archive-org.the-tone-rebellion] (the "Alternative ISO Version") to serve as the reference, though other versions of the game are known to exist (e.g. check [these][fadoli.title-screen] French title screen buttons). Ideally, they shouldn't differ in resource contents too much from the English one.

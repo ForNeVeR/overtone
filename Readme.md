@@ -26,7 +26,7 @@ The game is considered [abandonware][wikipedia.abandonware], so feel free to dow
 
 Prerequisites
 -------------
-To develop the project, you'll need [.NET SDK][dotnet.sdk] 7.0 or later installed.
+To develop the project, you'll need [.NET SDK][dotnet.sdk] 10.0 or later installed.
 
 Build
 -----

@@ -18,21 +18,24 @@ type GameDisc(rootPath: string) =
 
     let configEntries =
         configArchive.ReadEntries()
-        |> Seq.map(fun e -> e.Path, e)
+        |> Seq.map(fun e -> e.Path.ToUpper(), e)
         |> Map.ofSeq
     let dataEntries =
         dataArchive.ReadEntries()
-        |> Seq.map(fun e -> e.Path, e)
+        |> Seq.map(fun e -> e.Path.ToUpper(), e)
         |> Map.ofSeq
+
+    member _.ReadFileAsStream(relativePath: string): FileStream =
+        Path.Combine(rootPath, relativePath) |> File.OpenRead
 
     member _.ReadFile(relativePath: string): Task<byte[]> =
         Path.Combine(rootPath, relativePath) |> File.ReadAllBytesAsync
 
-    member _.GetConfig(name: string): byte[] = configEntries[name] |> configArchive.ReadEntry
-    member _.GetData(name: string): byte[] = dataEntries[name] |> dataArchive.ReadEntry
+    member _.GetConfig(name: string): byte[] = configEntries[name.ToUpper()] |> configArchive.ReadEntry
+    member _.GetData(name: string): byte[] = dataEntries[name.ToUpper()] |> dataArchive.ReadEntry
 
     member _.hasDataEntry(name: string): bool = 
-        dataEntries.ContainsKey name
+        dataEntries.ContainsKey (name.ToUpper())
 
     interface IDisposable with
         member _.Dispose() =

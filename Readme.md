@@ -25,22 +25,6 @@ to provide these resources ourselves).
 
 The game is considered [abandonware][wikipedia.abandonware], so feel free to download the game from the [Internet Archive][archive-org.the-tone-rebellion].
 
-Prerequisites
--------------
-To develop the project, you'll need [.NET SDK][dotnet.sdk] 10.0 or later installed.
-
-Build
------
-```console
-$ dotnet build
-```
-
-Test
-----
-```console
-$ dotnet test
-```
-
 Available Utilities
 -------------------
 
@@ -98,7 +82,6 @@ Author would like to thank the following people for their help with this project
 [docs.shp]: ./docs/shp.md
 [docs.txt]: ./docs/txt.md
 [docs.windows]: docs/game/windows.md
-[dotnet.sdk]: https://dot.net/
 [extractor.ru]: http://www.extractor.ru/
 [fadoli.tone-rebellion-extractor]: https://github.com/Fadoli/Tone-rebellion-extractor
 [fadoli]: https://github.com/Fadoli

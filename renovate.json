@@ -15,6 +15,19 @@
                 "(?<depName>macos|ubuntu|windows)-(?<currentValue>[-\\w.\\d]+)"
             ],
             "datasourceTemplate": "github-runners"
+        },
+        {
+            "description": "Update the VerifyEncoding PowerShell module.",
+            "customType": "regex",
+            "managerFilePatterns": [
+                "CONTRIBUTING.md",
+                ".github/workflows/*.yml"
+            ],
+            "matchStrings": [
+                "Install-Module (?<depName>\\S+?) -Repository PSGallery -RequiredVersion (?<currentValue>\\S+)"
+            ],
+            "datasourceTemplate": "nuget",
+            "registryUrlTemplate": "https://www.powershellgallery.com/api/v2/"
         }
     ]
 }

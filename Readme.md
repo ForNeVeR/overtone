@@ -5,6 +5,7 @@ strategy game developed by The Logic Factory and released in 1997.
 
 Developer Documentation
 -----------------------
+- [Contributor Guide][docs.contributing]
 - [Running the Original Game][docs.running-original]
 - [Game Resources][docs.resources]
 - [COB File Format][docs.cob]
@@ -87,6 +88,7 @@ Author would like to thank the following people for their help with this project
 [daumiller.ascendancy]: https://github.com/daumiller/ascendancy
 [daumiller]: https://github.com/daumiller
 [docs.cob]: docs/cob.md
+[docs.contributing]: CONTRIBUTING.md
 [docs.cursors]: docs/cursor.md
 [docs.events]: docs/game/events.md
 [docs.fnt]: docs/fnt.md
@@ -102,8 +104,7 @@ Author would like to thank the following people for their help with this project
 [fadoli]: https://github.com/Fadoli
 [rogerbraun.ascendancy-tools]: https://github.com/rogerbraun/Ascendancy-tools
 [rogerbraun]: https://github.com/rogerbraun
+[status-umbra]: https://img.shields.io/badge/status-umbra-red.svg
 [wikipedia.abandonware]: https://en.wikipedia.org/wiki/Abandonware
 [wikipedia.the-logic-factory]: https://en.wikipedia.org/wiki/The_Logic_Factory
 [wikipedia.the-tone-rebellion]: https://en.wikipedia.org/wiki/The_Tone_Rebellion
-
-[status-umbra]: https://img.shields.io/badge/status-umbra-red.svg

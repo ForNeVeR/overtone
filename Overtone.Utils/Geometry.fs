@@ -1,4 +1,4 @@
-﻿module Overtone.Utils.Geometry
+module Overtone.Utils.Geometry
 
 open Microsoft.Xna.Framework
 

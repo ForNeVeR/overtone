@@ -1,4 +1,4 @@
-﻿module Overtone.Cob.Program
+module Overtone.Cob.Program
 
 open System
 open System.IO

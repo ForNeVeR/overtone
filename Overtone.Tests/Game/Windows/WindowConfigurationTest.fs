@@ -1,4 +1,4 @@
-﻿module Overtone.Tests.Game.Windows.WindowConfigurationTest
+module Overtone.Tests.Game.Windows.WindowConfigurationTest
 
 open System.Text
 

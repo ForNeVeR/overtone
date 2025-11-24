@@ -36,7 +36,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: [ macos-15, ubuntu-24.04, windows-2022 ]
+        image: [ macos-15, ubuntu-24.04, windows-2025 ]
     env:
       DOTNET_NOLOGO: 1
       DOTNET_CLI_TELEMETRY_OPTOUT: 1

@@ -4,7 +4,9 @@
 
 namespace Overtone.Game.Config
 
+open System.IO
 open Overtone.Resources
+open Microsoft.Xna.Framework.Audio
 
 // The file looks like that for sound.txt
 //
@@ -27,19 +29,26 @@ type SoundConfig(name:string, typeOfSound:string, path:string)=
 
 
 type SoundsConfiguration(names: Map<string, SoundConfig>) =
+
     static member Read(shapesTxt: byte[]): SoundsConfiguration =
         shapesTxt
         |> TextConfiguration.extractLines
         |> Seq.map TextConfiguration.readPreformatedEntries
         // Filter elements whose length isn't 3 !
         |> Seq.filter(fun(array) -> array.Length = 3)
-        |> Seq.map(fun(array) -> array[1], SoundConfig(array[1],array[0], array[2]))
+        |> Seq.map(fun(array) -> array[1].ToUpper(), SoundConfig(array[1].ToUpper(),array[0], array[2].ToUpper()))
         |> Map.ofSeq
         |> SoundsConfiguration
 
-    member _.GetSoundsPath(effectName: string): string =
+    member _.GetSoundPerName(effectName: string, disc: GameDisc): SoundEffect =
+        let mutable filename = effectName
         // printfn "Loading shape : %s" shapeId
         if names.ContainsKey effectName then
-            names[effectName].path
+            filename <- names[effectName].path
+            
+        if filename.StartsWith("DATA\\") then
+            let stream = new MemoryStream(disc.GetData filename)
+            SoundEffect.FromStream(stream)
         else
-            effectName
+            filename <- Path.Combine("THING2", filename)
+            SoundEffect.FromStream(disc.ReadFileAsStream filename)

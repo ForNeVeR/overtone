@@ -18,7 +18,7 @@ SPDX-License-Identifier: MIT
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="JetBrains.Lifetimes" Version="2025.3.1" />
+      <PackageReference Include="JetBrains.Lifetimes" Version="2026.1.0" />
       <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.4.1" />
     </ItemGroup>
 

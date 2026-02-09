@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2021-2025 Overtone contributors <https://github.com/ForNeVeR/overtone>
+// SPDX-FileCopyrightText: 2021-2026 Overtone contributors <https://github.com/ForNeVeR/overtone>
 //
 // SPDX-License-Identifier: MIT
 
@@ -14,7 +14,7 @@ let private (|Island|_|): string -> string option = function
 | _ -> None
 
 let get(shapeFilePath: string): string =
-    let name = (Path.GetFileName (shapeFilePath)).ToLower()
+    let name = (Path.GetFileName shapeFilePath)
     let resName =
         match name with
         | Island(number) -> $"island{number}.pal"
@@ -31,7 +31,7 @@ let get(shapeFilePath: string): string =
 
 let getWithDisk(shapeFilePath: string, disc: GameDisc): string =
     let name = Path.GetFileName shapeFilePath
-    let simpleRename = "data\\"+Path.ChangeExtension(name, "pal").ToUpper()
+    let simpleRename = "data\\"+Path.ChangeExtension(name, "pal")
     if disc.hasDataEntry simpleRename
     then
         simpleRename

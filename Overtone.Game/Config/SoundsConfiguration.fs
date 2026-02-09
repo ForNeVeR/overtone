@@ -1,9 +1,11 @@
-// SPDX-FileCopyrightText: 2023-2025 Overtone contributors <https://github.com/ForNeVeR/overtone>
+// SPDX-FileCopyrightText: 2023-2026 Overtone contributors <https://github.com/ForNeVeR/overtone>
 //
 // SPDX-License-Identifier: MIT
 
 namespace Overtone.Game.Config
 
+open System
+open System.Collections.Generic
 open System.IO
 open Overtone.Resources
 open Microsoft.Xna.Framework.Audio
@@ -28,17 +30,20 @@ type SoundConfig(name:string, typeOfSound:string, path:string)=
     member _.sound= path
 
 
-type SoundsConfiguration(names: Map<string, SoundConfig>) =
+type SoundsConfiguration(names: IReadOnlyDictionary<string, SoundConfig>) =
 
     static member Read(shapesTxt: byte[]): SoundsConfiguration =
-        shapesTxt
-        |> TextConfiguration.extractLines
-        |> Seq.map TextConfiguration.readPreformatedEntries
-        // Filter elements whose length isn't 3 !
-        |> Seq.filter(fun(array) -> array.Length = 3)
-        |> Seq.map(fun(array) -> array[1].ToUpper(), SoundConfig(array[1].ToUpper(),array[0], array[2].ToUpper()))
-        |> Map.ofSeq
-        |> SoundsConfiguration
+        let data =
+            Dictionary(
+                shapesTxt
+                |> TextConfiguration.extractLines
+                |> Seq.map TextConfiguration.readPreformatedEntries
+                // Filter elements whose length isn't 3 !
+                |> Seq.filter(fun array -> array.Length = 3)
+                |> Seq.map(fun array -> KeyValuePair(array[1], SoundConfig(array[1] ,array[0], array[2]))),
+                StringComparer.OrdinalIgnoreCase
+            )
+        SoundsConfiguration data
 
     member _.GetSoundPerName(effectName: string, disc: GameDisc): SoundEffect =
         let mutable filename = effectName
@@ -46,7 +51,7 @@ type SoundsConfiguration(names: Map<string, SoundConfig>) =
         if names.ContainsKey effectName then
             filename <- names[effectName].path
             
-        if filename.StartsWith("DATA\\") then
+        if filename.StartsWith("DATA\\", StringComparison.OrdinalIgnoreCase) then
             let stream = new MemoryStream(disc.GetData filename)
             SoundEffect.FromStream(stream)
         else

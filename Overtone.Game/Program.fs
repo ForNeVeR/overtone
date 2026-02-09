@@ -1,11 +1,10 @@
-// SPDX-FileCopyrightText: 2021-2025 Overtone contributors <https://github.com/ForNeVeR/overtone>
+// SPDX-FileCopyrightText: 2021-2026 Overtone contributors <https://github.com/ForNeVeR/overtone>
 //
 // SPDX-License-Identifier: MIT
 
 module Overtone.Game.Program
 
 open Overtone.Game.Config
-open Overtone.Resources
 
 [<EntryPoint>]
 let main(args: string[]): int =
@@ -21,6 +20,8 @@ let main(args: string[]): int =
     let windowsConfig = WindowsConfiguration.Read <| GameState.getDisc().GetConfig "windows.txt"
 
     use game = new OvertoneGame(GameState.getDisc(), shapesConfig, windowsConfig)
+
+    // TODO: Should become a part of a scene.
     let mainTheme = soundsConfig.GetSoundPerName("START.WAV",GameState.getDisc())
     mainTheme.Play() |> ignore
     game.Run()

@@ -1,20 +1,24 @@
-// SPDX-FileCopyrightText: 2023-2025 Overtone contributors <https://github.com/ForNeVeR/overtone>
+// SPDX-FileCopyrightText: 2023-2026 Overtone contributors <https://github.com/ForNeVeR/overtone>
 //
 // SPDX-License-Identifier: MIT
 
 namespace Overtone.Game.UI
 
 open Microsoft.Xna.Framework
+open Microsoft.Xna.Framework.Audio
 open Microsoft.Xna.Framework.Graphics
 
 open Microsoft.Xna.Framework.Input
 
 open Overtone.Game.Config
 open Overtone.Game.Textures
-open Overtone.Game
 
-
-type Button(normalTexture: Texture2DWithOffset, hoverTexture: Texture2DWithOffset, entry: WindowEntry) =
+type Button(
+    normalTexture: Texture2DWithOffset,
+    hoverTexture: Texture2DWithOffset,
+    entry: WindowEntry,
+    clickSound: SoundEffect
+) =
 
     let mutable isHover = false
 
@@ -30,8 +34,7 @@ type Button(normalTexture: Texture2DWithOffset, hoverTexture: Texture2DWithOffse
             then
                 // Debug for now
                 // printfn "should act !"
-                let sound = GameState.soundsConfig.GetSoundPerName("BUTTON",GameState.getDisc())
-                sound.Play() |> ignore
+                clickSound.Play() |> ignore
                 entry.Message
             else
                 (0, 0, 0)

@@ -21,7 +21,7 @@ let main(args: string[]): int =
 
     use game = new OvertoneGame(GameState.getDisc(), shapesConfig, windowsConfig)
 
-    // TODO: Should become a part of a scene.
+    // TODO[#107]: Should become a part of a scene.
     let mainTheme = soundsConfig.GetSoundPerName("START.WAV",GameState.getDisc())
     mainTheme.Play() |> ignore
     game.Run()

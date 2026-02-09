@@ -23,7 +23,7 @@ module Controls =
                 normalTexture,
                 hoverTexture,
                 entry,
-                GameState.soundsConfig.GetSoundPerName("BUTTON", GameState.getDisc()) // TODO: Migrate to the SoundManager, only load once
+                GameState.soundsConfig.GetSoundPerName("BUTTON", GameState.getDisc()) // TODO[#106]: Migrate to the SoundManager, only load once
             )
         else if entry.MouseFocus && entry.WindowType = WindowTypes.DropDownMenu then
             DropDownMenuButton(normalTexture, entry)

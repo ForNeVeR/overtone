@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023-2025 Overtone contributors <https://github.com/ForNeVeR/overtone>
+// SPDX-FileCopyrightText: 2023-2026 Overtone contributors <https://github.com/ForNeVeR/overtone>
 //
 // SPDX-License-Identifier: MIT
 
@@ -15,7 +15,7 @@ module Scenes =
     let IntoMovie: int = 6
     let OutroMovie: int = 7
 
-// TODO, fullfill types as needed
+// TODO[#108]: fullfill types as needed
 module WindowTypes =
     let Button: int = 1
     let TemporaryElements: int = 2 // used in load/save and islands rendering ?

@@ -1,10 +1,11 @@
-// SPDX-FileCopyrightText: 2022-2025 Overtone contributors <https://github.com/ForNeVeR/overtone>
+// SPDX-FileCopyrightText: 2022-2026 Overtone contributors <https://github.com/ForNeVeR/overtone>
 //
 // SPDX-License-Identifier: MIT
 
 namespace Overtone.Resources
 
 open System
+open System.Collections.Generic
 open System.IO
 open System.Threading.Tasks
 
@@ -21,13 +22,19 @@ type GameDisc(rootPath: string) =
     let dataArchive = new CobFile(dataStream)
 
     let configEntries =
-        configArchive.ReadEntries()
-        |> Seq.map(fun e -> e.Path.ToUpper(), e)
-        |> Map.ofSeq
+        Dictionary(
+            configArchive.ReadEntries() |> Seq.map(fun e -> KeyValuePair(e.Path, e)),
+            StringComparer.OrdinalIgnoreCase
+        )
+
     let dataEntries =
-        dataArchive.ReadEntries()
-        |> Seq.map(fun e -> e.Path.ToUpper(), e)
-        |> Map.ofSeq
+        Dictionary(
+            dataArchive.ReadEntries() |> Seq.map(fun e -> KeyValuePair(e.Path, e)),
+            StringComparer.OrdinalIgnoreCase
+        )
+
+    let canonicalize(path: string) =
+        path.Replace("/", "\\")
 
     member _.ReadFileAsStream(relativePath: string): FileStream =
         Path.Combine(rootPath, relativePath) |> File.OpenRead
@@ -35,11 +42,11 @@ type GameDisc(rootPath: string) =
     member _.ReadFile(relativePath: string): Task<byte[]> =
         Path.Combine(rootPath, relativePath) |> File.ReadAllBytesAsync
 
-    member _.GetConfig(name: string): byte[] = configEntries[name.ToUpper()] |> configArchive.ReadEntry
-    member _.GetData(name: string): byte[] = dataEntries[name.ToUpper()] |> dataArchive.ReadEntry
+    member _.GetConfig(name: string): byte[] = configEntries[canonicalize name] |> configArchive.ReadEntry
+    member _.GetData(name: string): byte[] = dataEntries[canonicalize name] |> dataArchive.ReadEntry
 
     member _.hasDataEntry(name: string): bool = 
-        dataEntries.ContainsKey (name.ToUpper())
+        dataEntries.ContainsKey name
 
     interface IDisposable with
         member _.Dispose() =

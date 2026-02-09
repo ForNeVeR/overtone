@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022-2025 Overtone contributors <https://github.com/ForNeVeR/overtone>
+// SPDX-FileCopyrightText: 2022-2026 Overtone contributors <https://github.com/ForNeVeR/overtone>
 //
 // SPDX-License-Identifier: MIT
 
@@ -12,7 +12,7 @@ type ShapesConfiguration(names: Map<string, string>) =
         shapesTxt
         |> TextConfiguration.extractLines
         |> Seq.map TextConfiguration.readKeyValueEntry
-        |> Seq.map(fun(a, b) -> b.ToUpper(), a.ToUpper())
+        |> Seq.map(fun(a, b) -> b, a)
         |> Map.ofSeq
         |> ShapesConfiguration
 

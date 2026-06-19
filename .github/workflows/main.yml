@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Check out the sources
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Verify encoding
         shell: pwsh
         run: Install-Module VerifyEncoding -Repository PSGallery -RequiredVersion 2.3.0 -Force && Test-Encoding
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Check out the sources
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: REUSE license check
         uses: fsfe/reuse-action@v6
 
@@ -44,7 +44,7 @@ jobs:
       NUGET_PACKAGES: ${{ github.workspace }}/.github/nuget-packages
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - if: runner.os != 'macOS' # TODO[#94]: Enable this back after actions/runner-images#13341 is fixed.
         name: NuGet cache
